@@ -27,7 +27,7 @@ namespace PrcsCtlModelsAoyou
         }
         public bool Init()
         {
-            wmsStDevList.AddRange(new TaskDeviceModel[] { new TaskDeviceModel("12113","工位"),new TaskDeviceModel("11001","货位"), new TaskDeviceModel("11002","货位"),new TaskDeviceModel("11003","货位"),
+            wmsStDevList.AddRange(new TaskDeviceModel[] { new TaskDeviceModel("12112","工位"),new TaskDeviceModel("11001","货位"), new TaskDeviceModel("11002","货位"),new TaskDeviceModel("11003","货位"),
                 new TaskDeviceModel( "11004","货位"),new TaskDeviceModel("11005","货位"), new TaskDeviceModel("11006","货位"), new TaskDeviceModel("11007","货位") });
             taskMonitorThread = new FlowCtlBaseModel.ThreadBaseModel("WMS任务监控线程");
             taskMonitorThread.LoopInterval = 5000;

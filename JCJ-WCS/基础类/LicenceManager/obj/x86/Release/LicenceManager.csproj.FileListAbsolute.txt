@@ -19,3 +19,9 @@ E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\基础类
 E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\基础类\LicenceManager\obj\x86\Release\LicenceManager.csproj.GenerateResource.Cache
 E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\基础类\LicenceManager\obj\x86\Release\LicenceManager.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\基础类\LicenceManager\obj\x86\Release\LicenceManager.pdb
+E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\基础类\LicenceManager\bin\Release\LicenceManager.dll
+E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\基础类\LicenceManager\bin\Release\LicenceManager.pdb
+E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\基础类\LicenceManager\obj\x86\Release\LicenceManager.ActivativeFormView.resources
+E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\基础类\LicenceManager\obj\x86\Release\LicenceManager.csproj.GenerateResource.Cache
+E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\基础类\LicenceManager\obj\x86\Release\LicenceManager.dll
+E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\基础类\LicenceManager\obj\x86\Release\LicenceManager.pdb

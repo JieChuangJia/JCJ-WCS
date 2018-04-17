@@ -120,7 +120,7 @@ namespace AsrsControl
             //asrsMonitorThread.LoopInterval = 1000;
             //asrsMonitorThread.TaskInit();
             this.stacker.dlgtTaskCompleted = TaskCompletedProcess;
-         //   this.stacker.dlgtAsrsPnPCompleted = AsrsPnPBusiness;
+            this.stacker.dlgtAsrsPnPCompleted = AsrsPnPBusiness;
             this.nodeID = this.stacker.NodeID;
             //if(this.mesProcessStepID.Count()>0)
             //{
