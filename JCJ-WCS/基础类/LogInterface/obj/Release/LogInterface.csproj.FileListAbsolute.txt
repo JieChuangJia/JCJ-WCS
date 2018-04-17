@@ -1,0 +1,4 @@
+E:\workspace\项目\之信遨优项目\代码\WES\基础类\LogInterface\bin\Release\LogInterface.dll
+E:\workspace\项目\之信遨优项目\代码\WES\基础类\LogInterface\bin\Release\LogInterface.pdb
+E:\workspace\项目\之信遨优项目\代码\WES\基础类\LogInterface\obj\Release\LogInterface.dll
+E:\workspace\项目\之信遨优项目\代码\WES\基础类\LogInterface\obj\Release\LogInterface.pdb

@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6644F06B-8FEB-431B-9020-AC91FD93CCE6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MonitorViews</RootNamespace>
+    <AssemblyName>MonitorViews</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClosingWaitDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClosingWaitDlg.designer.cs">
+      <DependentUpon>ClosingWaitDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CtlNodeMonitorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CtlNodeMonitorView.Designer.cs">
+      <DependentUpon>CtlNodeMonitorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DevConnMonitorView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DevConnMonitorView.Designer.cs">
+      <DependentUpon>DevConnMonitorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WelcomeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WelcomeForm.designer.cs">
+      <DependentUpon>WelcomeForm.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\基础类\LogInterface\LogInterface.csproj">
+      <Project>{f929e2c2-43ed-4d7e-8426-356b0ec3c540}</Project>
+      <Name>LogInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\基础类\ModuleAttachInterface\ModuleCrossPnP.csproj">
+      <Project>{8ebcda91-8a16-46fa-84bd-784982f9eac8}</Project>
+      <Name>ModuleCrossPnP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\基础类\PLProcessModel\FlowCtlBaseModel.csproj">
+      <Project>{178d26df-c682-42d8-aeab-c816111b69c6}</Project>
+      <Name>FlowCtlBaseModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\基础类\SysCfgModel\SysCfg.csproj">
+      <Project>{ca19b9f8-8521-40c8-8918-33b15b2935d2}</Project>
+      <Name>SysCfg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CtlMonitorInterface\CtlMonitorInterface.csproj">
+      <Project>{4863621a-2226-4318-8b40-cceb8feb390c}</Project>
+      <Name>CtlMonitorInterface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClosingWaitDlg.resx">
+      <DependentUpon>ClosingWaitDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CtlNodeMonitorView.resx">
+      <DependentUpon>CtlNodeMonitorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DevConnMonitorView.resx">
+      <DependentUpon>DevConnMonitorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WelcomeForm.resx">
+      <DependentUpon>WelcomeForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

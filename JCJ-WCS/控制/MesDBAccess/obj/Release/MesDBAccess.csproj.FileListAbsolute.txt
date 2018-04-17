@@ -1,0 +1,4 @@
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\MesDBAccess\bin\Release\MesDBAccess.dll
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\MesDBAccess\bin\Release\MesDBAccess.pdb
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\MesDBAccess\obj\Release\MesDBAccess.dll
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\MesDBAccess\obj\Release\MesDBAccess.pdb

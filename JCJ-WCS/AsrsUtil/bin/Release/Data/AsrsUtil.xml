@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Asrs>
+  <sysSet>
+    <RunMode sim="false">运行模式</RunMode>
+  </sysSet>
+  <StackerCfg id="1001" enabled="true">
+    <BaseDatainfo plcID="1" mesStep="2,4">
+      <NodeName>B1库堆垛机</NodeName>
+      <DB1Addr addrStart="D2001" blockNum="20">DB1数据区地址信息</DB1Addr>
+      <DB2Addr addrStart="D3001" blockNum="10">DB2数据区地址信息</DB2Addr>
+    </BaseDatainfo>
+  </StackerCfg>
+  <ControlTasks>
+    <Task id="123" step="3" taskStat="已完成">
+      <TaskParam type="1" portIn="1" portOut="0" row="1" col="10" layer="4">任务参数</TaskParam>
+    </Task>
+  </ControlTasks>
+</Asrs>

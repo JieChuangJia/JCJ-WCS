@@ -1,0 +1,5 @@
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\控制\CtlMonitorInterface\bin\Debug\CtlMonitorInterface.dll
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\控制\CtlMonitorInterface\bin\Debug\CtlMonitorInterface.pdb
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\控制\CtlMonitorInterface\obj\Debug\CtlMonitorInterface.csprojResolveAssemblyReference.cache
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\控制\CtlMonitorInterface\obj\Debug\CtlMonitorInterface.dll
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\控制\CtlMonitorInterface\obj\Debug\CtlMonitorInterface.pdb

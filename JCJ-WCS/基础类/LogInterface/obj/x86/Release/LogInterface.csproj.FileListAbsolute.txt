@@ -1,0 +1,13 @@
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\日志及记录\LogInterface\bin\Release\LogInterface.dll
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\日志及记录\LogInterface\bin\Release\LogInterface.pdb
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\日志及记录\LogInterface\obj\x86\Release\LogInterface.dll
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\日志及记录\LogInterface\obj\x86\Release\LogInterface.pdb
+E:\workspace\项目\之信遨优项目\代码\WES\基础类\LogInterface\bin\Release\LogInterface.dll
+E:\workspace\项目\之信遨优项目\代码\WES\基础类\LogInterface\bin\Release\LogInterface.pdb
+E:\workspace\项目\之信遨优项目\代码\WES\基础类\LogInterface\obj\x86\Release\LogInterface.csprojResolveAssemblyReference.cache
+E:\workspace\项目\之信遨优项目\代码\WES\基础类\LogInterface\obj\x86\Release\LogInterface.dll
+E:\workspace\项目\之信遨优项目\代码\WES\基础类\LogInterface\obj\x86\Release\LogInterface.pdb
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\基础类\LogInterface\bin\Release\LogInterface.dll
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\基础类\LogInterface\bin\Release\LogInterface.pdb
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\基础类\LogInterface\obj\x86\Release\LogInterface.dll
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\基础类\LogInterface\obj\x86\Release\LogInterface.pdb

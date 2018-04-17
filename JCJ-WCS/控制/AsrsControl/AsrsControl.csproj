@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1178AD55-557B-454B-98C6-60C262434666}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AsrsControl</RootNamespace>
+    <AssemblyName>AsrsControl</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevAccess, Version=1.0.0.3, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\LibReference\DevAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="DevInterface, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\LibReference\DevInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="JieChuangServices">
+      <HintPath>..\..\libReference\JieChuangServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IView\IAsrsCtlView.cs" />
+    <Compile Include="IView\ICtlTaskView.cs" />
+    <Compile Include="IView\IGsStatisticsView.cs" />
+    <Compile Include="Model\AsrsCtlModel.cs" />
+    <Compile Include="Model\AsrsPortalModel.cs" />
+    <Compile Include="Model\AsrsStackerCtlModel.cs" />
+    <Compile Include="Model\AsrsTaskParamModel.cs" />
+    <Compile Include="Model\TaskQueryFilterModel.cs" />
+    <Compile Include="Presenter\AsrsCtlPresenter.cs" />
+    <Compile Include="Presenter\CtlTaskPresenter.cs" />
+    <Compile Include="Presenter\GsStatisticsPresenter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="View2\AsrsMonitorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View2\AsrsMonitorView.Designer.cs">
+      <DependentUpon>AsrsMonitorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View2\AsrsStatUserCtl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View2\AsrsStatUserCtl.Designer.cs">
+      <DependentUpon>AsrsStatUserCtl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View2\PortBufferMonitorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View2\PortBufferMonitorView.Designer.cs">
+      <DependentUpon>PortBufferMonitorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\AsrsCtlView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AsrsCtlView.Designer.cs">
+      <DependentUpon>AsrsCtlView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\AsrsMonitorUsercontrol.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\AsrsMonitorUsercontrol.Designer.cs">
+      <DependentUpon>AsrsMonitorUsercontrol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CtlTaskView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CtlTaskView.Designer.cs">
+      <DependentUpon>CtlTaskView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\GsStatisticsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\GsStatisticsView.Designer.cs">
+      <DependentUpon>GsStatisticsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\PortBufferView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PortBufferView.Designer.cs">
+      <DependentUpon>PortBufferView.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View2\AsrsMonitorView.resx">
+      <DependentUpon>AsrsMonitorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View2\AsrsStatUserCtl.resx">
+      <DependentUpon>AsrsStatUserCtl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View2\PortBufferMonitorView.resx">
+      <DependentUpon>PortBufferMonitorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AsrsCtlView.resx">
+      <DependentUpon>AsrsCtlView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AsrsMonitorUsercontrol.resx">
+      <DependentUpon>AsrsMonitorUsercontrol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CtlTaskView.resx">
+      <DependentUpon>CtlTaskView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\GsStatisticsView.resx">
+      <DependentUpon>GsStatisticsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PortBufferView.resx">
+      <DependentUpon>PortBufferView.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CtlDBAccess\CtlDBAccess.csproj">
+      <Project>{2180a519-31fe-4c19-8d39-a4dfec26cf9a}</Project>
+      <Name>CtlDBAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CtlMonitorInterface\CtlMonitorInterface.csproj">
+      <Project>{4863621a-2226-4318-8b40-cceb8feb390c}</Project>
+      <Name>CtlMonitorInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MesDBAccess\MesDBAccess.csproj">
+      <Project>{6861ee48-2c2c-4034-8930-181ebe48cc7a}</Project>
+      <Name>MesDBAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\基础类\ModuleAttachInterface\ModuleCrossPnP.csproj">
+      <Project>{8ebcda91-8a16-46fa-84bd-784982f9eac8}</Project>
+      <Name>ModuleCrossPnP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\基础类\PLProcessModel\FlowCtlBaseModel.csproj">
+      <Project>{178d26df-c682-42d8-aeab-c816111b69c6}</Project>
+      <Name>FlowCtlBaseModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\基础类\LogInterface\LogInterface.csproj">
+      <Project>{f929e2c2-43ed-4d7e-8426-356b0ec3c540}</Project>
+      <Name>LogInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\基础类\SysCfgModel\SysCfg.csproj">
+      <Project>{ca19b9f8-8521-40c8-8918-33b15b2935d2}</Project>
+      <Name>SysCfg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AsrsInterface\AsrsInterface.csproj">
+      <Project>{3a9ad116-ca47-465e-ab89-3ab3346cb661}</Project>
+      <Name>AsrsInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AsrsModel\AsrsModel.csproj">
+      <Project>{5a6fa1e2-2e9b-4faf-93ec-bc6e1ef370de}</Project>
+      <Name>AsrsModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TransDevModel\TransDevModel.csproj">
+      <Project>{8d7a22b7-fb53-4861-b6b9-cc4c7d48cda7}</Project>
+      <Name>TransDevModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

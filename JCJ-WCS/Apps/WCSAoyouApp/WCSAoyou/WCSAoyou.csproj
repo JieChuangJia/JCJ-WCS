@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{39ADE9BB-4A74-4246-B24B-BDAFBD28B92B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WCSAoyou</RootNamespace>
+    <AssemblyName>WCSAoyou</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationIcon>48.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevAccess, Version=1.0.0.3, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\LibReference\DevAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Images.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v16.2.Core, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraBars.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraNavBar.v16.2, Version=16.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevInterface, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\LibReference\DevInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IMainView.cs" />
+    <Compile Include="Login\LoginView2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\LoginView2.designer.cs">
+      <DependentUpon>LoginView2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainPresenter.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TextBoxWriter.cs" />
+    <Compile Include="WMSSvcSim.cs" />
+    <EmbeddedResource Include="Login\LoginView2.resx">
+      <DependentUpon>LoginView2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="48.ico" />
+    <Content Include="AoyouWCSCfg.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="GoogsSiteCfg.xml" />
+    <None Include="Resources\Icon1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\基础类\LicenceManager\LicenceManager.csproj">
+      <Project>{785aa2aa-cc7e-408b-b61c-2dfb906d1797}</Project>
+      <Name>LicenceManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\基础类\LogInterface\LogInterface.csproj">
+      <Project>{f929e2c2-43ed-4d7e-8426-356b0ec3c540}</Project>
+      <Name>LogInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\基础类\ModuleAttachInterface\ModuleCrossPnP.csproj">
+      <Project>{8ebcda91-8a16-46fa-84bd-784982f9eac8}</Project>
+      <Name>ModuleCrossPnP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\基础类\PLProcessModel\FlowCtlBaseModel.csproj">
+      <Project>{178d26df-c682-42d8-aeab-c816111b69c6}</Project>
+      <Name>FlowCtlBaseModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\基础类\SysCfgModel\SysCfg.csproj">
+      <Project>{ca19b9f8-8521-40c8-8918-33b15b2935d2}</Project>
+      <Name>SysCfg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\常用视图\LogManage\LogManage.csproj">
+      <Project>{f7b5e062-39a2-49a7-9233-21150f3dfb09}</Project>
+      <Name>LogManage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\常用视图\ProductRecordView\ProductRecordView.csproj">
+      <Project>{7324889c-e198-4959-903a-4d183c356cb3}</Project>
+      <Name>ProductRecordView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\控制\AsrsControl\AsrsControl.csproj">
+      <Project>{1178ad55-557b-454b-98c6-60c262434666}</Project>
+      <Name>AsrsControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\控制\AsrsInterface\AsrsInterface.csproj">
+      <Project>{3a9ad116-ca47-465e-ab89-3ab3346cb661}</Project>
+      <Name>AsrsInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\控制\AsrsModel\AsrsModel.csproj">
+      <Project>{5a6fa1e2-2e9b-4faf-93ec-bc6e1ef370de}</Project>
+      <Name>AsrsModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\控制\CtlDBAccess\CtlDBAccess.csproj">
+      <Project>{2180a519-31fe-4c19-8d39-a4dfec26cf9a}</Project>
+      <Name>CtlDBAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\控制\CtlMonitorInterface\CtlMonitorInterface.csproj">
+      <Project>{4863621a-2226-4318-8b40-cceb8feb390c}</Project>
+      <Name>CtlMonitorInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\控制\DevManage\CtlManage.csproj">
+      <Project>{8784b37e-5893-4914-83ab-37be05054128}</Project>
+      <Name>CtlManage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\控制\MesDBAccess\MesDBAccess.csproj">
+      <Project>{6861ee48-2c2c-4034-8930-181ebe48cc7a}</Project>
+      <Name>MesDBAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\控制\MonitorViews\MonitorViews.csproj">
+      <Project>{6644f06b-8feb-431b-9020-ac91fd93cce6}</Project>
+      <Name>MonitorViews</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\控制\TransDevModel\TransDevModel.csproj">
+      <Project>{8d7a22b7-fb53-4861-b6b9-cc4c7d48cda7}</Project>
+      <Name>TransDevModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ConfigManage\ConfigManage.csproj">
+      <Project>{5ab1d7f4-0d37-4d6d-9939-1d6026cd33fd}</Project>
+      <Name>ConfigManage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PrcsCtlModels\PrcsCtlModelsAoyou.csproj">
+      <Project>{362f4d48-1622-4fa6-b26e-5f2b58a9949b}</Project>
+      <Name>PrcsCtlModelsAoyou</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy ".\AoyouWCSCfg.xml" ".\data\" /y
+del *.xml</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

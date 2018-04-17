@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7324889C-E198-4959-903A-4D183C356CB3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProductRecordView</RootNamespace>
+    <AssemblyName>ProductRecordView</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevAccess, Version=1.0.0.3, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\LibReference\DevAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="DevInterface, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\LibReference\DevInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\ProductQueryFilter.cs" />
+    <Compile Include="Model\TraceQueryFilter.cs" />
+    <Compile Include="View\HkTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\HkTestForm.designer.cs">
+      <DependentUpon>HkTestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProductDataView .cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ProductDataView .Designer.cs">
+      <DependentUpon>ProductDataView .cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProduceTraceView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ProduceTraceView.Designer.cs">
+      <DependentUpon>ProduceTraceView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\RecordView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\RecordView.Designer.cs">
+      <DependentUpon>RecordView.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="View\HkTestForm.resx">
+      <DependentUpon>HkTestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ProductDataView .resx">
+      <DependentUpon>ProductDataView .cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ProduceTraceView.resx">
+      <DependentUpon>ProduceTraceView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\RecordView.resx">
+      <DependentUpon>RecordView.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="IView\" />
+    <Folder Include="Presenter\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\基础类\PLProcessModel\FlowCtlBaseModel.csproj">
+      <Project>{178d26df-c682-42d8-aeab-c816111b69c6}</Project>
+      <Name>FlowCtlBaseModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\控制\MesDBAccess\MesDBAccess.csproj">
+      <Project>{6861ee48-2c2c-4034-8930-181ebe48cc7a}</Project>
+      <Name>MesDBAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\基础类\ModuleAttachInterface\ModuleCrossPnP.csproj">
+      <Project>{8ebcda91-8a16-46fa-84bd-784982f9eac8}</Project>
+      <Name>ModuleCrossPnP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\基础类\LogInterface\LogInterface.csproj">
+      <Project>{f929e2c2-43ed-4d7e-8426-356b0ec3c540}</Project>
+      <Name>LogInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LogManage\LogManage.csproj">
+      <Project>{f7b5e062-39a2-49a7-9233-21150f3dfb09}</Project>
+      <Name>LogManage</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

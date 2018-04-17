@@ -1,0 +1,11 @@
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\CreateKey\bin\Release\CreateKey.exe.config
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\CreateKey\bin\Release\CreateKey.exe
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\CreateKey\bin\Release\CreateKey.pdb
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\CreateKey\bin\Release\LicenceManager.dll
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\CreateKey\bin\Release\LicenceManager.pdb
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\CreateKey\obj\x86\Release\CreateKey.csprojResolveAssemblyReference.cache
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\CreateKey\obj\x86\Release\CreateKey.Form1.resources
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\CreateKey\obj\x86\Release\CreateKey.Properties.Resources.resources
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\CreateKey\obj\x86\Release\CreateKey.csproj.GenerateResource.Cache
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\CreateKey\obj\x86\Release\CreateKey.exe
+E:\Workspace\zz\项目8\安驰\代码\AcEcams\CreateKey\obj\x86\Release\CreateKey.pdb

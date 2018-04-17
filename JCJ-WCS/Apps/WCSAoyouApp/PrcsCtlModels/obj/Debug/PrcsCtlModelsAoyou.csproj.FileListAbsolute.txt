@@ -1,0 +1,3 @@
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\Apps\WCSAoyouApp\PrcsCtlModels\obj\Debug\PrcsCtlModelsAoyou.csprojResolveAssemblyReference.cache
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\Apps\WCSAoyouApp\PrcsCtlModels\obj\Debug\PrcsCtlModelsAoyou.Properties.Resources.resources
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\Apps\WCSAoyouApp\PrcsCtlModels\obj\Debug\PrcsCtlModelsAoyou.csproj.GenerateResource.Cache

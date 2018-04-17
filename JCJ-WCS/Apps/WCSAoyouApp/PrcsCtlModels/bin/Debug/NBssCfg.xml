@@ -1,0 +1,462 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ProcessCfg>
+  <sysSet>
+    <RunMode sim="true">运行模式</RunMode>
+    <!--线体控制，速度，启动/停止-->
+    <LineCtl addrStart="D4000" blockNum="3">线体控制</LineCtl>
+    <AsrsStoreCfg StoreTime="4">A库静置时间，单位：小时</AsrsStoreCfg>
+    <AsrsBatchCfg HouseACheckin="48-d" HouseACheckout="" HouseBCheckin="" HouseBCheckout="">出入库批次设置</AsrsBatchCfg>
+    <AsrsEnableSet HouseEnabledA="True" HouseEnabledB="True">库房启用设置</AsrsEnableSet>
+  </sysSet>
+  <CommDevCfg>
+    <!--<ComPort>
+      <Port id="1">COM1</Port>
+      <Port id="2">COM2</Port>
+      <Port id="3">COM3</Port>
+      <Port id="4">COM4</Port>
+      <Port id="5">COM5</Port>
+      <Port id="6">COM6</Port>
+      <Port id="7">COM7</Port>
+      <Port id="8">COM8</Port>
+      <Port id="9">COM9</Port>
+      <Port id="10">COM10</Port>
+      <Port id="11">COM11</Port>
+      <Port id="12">COM12</Port>
+      <Port id="13">COM13</Port>
+      <Port id="14">COM14</Port>
+
+    </ComPort>-->
+    <PLCCfg>
+      <PLCVendor>三菱</PLCVendor>
+      <PLC id="1" role="A库堆垛机" db1Len="100"  db2Len="100">192.168.1.212:7000</PLC>
+      <PLC id ="2" role="B库堆垛机" db1Len="100" db2Len="100">192.168.1.200:7000</PLC>
+      <PLC id ="3" role="组装线、绑定、焊接、A库出入口" db1Len="200" db2Len="200">192.168.1.215:7000</PLC>
+      <PLC id="4" role="B库出入口，PACK组装" db1Len="200"  db2Len="200">192.168.1.205:7000</PLC>
+      <PLC id="5" role="1号RGV:模块焊接RGV,FX3U" db1Len="10"  db2Len="10">192.168.1.207:7000</PLC>
+      <PLC id="6" role="2号RGV,FX3U" db1Len="10"  db2Len="10">192.168.1.208:7000</PLC>
+    </PLCCfg>
+    <!--RFID配置-->
+    <RfidCfg CommType="TCPIP">
+      <RFID id="1" CommAddr="192.168.1.217:9000"></RFID>
+      <RFID id="2" CommAddr="192.168.1.219:9000"></RFID>
+      <RFID id="3" CommAddr="192.168.1.220:9000"></RFID>
+      <!--<RFID id="4" CommAddr="192.168.1.13:9000"></RFID>-->
+    </RfidCfg>
+    <BarScannerCfg>
+      <BarScanner id="40" CommAddr="COM10"></BarScanner>
+      <BarScanner id="7" CommAddr="COM17"></BarScanner>
+      <BarScanner id="8" CommAddr="COM18"></BarScanner>
+      <BarScanner id="9" CommAddr="COM19"></BarScanner>
+      <BarScanner id="10" CommAddr="COM20"></BarScanner>
+      <BarScanner id="11" CommAddr="COM21"></BarScanner>
+      <BarScanner id="12" CommAddr="COM22"></BarScanner>
+    </BarScannerCfg>
+  </CommDevCfg>
+  <CtlNodes>
+    <Node className="NbProcessCtl.NodeAssem" id="5001" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>1线电池装配#1</NodeName>
+        <DB1Addr addrStart="D5000" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5000" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5002" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>1线电池装配#2</NodeName>
+        <DB1Addr addrStart="D5005" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5005" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5003" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>1线电池装配#3</NodeName>
+        <DB1Addr addrStart="D5010" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5010" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5004" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>1线电池装配#4</NodeName>
+        <DB1Addr addrStart="D5015" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5015" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5005" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>1线电池装配#5</NodeName>
+        <DB1Addr addrStart="D5020" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5020" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5006" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>1线电池装配#6</NodeName>
+        <DB1Addr addrStart="D5025" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5025" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5007" enabled ="true">
+      <BaseDatainfo barcodeScanner ="7">
+        <NodeName>1线电池装配#7</NodeName>
+        <DB1Addr addrStart="D5030" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5030" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5008" enabled ="true">
+      <BaseDatainfo barcodeScanner ="8">
+        <NodeName>1线电池装配#8</NodeName>
+        <DB1Addr addrStart="D5035" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5035" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5009" enabled ="true">
+      <BaseDatainfo barcodeScanner ="9">
+        <NodeName>1线电池装配#9</NodeName>
+        <DB1Addr addrStart="D5040" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5040" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5010" enabled ="true">
+      <BaseDatainfo barcodeScanner ="10">
+        <NodeName>1线电池装配#10</NodeName>
+        <DB1Addr addrStart="D5045" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5045" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5011" enabled ="true">
+      <BaseDatainfo barcodeScanner ="11">
+        <NodeName>1线电池装配#11</NodeName>
+        <DB1Addr addrStart="D5050" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5050" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5012" enabled ="true">
+      <BaseDatainfo barcodeScanner ="12">
+        <NodeName>1线电池装配#12</NodeName>
+        <DB1Addr addrStart="D5055" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5055" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5013" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>1线电池装配#13</NodeName>
+        <DB1Addr addrStart="D5060" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5060" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5014" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>1线电池装配#14</NodeName>
+        <DB1Addr addrStart="D5065" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5065" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5015" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>1线电池装配#15</NodeName>
+        <DB1Addr addrStart="D5070" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5070" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5021" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>2线电池装配#1</NodeName>
+        <DB1Addr addrStart="D5100" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5100" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5022" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>2线电池装配#2</NodeName>
+        <DB1Addr addrStart="D5105" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5105" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5023" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>2线电池装配#3</NodeName>
+        <DB1Addr addrStart="D5110" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5110" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5024" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>2线电池装配#4</NodeName>
+        <DB1Addr addrStart="D5115" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5115" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5025" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>2线电池装配#5</NodeName>
+        <DB1Addr addrStart="D5120" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5120" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5026" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>2线电池装配#6</NodeName>
+        <DB1Addr addrStart="D5125" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5125" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5027" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>2线电池装配#7</NodeName>
+        <DB1Addr addrStart="D5130" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5130" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5028" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>2线电池装配#8</NodeName>
+        <DB1Addr addrStart="D5135" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5135" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5029" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>2线电池装配#9</NodeName>
+        <DB1Addr addrStart="D5140" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5140" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5030" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>2线电池装配#10</NodeName>
+        <DB1Addr addrStart="D5145" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5145" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5031" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>2线电池装配#11</NodeName>
+        <DB1Addr addrStart="D5150" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5150" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5032" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>2线电池装配#12</NodeName>
+        <DB1Addr addrStart="D5155" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5155" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5033" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>2线电池装配#13</NodeName>
+        <DB1Addr addrStart="D5160" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5160" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5034" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>2线电池装配#14</NodeName>
+        <DB1Addr addrStart="D5165" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5165" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeAssem" id="5035" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>2线电池装配#15</NodeName>
+        <DB1Addr addrStart="D5170" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5170" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodePalletBind" id="6001" enabled ="true">
+      <BaseDatainfo rfid="1" barcodeScanner ="40">
+        <NodeName>工装板绑定</NodeName>
+        <DB1Addr addrStart="D5200" blockNum="5">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D5250" blockNum="5">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeWelding" id="4001" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>超声波焊#1</NodeName>
+        <DB1Addr addrStart="D3000" blockNum="10">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D4000" blockNum="20">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+      <SelfDatainfo>
+          <Mach seq="1">焊机编号</Mach>
+      </SelfDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeWelding" id="4002" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>超声波焊#2</NodeName>
+        <DB1Addr addrStart="D3010" blockNum="10">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D4020" blockNum="20">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+      <SelfDatainfo>
+          <Mach seq="2">焊机编号</Mach>
+      </SelfDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeWelding" id="4003" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>超声波焊#3</NodeName>
+        <DB1Addr addrStart="D3020" blockNum="10">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D4040" blockNum="20">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+      <SelfDatainfo>
+          <Mach seq="3">焊机编号</Mach>
+      </SelfDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeWelding" id="4004" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>超声波焊#4</NodeName>
+        <DB1Addr addrStart="D3030" blockNum="10">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D4060" blockNum="20">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+      <SelfDatainfo>
+          <Mach seq="4">焊机编号</Mach>
+      </SelfDatainfo>
+    </Node>
+    
+    <Node className="NbProcessCtl.NodeWelding" id="4005" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>超声波焊#5</NodeName>
+        <DB1Addr addrStart="D3040" blockNum="10">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D4080" blockNum="20">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+      <SelfDatainfo>
+          <Mach seq="5">焊机编号</Mach>
+      </SelfDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeWelding" id="4006" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>超声波焊#6</NodeName>
+        <DB1Addr addrStart="D3050" blockNum="10">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D4100" blockNum="20">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+      <SelfDatainfo>
+          <Mach seq="6">焊机编号</Mach>
+      </SelfDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeWelding" id="4007" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>超声波焊#7</NodeName>
+        <DB1Addr addrStart="D3060" blockNum="10">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D4120" blockNum="20">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+      <SelfDatainfo>
+          <Mach seq="7">焊机编号</Mach>
+      </SelfDatainfo>
+    </Node>
+    <Node className="NbProcessCtl.NodeWelding" id="4008" enabled ="false">
+      <BaseDatainfo>
+        <NodeName>超声波焊#8</NodeName>
+        <DB1Addr addrStart="D3070" blockNum="10">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D4140" blockNum="20">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+      <SelfDatainfo>
+          <Mach seq="8">焊机编号</Mach>
+      </SelfDatainfo>
+    </Node>
+    <!--<Node className="NbProcessCtl.NodeAssemPack" id="5001">
+      <BaseDatainfo>
+        <NodeName>PACK组装#1</NodeName>
+        <DB1Addr addrStart="D3600" blockNum="50">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D4600" blockNum="20">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+     
+    </Node>
+    <Node className="NbProcessCtl.NodeAssemPack" id="5002">
+      <BaseDatainfo>
+        <NodeName>PACK组装#2</NodeName>
+        <DB1Addr addrStart="D3650" blockNum="50">DB1数据区地址信息</DB1Addr>
+        <DB2Addr addrStart="D4620" blockNum="20">DB2数据区地址信息</DB2Addr>
+      </BaseDatainfo>
+    </Node>-->
+  </CtlNodes>
+  <AsrsNodes>
+    <Asrs name="A库房">
+      <Node className="AsrsControl.AsrsStackerCtlModel" id="1001" enabled ="true">
+        <BaseDatainfo>
+          <NodeName>A1库堆垛机</NodeName>
+          <DB1Addr addrStart="D2001" blockNum="20">DB1数据区地址信息</DB1Addr>
+          <DB2Addr addrStart="D3001" blockNum="10">DB2数据区地址信息</DB2Addr>
+        </BaseDatainfo>
+        
+      </Node>
+      <Node className="AsrsPortalModel.AsrsPortalModel" id="2001" enabled ="true">
+        <BaseDatainfo rfid ="2">
+          <NodeName>A1库产品入口</NodeName>
+          <DB1Addr addrStart="D2021" blockNum="5">DB1数据区地址信息</DB1Addr>
+          <DB2Addr addrStart="D3011" blockNum="5">DB2数据区地址信息</DB2Addr>
+        </BaseDatainfo>
+        <SelfDatainfo>
+          <PortType>入口</PortType>
+        </SelfDatainfo>
+      </Node>
+      <Node className="AsrsPortalModel.AsrsPortalModel" id="2002" enabled ="true">
+        <BaseDatainfo>
+          <NodeName>A1库产品出口</NodeName>
+          <DB1Addr addrStart="D2026" blockNum="5">DB1数据区地址信息</DB1Addr>
+          <DB2Addr addrStart="D3016" blockNum="5">DB2数据区地址信息</DB2Addr>
+        </BaseDatainfo>
+        <SelfDatainfo>
+          <PortType>出口</PortType>
+        </SelfDatainfo>
+      </Node>
+      <Node className="AsrsPortalModel.AsrsPortalModel" id="2003" enabled ="true">
+        <BaseDatainfo>
+          <NodeName>A1库空框入口</NodeName>
+          <DB1Addr addrStart="D2031" blockNum="5">DB1数据区地址信息</DB1Addr>
+          <DB2Addr addrStart="D3021" blockNum="5">DB2数据区地址信息</DB2Addr>
+        </BaseDatainfo>
+        <SelfDatainfo>
+          <PortType>入口</PortType>
+        </SelfDatainfo>
+      </Node>
+      <!--<Node className="AsrsPortalModel.AsrsPortalModel" id="2004">
+        <BaseDatainfo>
+          <NodeName>A1库空框出口</NodeName>
+          <DB1Addr addrStart="D2036" blockNum="5">DB1数据区地址信息</DB1Addr>
+          <DB2Addr addrStart="D3026" blockNum="5">DB2数据区地址信息</DB2Addr>
+        </BaseDatainfo>
+        <SelfDatainfo>
+          <PortType>出口</PortType>
+        </SelfDatainfo>
+      </Node>-->
+    </Asrs>
+    <Asrs name="B库房">
+      <Node className="AsrsControl.AsrsStackerCtlModel" id="1002" enabled ="true">
+        <BaseDatainfo >
+          <NodeName>B1库堆垛机</NodeName>
+          <DB1Addr addrStart="D2100" blockNum="20">DB1数据区地址信息</DB1Addr>
+          <DB2Addr addrStart="D3100" blockNum="10">DB2数据区地址信息</DB2Addr>
+        </BaseDatainfo>
+
+      </Node>
+      <Node className="AsrsPortalModel.AsrsPortalModel" id="2011" enabled ="true">
+        <BaseDatainfo rfid ="3">
+          <NodeName>B1库产品入口</NodeName>
+          <DB1Addr addrStart="D2120" blockNum="5">DB1数据区地址信息</DB1Addr>
+          <DB2Addr addrStart="D3110" blockNum="5">DB2数据区地址信息</DB2Addr>
+        </BaseDatainfo>
+        <SelfDatainfo>
+          <PortType>入口</PortType>
+        </SelfDatainfo>
+      </Node>
+      <Node className="AsrsPortalModel.AsrsPortalModel" id="2012" enabled ="true">
+        <BaseDatainfo>
+          <NodeName>B1库合格品出口</NodeName>
+          <DB1Addr addrStart="D2125" blockNum="5">DB1数据区地址信息</DB1Addr>
+          <DB2Addr addrStart="D3115" blockNum="5">DB2数据区地址信息</DB2Addr>
+        </BaseDatainfo>
+        <SelfDatainfo>
+          <PortType>出口</PortType>
+        </SelfDatainfo>
+      </Node>
+      <Node className="AsrsPortalModel.AsrsPortalModel" id="2013" enabled ="true">
+        <BaseDatainfo>
+          <NodeName>B1库不良产品出口</NodeName>
+          <DB1Addr addrStart="D2130" blockNum="5">DB1数据区地址信息</DB1Addr>
+          <DB2Addr addrStart="D3120" blockNum="5">DB2数据区地址信息</DB2Addr>
+        </BaseDatainfo>
+        <SelfDatainfo>
+          <PortType>出口</PortType>
+        </SelfDatainfo>
+      </Node>
+    </Asrs>
+  </AsrsNodes>
+</ProcessCfg>

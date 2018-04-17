@@ -1,0 +1,7 @@
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\控制\AsrsInterface\bin\Debug\AsrsInterface.dll
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\控制\AsrsInterface\bin\Debug\AsrsInterface.pdb
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\控制\AsrsInterface\bin\Debug\AsrsModel.dll
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\控制\AsrsInterface\bin\Debug\AsrsModel.pdb
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\控制\AsrsInterface\obj\Debug\AsrsInterface.csprojResolveAssemblyReference.cache
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\控制\AsrsInterface\obj\Debug\AsrsInterface.dll
+E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\控制\AsrsInterface\obj\Debug\AsrsInterface.pdb
