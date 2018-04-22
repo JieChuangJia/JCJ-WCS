@@ -15,3 +15,4 @@ E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\�
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\AsrsModel\bin\Release\AsrsModel.pdb
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\AsrsModel\obj\x86\Release\AsrsModel.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\AsrsModel\obj\x86\Release\AsrsModel.pdb
+E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\AsrsModel\obj\x86\Release\AsrsModel.csprojResolveAssemblyReference.cache

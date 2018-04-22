@@ -24,8 +24,6 @@ E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\控制\Tr
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\TransDevModel.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\TransDevModel.pdb
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\CtlDBAccess.dll
-E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\DevAccess.dll
-E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\DevInterface.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\FlowCtlBaseModel.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\LogInterface.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\SysCfg.dll

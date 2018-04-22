@@ -25,3 +25,4 @@ E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\�
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\基础类\LicenceManager\obj\x86\Release\LicenceManager.csproj.GenerateResource.Cache
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\基础类\LicenceManager\obj\x86\Release\LicenceManager.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\基础类\LicenceManager\obj\x86\Release\LicenceManager.pdb
+E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\基础类\LicenceManager\obj\x86\Release\LicenceManager.csprojResolveAssemblyReference.cache

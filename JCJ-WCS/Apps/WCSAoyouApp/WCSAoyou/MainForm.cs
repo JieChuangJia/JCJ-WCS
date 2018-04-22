@@ -210,14 +210,16 @@ namespace WCSAoyou
                 nodeMonitorView.dlgtWMSTaskCommit = wmsSvcSim.WMSTaskCommit;
                 this.nodeMonitorView.InitDevDic(presenter.DevCommManager.GetPLCConnStatDic());
                 this.nodeMonitorView.DevMonitorView.devCommMonitor = presenter.DevCommManager;
-                string[] taskNodeIDS = new string[] {"1001","1002","1003","1004","1005","1006","6001","6002","6003" };
+                //string[] taskNodeIDS = new string[] {"1001","1002","1003","1004","1005","1006","6001","6002","6003" };
                 IDictionary<string, string> taskNodeMap = new Dictionary<string, string>();
-                foreach(string nodeID in taskNodeIDS)
+               
+              //  foreach(string nodeID in taskNodeIDS)
+                foreach (FlowCtlBaseModel.CtlNodeBaseModel node in presenter.CtlNodeManager.MonitorNodeList)
                 {
-                    FlowCtlBaseModel.CtlNodeBaseModel node = presenter.CtlNodeManager.GetNodeByID(nodeID);
+                    //FlowCtlBaseModel.CtlNodeBaseModel node = presenter.CtlNodeManager.GetNodeByID(nodeID);
                     if(node != null)
                     {
-                        taskNodeMap[nodeID] = node.NodeName;
+                        taskNodeMap[node.NodeID] = node.NodeName;
                     }
                 }
                 asrsCtlView.SetTaskNodeNames(taskNodeMap);
