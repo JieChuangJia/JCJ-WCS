@@ -96,6 +96,7 @@ namespace TransDevModel
                             }
                         }
                         string logInfo = string.Format("任务完成:{0},上料站台：{1}，下料站台:{2}", ((SysCfg.EnumAsrsTaskType)currentTask.TaskType).ToString(),this.currentTask.StDevice,this.currentTask.EndDevice);
+                        this.db1ValsToSnd[1] = 2;
                         for (int i = 3; i < db1ValsToSnd.Count(); i++)
                         {
                             db1ValsToSnd[i] = 0;

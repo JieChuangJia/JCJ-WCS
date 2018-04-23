@@ -60,7 +60,7 @@ namespace AsrsControl
                     short row = short.Parse(cellPos[0]);
                     short col = short.Parse(cellPos[1]);
                     short layer = short.Parse(cellPos[2]);
-                    this.cellPos2 = new CellCoordModel(row, col, layer);
+                    this.cellPos1 = new CellCoordModel(row, col, layer);
                 }
                 else if(taskType== SysCfg.EnumAsrsTaskType.移库)
                 {

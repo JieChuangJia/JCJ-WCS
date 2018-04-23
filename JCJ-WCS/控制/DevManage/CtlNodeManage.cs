@@ -209,6 +209,19 @@ namespace CtlManage
             taskDetail = node.GetRunningTaskDetail();
             return true;
         }
+        public bool GetDevRunningInfoByID(string nodeID, ref DataTable db1Dt, ref DataTable db2Dt, ref string taskDetail)
+        {
+            CtlNodeBaseModel node =GetNodeByID(nodeID);
+            if (node == null)
+            {
+                return false;
+            }
+            //任务
+            db1Dt = node.GetDB1DataDetail();
+            db2Dt = node.GetDB2DataDetail();
+            taskDetail = node.GetRunningTaskDetail();
+            return true;
+        }
         public void SimSetBarcode(string nodeName, string barcode)
         {
             CtlNodeBaseModel node = GetMonitorNode(nodeName);

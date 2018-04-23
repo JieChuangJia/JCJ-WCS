@@ -29,16 +29,11 @@ E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\�
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\SysCfg.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\MesDBAccess.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\Newtonsoft.Json.dll
-E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\Oracle.ManagedDataAccess.dll
-E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\UHFReader06CSharp.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\LogInterface.pdb
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\FlowCtlBaseModel.pdb
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\SysCfg.pdb
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\CtlDBAccess.pdb
-E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\DevAccess.pdb
-E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\DevInterface.pdb
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\MesDBAccess.pdb
-E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\bin\Release\DevAccess.XmlSerializers.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\obj\Release\TransDevModel.csprojResolveAssemblyReference.cache
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\obj\Release\TransDevModel.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\TransDevModel\obj\Release\TransDevModel.pdb

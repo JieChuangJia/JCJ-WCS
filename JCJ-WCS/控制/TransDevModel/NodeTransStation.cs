@@ -104,34 +104,48 @@ namespace TransDevModel
                             if(this.db2Vals[0] != 2)
                             {
                                 break;
-                            }              
-                            if(SysCfg.SysCfgModel.SimMode)
+                            }
+
+                            if (SysCfg.SysCfgModel.SimMode)
                             {
                                 this.rfidUID = this.SimRfidUID;
+                                logRecorder.AddDebugLog(this.nodeName, "读到托盘号:" + this.rfidUID);
                             }
                             else
                             {
-                                this.rfidUID = this.barcodeRW.ReadBarcode().Trim();//this.barcodeRW.Trim();
+                                if(this.barcodeRW != null)
+                                {
+                                    this.rfidUID = this.barcodeRW.ReadBarcode().Trim();//this.barcodeRW.Trim();
+                                }
+                                logRecorder.AddDebugLog(this.nodeName, "读到托盘号:" + this.rfidUID);
                             }
-                            logRecorder.AddDebugLog(this.nodeName, "读到托盘号:" + this.rfidUID);
-                            
+                           
                             this.currentTaskPhase++;
                             break;
                         }
                     case 2:
                         {
                             this.currentTask = null;
-                            currentTaskDescribe = "等待检索待执行任务，托盘码：" + this.rfidUID;
+                            currentTaskDescribe = "等待检索待执行任务";
                             List<CtlDBAccess.Model.ControlTaskModel> taskList = ctlTaskBll.GetTaskToRunList((int)SysCfg.EnumAsrsTaskType.输送机送出, "待执行", this.nodeID);
                           //  CtlDBAccess.Model.ControlTaskModel taskToRun = null;
                             
                             foreach (CtlDBAccess.Model.ControlTaskModel task in taskList)
                             {
-                                if (task.PalletCode == this.rfidUID)
+                                if(string.IsNullOrWhiteSpace(this.rfidUID))
                                 {
-                                   this.currentTask = task;
+                                    this.currentTask = task;
                                     break;
                                 }
+                                else
+                                {
+                                    if (task.PalletCode == this.rfidUID)
+                                    {
+                                        this.currentTask = task;
+                                        break;
+                                    }
+                                }
+                                
                             }
                             if (this.currentTask == null)
                             {

@@ -56,7 +56,7 @@ namespace MonitorViews
             dr["任务类型"] = "产品入库";
             dr["任务状态"] = "待执行";
             dr["托盘码"] = "TP2018040412";
-            dr["起始设备号"] = "12113";
+            dr["起始设备号"] = "12112";
             dr["起始设备类型"] = "工位";
             dr["起始设备参数"] = "";
             dr["目标设备号"] = "11001";
@@ -339,8 +339,6 @@ namespace MonitorViews
             }
         }
         #endregion     
-
-       
         #region 委托调用
         private void button1_Click(object sender, EventArgs e)
         {

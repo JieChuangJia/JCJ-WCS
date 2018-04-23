@@ -1617,10 +1617,14 @@ namespace AsrsControl
                         {
                             //List<AsrsPortalModel> validPorts = GetOutPortsOfBindedtask(taskType);
                             AsrsPortalModel port = GetPortByDeviceID(paramModel.OutputPort.ToString());//ports[paramModel.OutputPort - 1];
-                            if (port.Db2Vals[0] != 2)
+                            if(port.Db2Vals[0] != 1 || port.Db2Vals[6] != 1)
                             {
                                 continue;
                             }
+                            //if (port.Db2Vals[0] != 2)
+                            //{
+                            //    continue;
+                            //}
                         }
 
                         if (stacker.FillTask(task, ref reStr))
@@ -1965,9 +1969,10 @@ namespace AsrsControl
                         {
                            // int stepUpdate = 3;
                             //通知站台出库完成
-                           if(ports.Count()>= taskParamModel.OutputPort)
+                            AsrsPortalModel outPort = GetPortByDeviceID(taskParamModel.OutputPort.ToString());
+                            if(outPort !=null)
                            {
-                               AsrsPortalModel outPort = ports[taskParamModel.OutputPort-1];
+                              
                                if(dlgtAsrsOutTaskPost != null)
                                {
                                    if(!dlgtAsrsOutTaskPost(outPort,taskParamModel,ref reStr))
@@ -1975,7 +1980,7 @@ namespace AsrsControl
                                        return false;
                                    }
                                }
-                               outPort.Db1ValsToSnd[0] = 2;
+                               outPort.Db1ValsToSnd[1] = 2;
                                if (!outPort.NodeCmdCommit(true, ref reStr))
                                {
                                    reStr = string.Format("出库站台{0}状态'出库完成'提交失败", outPort.PortSeq);
@@ -1984,8 +1989,8 @@ namespace AsrsControl
                            }
 
                             #region 上传MES 出入库时间，库位，托盘号
-                            DateTime checkInTime = DateTime.Now;
-                            DateTime checkOutTime = DateTime.Now;
+                            //DateTime checkInTime = DateTime.Now;
+                         //   DateTime checkOutTime = DateTime.Now;
                  
                           //  this.MesAcc.UpdateStep(stepUpdate, palletID);
                             #endregion
@@ -2103,37 +2108,33 @@ namespace AsrsControl
 
         private bool AsrsPnPBusiness(AsrsTaskParamModel taskParamModel, ControlTaskModel ctlTask,short pnpStat)
         {
-            if (ports.Count() >= taskParamModel.OutputPort)
-            {
+          //  if (ports.Count() >= taskParamModel.OutputPort)
+            
                // string reStr = "";
-                AsrsPortalModel port = null;
-                if (ctlTask.TaskType == (int)SysCfg.EnumAsrsTaskType.产品入库 || ctlTask.TaskType == (int)SysCfg.EnumAsrsTaskType.空筐入库)
-                {
-                    port = GetPortByDeviceID(taskParamModel.InputPort.ToString());// this.ports[taskParamModel.InputPort - 1];
-                    port.Db1ValsToSnd[1] = (short)pnpStat;
-                }
-                //else if (ctlTask.TaskType == (int)SysCfg.EnumAsrsTaskType.产品出库 || ctlTask.TaskType == (int)SysCfg.EnumAsrsTaskType.空筐出库)
-                //{
-                //    port = this.ports[taskParamModel.OutputPort - 1];
-                //    port.Db1ValsToSnd[1] = (short)pnpStat;
-                //}
-                else
-                {
-                    return true;
-                }
-               
-                //if (!port.NodeCmdCommit(true, ref reStr))
-                //{
-                //    logRecorder.AddDebugLog(nodeName, string.Format("出库站台{0}状态'取放货完成'提交失败", port.PortSeq));
-                //    return false;
-                //}
-                return true;
+            AsrsPortalModel port = null;
+            if (ctlTask.TaskType == (int)SysCfg.EnumAsrsTaskType.产品入库 || ctlTask.TaskType == (int)SysCfg.EnumAsrsTaskType.空筐入库)
+            {
+                port = GetPortByDeviceID(taskParamModel.InputPort.ToString());// this.ports[taskParamModel.InputPort - 1];
+                port.Db1ValsToSnd[1] = (short)pnpStat;
             }
+            //else if (ctlTask.TaskType == (int)SysCfg.EnumAsrsTaskType.产品出库 || ctlTask.TaskType == (int)SysCfg.EnumAsrsTaskType.空筐出库)
+            //{
+            //    port = this.ports[taskParamModel.OutputPort - 1];
+            //    port.Db1ValsToSnd[1] = (short)pnpStat;
+            //}
             else
             {
-                throw new Exception("配置参数错误，发生异常");
-               
+                return true;
             }
+               
+            //if (!port.NodeCmdCommit(true, ref reStr))
+            //{
+            //    logRecorder.AddDebugLog(nodeName, string.Format("出库站台{0}状态'取放货完成'提交失败", port.PortSeq));
+            //    return false;
+            //}
+            return true;
+           
+            
             
         }
         /// <summary>

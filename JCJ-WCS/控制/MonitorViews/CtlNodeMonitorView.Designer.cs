@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanelAsrs = new System.Windows.Forms.FlowLayoutPanel();
             this.panel13 = new System.Windows.Forms.Panel();
@@ -206,7 +206,7 @@
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.splitContainer2.Panel2.Controls.Add(this.tableLayoutPanel3);
             this.splitContainer2.Size = new System.Drawing.Size(1341, 738);
-            this.splitContainer2.SplitterDistance = 298;
+            this.splitContainer2.SplitterDistance = 398;
             this.splitContainer2.SplitterWidth = 6;
             this.splitContainer2.TabIndex = 1;
             // 
@@ -239,11 +239,11 @@
             this.groupBoxCtlSim.Controls.Add(this.buttonDB2SimSet);
             this.groupBoxCtlSim.Controls.Add(this.label7);
             this.groupBoxCtlSim.Controls.Add(this.label25);
-            this.groupBoxCtlSim.Location = new System.Drawing.Point(10, 172);
+            this.groupBoxCtlSim.Location = new System.Drawing.Point(12, 266);
             this.groupBoxCtlSim.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxCtlSim.Name = "groupBoxCtlSim";
             this.groupBoxCtlSim.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBoxCtlSim.Size = new System.Drawing.Size(284, 363);
+            this.groupBoxCtlSim.Size = new System.Drawing.Size(384, 363);
             this.groupBoxCtlSim.TabIndex = 8;
             this.groupBoxCtlSim.TabStop = false;
             this.groupBoxCtlSim.Text = "仿真模拟";
@@ -256,7 +256,7 @@
             this.comboBoxBarcodeGun.Location = new System.Drawing.Point(141, 222);
             this.comboBoxBarcodeGun.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxBarcodeGun.Name = "comboBoxBarcodeGun";
-            this.comboBoxBarcodeGun.Size = new System.Drawing.Size(38, 26);
+            this.comboBoxBarcodeGun.Size = new System.Drawing.Size(138, 26);
             this.comboBoxBarcodeGun.TabIndex = 12;
             this.comboBoxBarcodeGun.Visible = false;
             // 
@@ -278,7 +278,7 @@
             this.textBoxBarcode.Location = new System.Drawing.Point(96, 261);
             this.textBoxBarcode.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxBarcode.Name = "textBoxBarcode";
-            this.textBoxBarcode.Size = new System.Drawing.Size(88, 28);
+            this.textBoxBarcode.Size = new System.Drawing.Size(188, 28);
             this.textBoxBarcode.TabIndex = 11;
             // 
             // label17
@@ -318,7 +318,7 @@
             this.textBoxRfidVal.Location = new System.Drawing.Point(96, 170);
             this.textBoxRfidVal.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxRfidVal.Name = "textBoxRfidVal";
-            this.textBoxRfidVal.Size = new System.Drawing.Size(88, 28);
+            this.textBoxRfidVal.Size = new System.Drawing.Size(188, 28);
             this.textBoxRfidVal.TabIndex = 5;
             // 
             // textBoxDB2ItemVal
@@ -397,7 +397,7 @@
             this.comboBoxDevList.Location = new System.Drawing.Point(8, 40);
             this.comboBoxDevList.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxDevList.Name = "comboBoxDevList";
-            this.comboBoxDevList.Size = new System.Drawing.Size(276, 26);
+            this.comboBoxDevList.Size = new System.Drawing.Size(386, 26);
             this.comboBoxDevList.TabIndex = 5;
             // 
             // buttonClearDevCmd
@@ -448,7 +448,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1037, 738);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(937, 738);
             this.tableLayoutPanel3.TabIndex = 9;
             // 
             // label24
@@ -473,7 +473,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(732, 132);
+            this.groupBox1.Size = new System.Drawing.Size(632, 132);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "流程详细";
@@ -485,38 +485,38 @@
             this.richTextBoxTaskInfo.Location = new System.Drawing.Point(4, 25);
             this.richTextBoxTaskInfo.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBoxTaskInfo.Name = "richTextBoxTaskInfo";
-            this.richTextBoxTaskInfo.Size = new System.Drawing.Size(724, 103);
+            this.richTextBoxTaskInfo.Size = new System.Drawing.Size(624, 103);
             this.richTextBoxTaskInfo.TabIndex = 0;
             this.richTextBoxTaskInfo.Text = "";
             // 
             // dataGridViewDevDB1
             // 
             this.dataGridViewDevDB1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewDevDB1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewDevDB1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewDevDB1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewDevDB1.Location = new System.Drawing.Point(301, 38);
             this.dataGridViewDevDB1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewDevDB1.Name = "dataGridViewDevDB1";
             this.dataGridViewDevDB1.RowTemplate.Height = 23;
-            this.dataGridViewDevDB1.Size = new System.Drawing.Size(362, 556);
+            this.dataGridViewDevDB1.Size = new System.Drawing.Size(312, 556);
             this.dataGridViewDevDB1.TabIndex = 3;
             // 
             // dataGridViewDevDB2
             // 
             this.dataGridViewDevDB2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDevDB2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewDevDB2.Location = new System.Drawing.Point(671, 38);
+            this.dataGridViewDevDB2.Location = new System.Drawing.Point(621, 38);
             this.dataGridViewDevDB2.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewDevDB2.Name = "dataGridViewDevDB2";
             this.dataGridViewDevDB2.RowTemplate.Height = 23;
-            this.dataGridViewDevDB2.Size = new System.Drawing.Size(362, 556);
+            this.dataGridViewDevDB2.Size = new System.Drawing.Size(312, 556);
             this.dataGridViewDevDB2.TabIndex = 4;
             // 
             // label8
@@ -528,7 +528,7 @@
             this.label8.Location = new System.Drawing.Point(301, 0);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(362, 34);
+            this.label8.Size = new System.Drawing.Size(312, 34);
             this.label8.TabIndex = 5;
             this.label8.Text = "DB1";
             // 
@@ -538,10 +538,10 @@
             this.label10.BackColor = System.Drawing.Color.Orange;
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label10.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label10.Location = new System.Drawing.Point(671, 0);
+            this.label10.Location = new System.Drawing.Point(621, 0);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(362, 34);
+            this.label10.Size = new System.Drawing.Size(312, 34);
             this.label10.TabIndex = 6;
             this.label10.Text = "DB2";
             // 

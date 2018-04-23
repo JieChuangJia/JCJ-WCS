@@ -218,7 +218,46 @@ namespace PrcsCtlModelsAoyou
                         return false;
                     }
                 }
-
+                else if(curNode.DevCata=="堆垛机")
+                {
+                    if (nextNode.DevCata != "站台")
+                    {
+                        reStr = "堆垛机目标设备应该为站台";
+                        return false;
+                    }
+                    FlowCtlBaseModel.WCSPathNodeModel targetWcsNode = wcsPath.GetNodeByID(wcsNode.NextNodeID);
+                    if (targetWcsNode.NodeFlag == "终点")
+                    {
+                        //管理任务完成
+                        WmsSvc.UpdateManageTaskStatus(mainTask.WMSTaskID, "已完成");
+                        return true;
+                    }
+                    FlowCtlBaseModel.CtlNodeBaseModel nextNode2 = NodeManager.GetNodeByID(targetWcsNode.NextNodeID);
+                    if (nextNode2.DevCata == "站台")
+                    {
+                        CtlDBAccess.Model.ControlTaskModel nextCtlTask = CreateConveyorTask(curTask.TaskIndex + 1, mainTask.MainTaskID, nextNode as TransDevModel.NodeTransStation, nextNode2 as TransDevModel.NodeTransStation, curTask.PalletCode, ref reStr);
+                        if (nextCtlTask == null)
+                        {
+                            return false;
+                        }
+                        return ctlTaskBll.Add(nextCtlTask);
+                    }
+                    else if(nextNode2.DevCata=="RGV")
+                    {
+                        FlowCtlBaseModel.WCSPathNodeModel targetWcsNode2 = wcsPath.GetNodeByID(nextNode2.NodeID);
+                        FlowCtlBaseModel.CtlNodeBaseModel nextNode3 = NodeManager.GetNodeByID(targetWcsNode2.NextNodeID);
+                        if(nextNode3==null)
+                        {
+                            return false;
+                        }
+                        CtlDBAccess.Model.ControlTaskModel nextCtlTask = CreateRGVTask(curTask.TaskIndex + 1, mainTask.MainTaskID, nextNode2 as TransDevModel.NodeRGV, nextNode as TransDevModel.NodeTransStation, nextNode3 as TransDevModel.NodeTransStation, curTask.PalletCode, ref reStr);
+                        if (nextCtlTask == null)
+                        {
+                            return false;
+                        }
+                        return ctlTaskBll.Add(nextCtlTask);
+                    }
+                }
                 return true;
             }
             catch (Exception ex)

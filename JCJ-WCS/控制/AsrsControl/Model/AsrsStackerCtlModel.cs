@@ -310,6 +310,63 @@ namespace AsrsControl
             }
             return true;
         }
+        public override bool WCSMainTaskStart(MainControlTaskModel mainTask, WCSFlowPathModel wcsPath, ref string reStr)
+        {
+            try
+            {
+                if (!base.WCSMainTaskStart(mainTask, wcsPath, ref reStr))
+                {
+                    return false;
+                }
+                WCSPathNodeModel wcsNode = wcsPath.GetNodeByID(nodeID);
+                WCSPathNodeModel wcsNodeNext = wcsPath.GetNodeByID(wcsNode.NextNodeID);
+                CtlDBAccess.Model.ControlTaskModel ctlTask = new CtlDBAccess.Model.ControlTaskModel();
+                ctlTask.TaskID = System.Guid.NewGuid().ToString();
+                ctlTask.DeviceID = nodeID;
+                ctlTask.DeviceCata = devCata;
+                ctlTask.StDevice = nodeID;
+                ctlTask.StDeviceCata = devCata;
+                ctlTask.StDeviceParam = mainTask.StDeviceParam;
+                ctlTask.EndDevice = wcsNode.NextNodeID;
+                ctlTask.EndDeviceCata = wcsNodeNext.DevCata;
+                ctlTask.EndDeviceParam = mainTask.EndDeviceParam;
+                ctlTask.MainTaskID = mainTask.MainTaskID;
+                ctlTask.PalletCode = mainTask.PalletCode;
+                UInt16 controlID = ctlTaskBll.GetUnusedControlID();
+                if (controlID < 1)
+                {
+                    reStr = "没有可用的控制任务ID";
+                    return false;
+                }
+                ctlTask.ControlID = controlID;
+                ctlTask.TaskIndex = 1;
+                SysCfg.EnumAsrsTaskType asrsTaskType=(SysCfg.EnumAsrsTaskType)Enum.Parse(typeof(SysCfg.EnumAsrsTaskType),mainTask.TaskType);
+                ctlTask.TaskType = (int)asrsTaskType;
+                ctlTask.TaskParam = "";
+                ctlTask.TaskStatus = "待执行";
+                ctlTask.TaskPhase = 0;
+                ctlTask.CreateTime = System.DateTime.Now;
+                ctlTask.CreateMode = "自动";
+                bool re = ctlTaskBll.Add(ctlTask);
+                if (re)
+                {
+                    mainTask.TaskStatus = "执行中";
+                    CtlDBAccess.BLL.MainControlTaskBll mainTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
+                    return mainTaskBll.Update(mainTask);
+                }
+                else
+                {
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                reStr = ex.ToString();
+                return false; 
+            }
+            
+        }
         public override bool BuildCfg(System.Xml.Linq.XElement xe, ref string reStr)
         {
             if (!base.BuildCfg(xe, ref reStr))

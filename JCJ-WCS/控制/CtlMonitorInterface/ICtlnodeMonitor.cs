@@ -11,6 +11,9 @@ namespace CtlMonitorInterface
     {
         [OperationContract]
         List<string> GetMonitorNodeNames();
+        [OperationContract]
+        bool GetDevRunningInfoByID(string nodeID, ref DataTable db1Dt, ref DataTable db2Dt, ref string taskDetail);
+
          [OperationContract]
         bool GetDevRunningInfo(string nodeName, ref DataTable db1Dt, ref DataTable db2Dt, ref string taskDetail);
          [OperationContract]

@@ -272,7 +272,10 @@ namespace WCSAoyou
         {
             return ctlNodeManager.GetDevRunningInfo(nodeName, ref db1Dt, ref db2Dt, ref taskDetail);
         }
-       
+        public bool GetDevRunningInfoByID(string nodeID, ref DataTable db1Dt, ref DataTable db2Dt, ref string taskDetail)
+        {
+            return ctlNodeManager.GetDevRunningInfoByID(nodeID, ref db1Dt, ref db2Dt, ref taskDetail);
+        }
         public bool SimSetDB2(string nodeName, int dbItemID, int val)
         {
             return ctlNodeManager.SimSetDB2(nodeName, dbItemID, val);
