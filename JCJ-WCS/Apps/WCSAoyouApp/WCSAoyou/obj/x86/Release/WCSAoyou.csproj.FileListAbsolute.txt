@@ -54,10 +54,8 @@ E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\Apps\WCSA
 E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\Apps\WCSAoyouApp\WCSAoyou\obj\x86\Release\WCSAoyou.exe.licenses
 E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\Apps\WCSAoyouApp\WCSAoyou\obj\x86\Release\WCSAoyou.exe
 E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\Apps\WCSAoyouApp\WCSAoyou\obj\x86\Release\WCSAoyou.pdb
-E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WCSAoyouApp\WCSAoyou\bin\Release\WCSAoyou.exe.config
-E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WCSAoyouApp\WCSAoyou\obj\x86\Release\WCSAoyou.exe
-E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WCSAoyouApp\WCSAoyou\obj\x86\Release\WCSAoyou.pdb
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WCSAoyouApp\WCSAoyou\bin\Release\AoyouWCSCfg.xml
+E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WCSAoyouApp\WCSAoyou\bin\Release\WCSAoyou.exe.config
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WCSAoyouApp\WCSAoyou\bin\Release\WCSAoyou.exe
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WCSAoyouApp\WCSAoyou\bin\Release\WCSAoyou.pdb
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WCSAoyouApp\WCSAoyou\bin\Release\AoyouCfg.dll
@@ -110,3 +108,5 @@ E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\A
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WCSAoyouApp\WCSAoyou\obj\x86\Release\WCSAoyou.Properties.Resources.resources
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WCSAoyouApp\WCSAoyou\obj\x86\Release\WCSAoyou.csproj.GenerateResource.Cache
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WCSAoyouApp\WCSAoyou\obj\x86\Release\WCSAoyou.exe.licenses
+E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WCSAoyouApp\WCSAoyou\obj\x86\Release\WCSAoyou.exe
+E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WCSAoyouApp\WCSAoyou\obj\x86\Release\WCSAoyou.pdb

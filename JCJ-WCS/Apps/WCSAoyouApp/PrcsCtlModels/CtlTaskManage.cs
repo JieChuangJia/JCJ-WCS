@@ -419,6 +419,41 @@ namespace PrcsCtlModelsAoyou
             }
             string reStr = "";
             //分解主控制任务
+            List<CtlDBAccess.Model.MainControlTaskModel> mainTasks = mainCtlTaskBll.GetModelList("TaskStatus = '待执行'");
+            foreach (CtlDBAccess.Model.MainControlTaskModel mainTask in mainTasks)
+            {
+                string pathKey = mainTask.FlowPathKey;
+                if (!wcsPathMap.Keys.Contains(pathKey))
+                {
+                    continue;
+                }
+                FlowCtlBaseModel.WCSFlowPathModel wcsPath = wcsPathMap[pathKey];
+                if (wcsPath.NodeList.Count() < 1)
+                {
+                    continue;
+                }
+                FlowCtlBaseModel.WCSPathNodeModel stNode = wcsPath.NodeList[0];
+                if (stNode.NodeFlag != "起点")
+                {
+                    continue;
+                }
+                string nodeID = stNode.NodeID;
+                FlowCtlBaseModel.CtlNodeBaseModel node = NodeManager.GetNodeByID(nodeID);
+                if (node == null)
+                {
+                    continue;
+                }
+                if (!node.WCSMainTaskStart(mainTask, wcsPath, ref reStr))
+                {
+                    Console.WriteLine("{0} 启动任务：{1}失败,{2}", node.NodeName, mainTask.WMSTaskID, reStr);
+                }
+                else
+                {
+                    WmsSvc.UpdateManageTaskStatus(mainTask.WMSTaskID, "执行中");
+                    Console.WriteLine("主控制任务{0},{1}->{2}启动", mainTask.MainTaskID, mainTask.StDevice, mainTask.EndDevice);
+                }
+            }
+            /*
             foreach(string pathKey in wcsPathMap.Keys)
             {
                 FlowCtlBaseModel.WCSFlowPathModel wcsPath = wcsPathMap[pathKey];
@@ -451,7 +486,7 @@ namespace PrcsCtlModelsAoyou
                         WmsSvc.UpdateManageTaskStatus(mainTask.WMSTaskID, "执行中");
                     }
                 }
-            }
+            }*/
         }
 
 

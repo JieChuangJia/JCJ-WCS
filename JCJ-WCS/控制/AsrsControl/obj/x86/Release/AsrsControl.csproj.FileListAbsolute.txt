@@ -152,6 +152,7 @@ E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\�
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\AsrsControl\bin\Release\DevAccess.pdb
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\AsrsControl\bin\Release\DevInterface.pdb
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\AsrsControl\bin\Release\DevAccess.XmlSerializers.dll
+E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\AsrsControl\obj\x86\Release\AsrsControl.csprojResolveAssemblyReference.cache
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\AsrsControl\obj\x86\Release\AsrsControl.Properties.Resources.resources
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\AsrsControl\obj\x86\Release\AsrsControl.AsrsMonitorView.resources
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\AsrsControl\obj\x86\Release\AsrsControl.AsrsStatUserCtl.resources
@@ -164,4 +165,3 @@ E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\�
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\AsrsControl\obj\x86\Release\AsrsControl.csproj.GenerateResource.Cache
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\AsrsControl\obj\x86\Release\AsrsControl.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\AsrsControl\obj\x86\Release\AsrsControl.pdb
-E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\AsrsControl\obj\x86\Release\AsrsControl.csprojResolveAssemblyReference.cache

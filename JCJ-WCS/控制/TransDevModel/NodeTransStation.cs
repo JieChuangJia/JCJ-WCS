@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
+using System.Xml.Linq;
 using FlowCtlBaseModel;
 namespace TransDevModel
 {
@@ -11,9 +13,27 @@ namespace TransDevModel
     public class NodeTransStation : CtlNodeBaseModel
     {
         private int taskMode = 0;
+        private int recvTaskPhase = 0;
+        protected int transMode = 0; //输送站台任务模式,0:不发任务，也不收任务，1：只发任务，2：只收任务
         public NodeTransStation()
         {
             devCata = "站台";
+        }
+        public override bool BuildCfg(System.Xml.Linq.XElement xe, ref string reStr)
+        {
+            if(!base.BuildCfg(xe, ref reStr))
+            {
+                return false;
+            }
+            XElement selfDataXE = xe.Element("SelfDatainfo");
+            if(selfDataXE != null)
+            {
+                if(selfDataXE.Attribute("transMode") != null)
+                {
+                    transMode = int.Parse(selfDataXE.Attribute("transMode").Value.ToString());
+                }
+            }
+            return true;
         }
         public override bool ExeBusiness(ref string reStr)
         {
@@ -28,55 +48,94 @@ namespace TransDevModel
                 //    devStatusRestore = DevStatusRestore();
                 //}
                 //Console.WriteLine("{0}", nodeName);
-                if (this.currentTaskPhase > 3)
+               
+                if(this.db2Vals[5] == 0)
                 {
-                    this.currentTaskPhase = 0;
-                    this.currentTask = null;
+                    return true;
                 }
-                if(this.db2Vals[6] == 1 && this.db2Vals[5]==0) //空闲,检查是否有任务待发送
+                /*
+                if(transMode == 0)
                 {
-                   
-                    if(this.db2Vals[0]==1)
+                    if (this.db2Vals[6] == 1 && this.db2Vals[5] == 1 && this.db2Vals[7] == 0) //空闲,没有收到任务号，检查是否有任务待发送
                     {
-                        this.currentTaskPhase = 0;
-                        currentTask = null;
 
-                    }
-                    else if(this.db2Vals[0]==2)
-                    {
-                        taskMode = 1;// 发送任务流程;
-                        if (this.currentTaskPhase == 0)
+                        if (this.db2Vals[0] == 1)
                         {
-                            this.currentTaskDescribe = "设备空闲，等待发送输送任务";
-                            this.currentTaskPhase = 1;
+                            this.currentTaskPhase = 0;
+                            currentTask = null;
+
+                        }
+                        else if (this.db2Vals[0] == 2)
+                        {
+                            taskMode = 1;// 发送任务流程;
+                            if (this.currentTaskPhase == 0)
+                            {
+                                this.currentTaskDescribe = "设备空闲，等待发送输送任务";
+                                this.currentTaskPhase = 1;
+                            }
+                        }
+                    }
+                    else if (this.db2Vals[6] == 3 && this.db2Vals[5] == 1) //任务完成
+                    {
+
+                        if (this.db2Vals[0] == 1)
+                        {
+                            recvTaskPhase = 0;
+                            currentTask = null;
+
+                        }
+                        else if (this.db2Vals[0] == 2)
+                        {
+                            taskMode = 2;// 接收任务流程;
+                            this.currentTaskDescribe = "等待处理已经完成的输送任务";
+                            if (this.currentTaskPhase == 0)
+                            {
+                                recvTaskPhase = 1;
+                            }
                         }
                     }
                 }
-                else if(this.db2Vals[6] == 3 && this.db2Vals[5] == 1) //任务完成
+                else*/
+                //{
+                    
+               // }
+                taskMode = transMode;
+                if (taskMode == 1)
                 {
-                   
                     if (this.db2Vals[0] == 1)
                     {
+                        this.currentTaskDescribe = "设备空闲，等待新的任务";
                         this.currentTaskPhase = 0;
                         currentTask = null;
 
                     }
                     else if (this.db2Vals[0] == 2)
                     {
-                        taskMode = 2;// 接收任务流程;
-                        this.currentTaskDescribe = "等待处理已经完成的输送任务";
                         if (this.currentTaskPhase == 0)
                         {
+                            this.currentTaskDescribe = "设备空闲，等待发送输送任务";
                             this.currentTaskPhase = 1;
                         }
-                    } 
-                }
-                if (taskMode == 1)
-                {
+                    }
                     return ExeSndTaskBusiness(ref reStr);
                 }
                 else if(taskMode==2)
                 {
+                    if (this.db2Vals[0] == 1)
+                    {
+                        this.currentTaskDescribe = "设备空闲，等待新的任务";
+                        recvTaskPhase = 0;
+                        currentTask = null;
+
+                    }
+                    else if (this.db2Vals[0] == 2)
+                    {
+                        this.currentTaskDescribe = "等待处理已经完成的输送任务";
+                        if (recvTaskPhase == 0)
+                        {
+                            recvTaskPhase = 1;
+                        }
+                    }
                     return ExeRecvTaskBusiness(ref reStr);
                 }
                 return true;
@@ -98,6 +157,7 @@ namespace TransDevModel
                         {
                             this.currentTaskDescribe = "等待有板信号";
                             this.db1ValsToSnd[5] = 0;
+                            this.db1ValsToSnd[6]=1;
                             this.db1ValsToSnd[7] = 0;
                             this.db1ValsToSnd[8] = 0;
                             this.db1ValsToSnd[9] = 0;
@@ -153,12 +213,11 @@ namespace TransDevModel
                                 break;
                             }
                             //发送任务参数
-                            this.db1ValsToSnd[6] = 0;
+                            this.db1ValsToSnd[6] = 1;
                             this.db1ValsToSnd[7] = 21;
                             this.db1ValsToSnd[8] = (short)this.currentTask.ControlID;
                             this.db1ValsToSnd[9] = short.Parse(this.currentTask.EndDevice);
-                            currentTask.TaskPhase = currentTaskPhase;
-                            ctlTaskBll.Update(currentTask);
+
                             this.currentTaskPhase++;
                             break;
                         }
@@ -179,17 +238,13 @@ namespace TransDevModel
                             this.db1ValsToSnd[9] = 0;
                             
                             this.currentTaskPhase++;
-                            
-                            currentTask.TaskPhase = currentTaskPhase;
                             ctlTaskBll.Update(currentTask);
                             break;
                         }
                     case 4:
                         {
                             this.currentTaskDescribe = "输送任务发送完毕";
-                            currentTask.TaskPhase = currentTaskPhase;
-                            ctlTaskBll.Update(currentTask);
-                            currentTaskPhase = 0;
+                            
                             currentTask = null;
                             break;
                         }
@@ -211,7 +266,7 @@ namespace TransDevModel
         {
             try
             {
-                switch (this.currentTaskPhase)
+                switch (recvTaskPhase)
                 {
                     case 1:
                         {
@@ -232,20 +287,20 @@ namespace TransDevModel
                                 this.currentTask.TaskStatus = "已完成";
                                 this.db1ValsToSnd[6] = 2;
                                 this.ctlTaskBll.Update(this.currentTask);
-                                this.currentTaskPhase++;
+                                recvTaskPhase++;
                             }
                             break;
                         }
                     case 2:
                         {
-                            //等待设备空闲
-                            this.currentTaskDescribe = "等待设备空闲";
-                            if(this.db2Vals[6] !=1)
+                            //等待读写标志2
+                            this.currentTaskDescribe = "等待读写标志：2";
+                            if(this.db2Vals[5] !=2)
                             {
                                 break;
                             }
                             this.db1ValsToSnd[6] = 1;
-                            this.currentTaskPhase++;
+                            recvTaskPhase++;
                             break;
                         }
                     case 3:

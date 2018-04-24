@@ -115,6 +115,32 @@ namespace AsrsControl
             //{
             //    return false;
             //}
+            if(this.db2Vals[0] != 0 && (this.db2Vals[0] != this.db2ValsLast[0]))
+            {
+                int errCode = this.db2Vals[0];
+                string errDesc = "未定义的故障码";
+                if(SysCfg.SysCfgModel.StackerErrcodeMap.Keys.Contains(errCode))
+                {
+                    errDesc = SysCfg.SysCfgModel.StackerErrcodeMap[errCode];
+                }
+                string errInfo = string.Format("发生故障,故障码:{0},信息：{1}", this.db2Vals[0], errDesc);
+                ThrowErrorStat(errInfo, EnumNodeStatus.设备故障);
+            }
+            if(this.db2Vals[1] != this.db2ValsLast[1])
+            {
+                if(this.db2Vals[1] == 1 || this.db2Vals[1] ==2)
+                {
+                    logRecorder.AddDebugLog(nodeName, "切换到自动模式");
+                }
+                else if (this.db2Vals[1] == 3)
+                {
+                    logRecorder.AddDebugLog(nodeName, "处于故障状态");
+                }
+                else if (this.db2Vals[1] == 4)
+                {
+                    logRecorder.AddDebugLog(nodeName, "切换到手动模式");
+                }
+            }
             if (!nodeEnabled)
             {
                 return true;
@@ -482,9 +508,9 @@ namespace AsrsControl
             string errInfo = "工作正常";
             if(errCode != 0)
             {
-                if(errcodeMap.Keys.Contains(errCode))
+                if (SysCfg.SysCfgModel.StackerErrcodeMap.Keys.Contains(errCode))
                 {
-                    errInfo = string.Format("故障发生：{0},{1}", errCode, errcodeMap[errCode]);
+                    errInfo = string.Format("故障发生：{0},{1}", errCode, SysCfg.SysCfgModel.StackerErrcodeMap[errCode]);
                 }
                 else
                 {

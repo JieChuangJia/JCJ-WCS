@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ProcessCfg>
   <sysSet>
-    <RunMode sim="true" RfidSimMode="False" UnBindedMode="False">运行模式</RunMode>
+    <RunMode sim="false" RfidSimMode="False" UnBindedMode="False">运行模式</RunMode>
     <!--线体控制，速度，启动/停止-->
     <HouseAreaColorSet>
       <HouseArea houseAreaID="1" areaName="通用分区">153,153,153</HouseArea>
@@ -95,7 +95,8 @@
         <DB1Addr addrStart="D2051" blockNum="10">DB1数据区地址信息</DB1Addr>
         <DB2Addr addrStart="D3051" blockNum="10">DB2数据区地址信息</DB2Addr>
       </BaseDatainfo>
-      <SelfDatainfo >
+      <!--transMode 输送任务执行模式，1：只发送任务，2：只接收任务，3：:既发送又执行，0：默认，无任务模式-->
+      <SelfDatainfo transMode="1">
         <Db1Desc>预留;预留;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;任务处理标志,1:复位,2:完成;命令字,21:送出;任务号;目标设备号</Db1Desc>
         <Db2Desc>位置1状态,1:无板，2:有板;位置2状态,1:无板，2:有板;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;设备状态，１:空闲，２:工作中,3:任务完成;任务号</Db2Desc>
         <!--<SwitchPath>2001,2005</SwitchPath>-->
@@ -107,7 +108,7 @@
         <DB1Addr addrStart="D2081" blockNum="10">DB1数据区地址信息</DB1Addr>
         <DB2Addr addrStart="D3081" blockNum="10">DB2数据区地址信息</DB2Addr>
       </BaseDatainfo>
-      <SelfDatainfo >
+      <SelfDatainfo transMode="2">
         <Db1Desc>预留;预留;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;任务处理标志,1:复位,2:完成;命令字,21:送出;任务号;目标设备号</Db1Desc>
         <Db2Desc>位置1状态,1:无板，2:有板;位置2状态,1:无板，2:有板;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;设备状态，１:空闲，２:工作中,3:任务完成;任务号</Db2Desc>
         <!--<SwitchPath>2001,2005</SwitchPath>-->
@@ -119,7 +120,7 @@
         <DB1Addr addrStart="D2091" blockNum="10">DB1数据区地址信息</DB1Addr>
         <DB2Addr addrStart="D3091" blockNum="10">DB2数据区地址信息</DB2Addr>
       </BaseDatainfo>
-      <SelfDatainfo >
+      <SelfDatainfo transMode="2" >
         <Db1Desc>预留;预留;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;任务处理标志,1:复位,2:完成;命令字,21:送出;任务号;目标设备号</Db1Desc>
         <Db2Desc>位置1状态,1:无板，2:有板;位置2状态,1:无板，2:有板;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;设备状态，１:空闲，２:工作中,3:任务完成;任务号</Db2Desc>
         <!--<SwitchPath>2001,2005</SwitchPath>-->
@@ -131,7 +132,7 @@
         <DB1Addr addrStart="D2101" blockNum="10">DB1数据区地址信息</DB1Addr>　
         <DB2Addr addrStart="D3101" blockNum="10">DB2数据区地址信息</DB2Addr>
       </BaseDatainfo>
-      <SelfDatainfo >
+      <SelfDatainfo transMode="1">
         <Db1Desc>预留;预留;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;任务处理标志,1:复位,2:完成;命令字,21:送出;任务号;目标设备号</Db1Desc>
         <Db2Desc>位置1状态,1:无板，2:有板;位置2状态,1:无板，2:有板;货物高度检测，1:低货,2:高货;预留;预留;读写标志,1:写入数据,2:读数据完成;设备状态，１:空闲，２:工作中,3:任务完成;任务号</Db2Desc>
         <!--<SwitchPath>2001,2005</SwitchPath>-->
@@ -143,7 +144,7 @@
         <DB1Addr addrStart="D2191" blockNum="10">DB1数据区地址信息</DB1Addr>　
         <DB2Addr addrStart="D3191" blockNum="10">DB2数据区地址信息</DB2Addr>
       </BaseDatainfo>
-      <SelfDatainfo >
+      <SelfDatainfo transMode="1">
         <Db1Desc>预留;预留;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;任务处理标志,1:复位,2:完成;命令字,21:送出;任务号;目标设备号</Db1Desc>
         <Db2Desc>位置1状态,1:无板，2:有板;位置2状态,1:无板，2:有板;货物高度检测，1:低货,2:高货;预留;预留;读写标志,1:写入数据,2:读数据完成;设备状态，１:空闲，２:工作中,3:任务完成;任务号</Db2Desc>
         <!--<SwitchPath>2001,2005</SwitchPath>-->
@@ -155,7 +156,7 @@
         <DB1Addr addrStart="D2211" blockNum="10">DB1数据区地址信息</DB1Addr>　
         <DB2Addr addrStart="D3211" blockNum="10">DB2数据区地址信息</DB2Addr>
       </BaseDatainfo>
-      <SelfDatainfo >
+      <SelfDatainfo transMode="2">
         <Db1Desc>预留;预留;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;任务处理标志,1:复位,2:完成;命令字,21:送出;任务号;目标设备号</Db1Desc>
         <Db2Desc>位置1状态,1:无板，2:有板;位置2状态,1:无板，2:有板;货物高度检测，1:低货,2:高货;预留;预留;读写标志,1:写入数据,2:读数据完成;设备状态，１:空闲，２:工作中,3:任务完成;任务号</Db2Desc>
         <!--<SwitchPath>2001,2005</SwitchPath>-->
@@ -167,7 +168,7 @@
         <DB1Addr addrStart="D2121" blockNum="10">DB1数据区地址信息</DB1Addr>　
         <DB2Addr addrStart="D3121" blockNum="10">DB2数据区地址信息</DB2Addr>
       </BaseDatainfo>
-      <SelfDatainfo >
+      <SelfDatainfo transMode="0">
         <Db1Desc>预留;预留;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;任务处理标志,1:复位,2:完成;命令字,21:送出;任务号;目标设备号</Db1Desc>
         <Db2Desc>位置1状态,1:无板，2:有板;位置2状态,1:无板，2:有板;货物高度检测，1:低货,2:高货;预留;预留;读写标志,1:写入数据,2:读数据完成;设备状态，１:空闲，２:工作中,3:任务完成;任务号</Db2Desc>
         <!--<SwitchPath>2001,2005</SwitchPath>-->
@@ -179,7 +180,7 @@
         <DB1Addr addrStart="D2281" blockNum="10">DB1数据区地址信息</DB1Addr>　
         <DB2Addr addrStart="D3281" blockNum="10">DB2数据区地址信息</DB2Addr>
       </BaseDatainfo>
-      <SelfDatainfo >
+      <SelfDatainfo transMode="1">
         <Db1Desc>预留;预留;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;任务处理标志,1:复位,2:完成;命令字,21:送出;任务号;目标设备号</Db1Desc>
         <Db2Desc>位置1状态,1:无板，2:有板;位置2状态,1:无板，2:有板;货物高度检测，1:低货,2:高货;预留;预留;读写标志,1:写入数据,2:读数据完成;设备状态，１:空闲，２:工作中,3:任务完成;任务号</Db2Desc>
         <!--<SwitchPath>2001,2005</SwitchPath>-->
@@ -191,7 +192,7 @@
         <DB1Addr addrStart="D2301" blockNum="10">DB1数据区地址信息</DB1Addr>　
         <DB2Addr addrStart="D3301" blockNum="10">DB2数据区地址信息</DB2Addr>
       </BaseDatainfo>
-      <SelfDatainfo >
+      <SelfDatainfo transMode="2">
         <Db1Desc>预留;预留;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;任务处理标志,1:复位,2:完成;命令字,21:送出;任务号;目标设备号</Db1Desc>
         <Db2Desc>位置1状态,1:无板，2:有板;位置2状态,1:无板，2:有板;货物高度检测，1:低货,2:高货;预留;预留;读写标志,1:写入数据,2:读数据完成;设备状态，１:空闲，２:工作中,3:任务完成;任务号</Db2Desc>
         <!--<SwitchPath>2001,2005</SwitchPath>-->
@@ -215,7 +216,7 @@
         <DB1Addr addrStart="D2001" blockNum="10">DB1数据区地址信息</DB1Addr>　
         <DB2Addr addrStart="D3001" blockNum="10">DB2数据区地址信息</DB2Addr>
       </BaseDatainfo>
-      <SelfDatainfo >
+      <SelfDatainfo transMode="0">
         <Db1Desc>参数写入完成,1:复位,2:写入完成;任务处理完成,1:复位,2:写入完成;任务类型,11:RGV上料,12:RGV下料,13:RGV上下料;上料站台;下料站台;任务号</Db1Desc>
         <Db2Desc>故障码;设备状态,1:空闲,2:工作中,3:故障,4:本机工作模式;任务完成状态,1:复位,2:完成,3:撤销;取货完成,1:复位,2:完成;放货完成,1:复位,2:完成;任务号</Db2Desc>
         <!--<SwitchPath>2001,2005</SwitchPath>-->
