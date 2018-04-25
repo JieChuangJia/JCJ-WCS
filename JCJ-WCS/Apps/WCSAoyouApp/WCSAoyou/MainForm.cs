@@ -165,9 +165,9 @@ namespace WCSAoyou
                 #region 数据库配置
                 string dbSrc = ConfigurationManager.AppSettings["DBSource"];
                 //CtlDBAccess.DBUtility.PubConstant.ConnectionString = string.Format(@"{0}Initial Catalog=ACEcams;User ID=sa;Password=123456;", dbSrc);
-                string dbConn1 = string.Format(@"{0}Initial Catalog=AoyouWCS;User ID=sa;Password=123456;", dbSrc);
+                string dbConn1 = string.Format(@"{0}Initial Catalog=AoyouWCS;User ID=AoyouWcsSA;Password=jcj8421;", dbSrc);
                 CtlDBAccess.DBUtility.DbHelperSQL.SetConnstr(dbConn1);
-                string dbConn2 = string.Format(@"{0}Initial Catalog=AoyouLocalMes;User ID=sa;Password=123456;", dbSrc);
+                string dbConn2 = string.Format(@"{0}Initial Catalog=AoyouLocalMes;User ID=AoyouWcsSA;Password=jcj8421;", dbSrc);
                 MesDBAccess.DBUtility.DbHelperSQL.SetConnstr(dbConn2);
               
                 #endregion

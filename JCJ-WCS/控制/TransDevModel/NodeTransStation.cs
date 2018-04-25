@@ -156,6 +156,7 @@ namespace TransDevModel
                     case 1:
                         {
                             this.currentTaskDescribe = "等待有板信号";
+                            this.rfidUID = "";
                             this.db1ValsToSnd[5] = 0;
                             this.db1ValsToSnd[6]=1;
                             this.db1ValsToSnd[7] = 0;
@@ -176,8 +177,9 @@ namespace TransDevModel
                                 if(this.barcodeRW != null)
                                 {
                                     this.rfidUID = this.barcodeRW.ReadBarcode().Trim();//this.barcodeRW.Trim();
+                                    logRecorder.AddDebugLog(this.nodeName, "读到托盘号:" + this.rfidUID);
                                 }
-                                logRecorder.AddDebugLog(this.nodeName, "读到托盘号:" + this.rfidUID);
+                               
                             }
                            
                             this.currentTaskPhase++;
