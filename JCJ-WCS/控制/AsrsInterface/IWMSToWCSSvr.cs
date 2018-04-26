@@ -302,6 +302,7 @@ namespace WMS_Interface
         /// <summary>
         /// 托盘条码
         /// </summary>
+        [DataMember]
         public string PalletCode { get; set; }
         /// <summary>
         /// 申请类型：空筐入库,空筐出库,产品入库
@@ -309,14 +310,17 @@ namespace WMS_Interface
         /// 2、空筐出库：由WMS分配从哪个库房出库
         /// 3、产品入库：预留
         /// </summary>
+        [DataMember]
         public string RequireType { get; set; }
         /// <summary>
         /// 请求设备模型,请求的设备类型目前都为工位
         /// </summary>
-        public TaskDeviceModel DeviceCode { get; set; }
+        [DataMember]
+        public TaskDeviceModel RequireDevice { get; set; }
         /// <summary>
         ///备用参数
         /// </summary>
+        [DataMember]
         public string Remark { get; set; }
         public RequireTaskModel()
         { }
@@ -328,34 +332,41 @@ namespace WMS_Interface
         /// <summary>
         /// 管理任务ID
         /// </summary>
+        [DataMember]
         public string TaskID { get; set; }
         /// <summary>
         /// 管理任务类型:产品入库(需要配盘),空筐入库,产品出库,空筐出库,移库
         /// wcs根据需求转换为内部需要的类型
         /// </summary>
+        [DataMember]
         public string Type { get; set; }
 
         /// <summary>
         /// 管理任务状态：待执行,执行中,完成
         /// </summary>
+        [DataMember]
         public string Status { get; set; }
-       
+
         /// <summary>
         /// 托盘条码
         /// </summary>
+        [DataMember]
         public string PalletCode { get; set; }
         /// <summary>
         /// 起点设备
         /// </summary>
-        public TaskDeviceModel StartDevice{get;set;}
+        [DataMember]
+        public TaskDeviceModel StartDevice { get; set; }
         /// <summary>
         /// 目标点设备
         /// </summary>
-        public TaskDeviceModel TargetDevice{get;set;}
+        [DataMember]
+        public TaskDeviceModel TargetDevice { get; set; }
 
         /// <summary>
         /// 备用参数
         /// </summary>
+        [DataMember]
         public string Remark { get; set; }
 
         public ManageTaskModel()
@@ -364,19 +375,22 @@ namespace WMS_Interface
     /// <summary>
     /// 管理任务设备模型
     /// </summary>
-   [DataContract]
+    [DataContract]
     public class TaskDeviceModel
     {
-       
+
         /// <summary>
         /// 设备编码：若设备类型为货位，用库房编码（默认跟堆垛机编号相同),注意：不用名称
         /// 若设备类型为工位：2001表示工位编码；
         /// </summary>
+        [DataMember]
         public string DeviceCode { get; set; }
         /// <summary>
         /// 设备类型：工位、货位
         /// </summary>
+        [DataMember]
         public string DeviceType { get; set; }
+        [DataMember]
         public string ExtParam { get; set; } //仅当设备类型为货位有效，例如"1-2-3"表示为1排2列3排
         public TaskDeviceModel(string devCode,string devType)
         {
@@ -385,5 +399,6 @@ namespace WMS_Interface
         }
         public TaskDeviceModel()
         { }
+        
     }
 }

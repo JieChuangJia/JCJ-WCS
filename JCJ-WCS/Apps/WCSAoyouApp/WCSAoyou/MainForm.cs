@@ -173,9 +173,9 @@ namespace WCSAoyou
                 #endregion
 
                 presenter = new MainPresenter(this);
-                presenter.WmsSvc = this.wmsSvcSim;
-               // string svcAddr = ConfigurationManager.AppSettings["WMSSvcAddr"];
-               // presenter.WmsSvc = ChannelFactory<WMS_Interface.IWMSToWCSSvr>.CreateChannel(new BasicHttpBinding(), new EndpointAddress(svcAddr));
+               // presenter.WmsSvc = this.wmsSvcSim;
+                string svcAddr = ConfigurationManager.AppSettings["WMSSvcAddr"];
+                presenter.WmsSvc = ChannelFactory<WMS_Interface.IWMSToWCSSvr>.CreateChannel(new BasicHttpBinding(), new EndpointAddress(svcAddr));
 
                 childList = new List<string>();
                 childViews = new List<BaseChildView>();

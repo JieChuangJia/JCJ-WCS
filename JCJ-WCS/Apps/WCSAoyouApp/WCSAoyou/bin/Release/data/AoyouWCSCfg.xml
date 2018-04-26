@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ProcessCfg>
   <sysSet>
-    <RunMode sim="true" RfidSimMode="False" UnBindedMode="False">运行模式</RunMode>
+    <RunMode sim="true" WmsConnMode="false" UnBindedMode="False">运行模式</RunMode>
     <!--线体控制，速度，启动/停止-->
     <HouseAreaColorSet>
       <HouseArea houseAreaID="1" areaName="通用分区">153,153,153</HouseArea>
