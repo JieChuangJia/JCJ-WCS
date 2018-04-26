@@ -1353,6 +1353,11 @@ namespace AsrsControl
         {
             try
             {
+                bool debug = false;
+                if (debug && nodeID == "11005")
+                {
+                    Console.WriteLine("{0} P1", nodeName);
+                }
                 if(!this.nodeEnabled)
                 {
                     return;
@@ -1365,24 +1370,47 @@ namespace AsrsControl
                     {
                         continue;
                     }
+                    if (debug && nodeID == "11005")
+                    {
+                        Console.WriteLine("{0} {1} S1", nodeName, port.NodeName);
+                    }
                     if (!port.ReadDB2(ref reStr))
                     {
                         logRecorder.AddDebugLog(port.NodeName, "读DB2数据错误");
                         continue;
                     }
+                    if (debug && nodeID == "11005")
+                    {
+                        Console.WriteLine("{0} {1} S2", nodeName, port.NodeName);
+                    }
                     if(!port.ExeBusiness(ref reStr))
                     {
                         continue;
+                    }
+                    if (debug && nodeID == "11005")
+                    {
+                        Console.WriteLine("{0} {1} S3", nodeName, port.NodeName);
                     }
                     if (!port.NodeCmdCommit(false, ref reStr))
                     {
                         logRecorder.AddDebugLog(port.NodeName, "数据提交错误");
                         continue;
                     }
-
+                    if (debug && nodeID == "11005")
+                    {
+                        Console.WriteLine("{0} {1} S4", nodeName, port.NodeName);
+                    }
+                }
+                if (debug && nodeID == "11005")
+                {
+                    Console.WriteLine("{0} P2", nodeName);
                 }
                 //2 若堆垛机处于空闲状态，根据调度规则取任务
                 AsrsTaskAllocate2();// 堆垛机作业调度
+                if (debug && nodeID == "11005")
+                {
+                    Console.WriteLine("{0} P3", nodeName);
+                }
 
             }
             catch (Exception ex)

@@ -22,5 +22,6 @@ namespace CtlMonitorInterface
         void SimSetRFID(string nodeName, string strUID);
          [OperationContract]
         void SimSetBarcode(string nodeName, string barcode);
+        bool DevReset(string nodeName, ref string reStr);
     }
 }

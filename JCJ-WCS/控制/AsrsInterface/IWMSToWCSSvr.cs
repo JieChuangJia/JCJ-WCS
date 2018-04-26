@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.ServiceModel;
+using System.Runtime.Serialization;
 using AsrsInterface;
 namespace WMS_Interface
 {
@@ -246,6 +248,7 @@ namespace WMS_Interface
     /// <summary>
     /// 立库管理层提供给控制层的接口
     /// </summary>
+   [ServiceContract]
   public interface IWMSToWCSSvr : IAsrsManageToCtl
  // public interface IWMSToWCSSvr
   {
@@ -258,6 +261,7 @@ namespace WMS_Interface
       /// <param name="manageTaskList"></param>
       /// <param name="stDevice">起始设备</param>
       /// <returns></returns>
+        [OperationContract]
       ResposeData GetWaittingToRunTaskList(TaskDeviceModel stDevice,ref List<ManageTaskModel> manageTaskList);
       /// <summary>
       /// 更新指定管理任务状态
@@ -265,12 +269,14 @@ namespace WMS_Interface
       /// <param name="manageTaskID">管理任务ID</param>
       /// <param name="taskStatus">管理任务状态：待执行,执行中,完成</param>
       /// <returns></returns>
+        [OperationContract]
       ResposeData UpdateManageTaskStatus(string manageTaskID,string taskStatus);
       /// <summary>
       /// wcs向wms请求任务
       /// </summary>
       /// <param name="applyTask"></param>
       /// <returns></returns>
+        [OperationContract]
       ResposeData RequireTask(RequireTaskModel requireTask);
 
       #endregion
@@ -279,14 +285,18 @@ namespace WMS_Interface
     /// <summary>
     /// 接口返回类
     /// </summary>
-    public class ResposeData
-    {
-        public bool Status { get; set; }
-        public string Describe { get; set; }
-    }
+    [DataContract]
+   public class ResposeData
+   {
+       [DataMember]
+       public bool Status { get; set; }
+       [DataMember]
+       public string Describe { get; set; }
+   }
     /// <summary>
     /// 申请任务模型
     /// </summary>
+    [DataContract]
     public class RequireTaskModel
     {
         /// <summary>
@@ -311,6 +321,8 @@ namespace WMS_Interface
         public RequireTaskModel()
         { }
     }
+
+    [DataContract]
     public class ManageTaskModel
     {
         /// <summary>
@@ -352,6 +364,7 @@ namespace WMS_Interface
     /// <summary>
     /// 管理任务设备模型
     /// </summary>
+   [DataContract]
     public class TaskDeviceModel
     {
        

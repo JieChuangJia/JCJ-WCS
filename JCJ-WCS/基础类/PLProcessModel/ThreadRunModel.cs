@@ -17,7 +17,7 @@ namespace FlowCtlBaseModel
         #region 内部数据
        
         private List<CtlNodeBaseModel> nodeList = null;
-       // private Int64 lastPlcStat = 0;
+        private Int64 lastPlcStat = 0;
         #endregion
         #region 属性
         public DelegateThreadRoutine2 threadRoutine2 = null;
@@ -64,9 +64,9 @@ namespace FlowCtlBaseModel
                 }
                
              //   logRecorder.AddDebugLog("线程：" + threadID,"线程：" + threadID+"循环开始：");
-               
+
                 //IPlcRW plcRW = nodeList[0].PlcRW;
-                //if (!SysCfgModel.SimMode)
+                //if (!SysCfg.SysCfgModel.SimMode && SysCfg.SysCfgModel.PlcCommSynMode)
                 //{
                 //    if (lastPlcStat == plcRW.PlcStatCounter)
                 //    {
@@ -83,52 +83,40 @@ namespace FlowCtlBaseModel
                     CtlNodeBaseModel node = nodeList[nodeIndex];
                     try
                     {
-                        
-                        //if(!SysCfgModel.SimMode && SysCfgModel.TestMode)
-                        //{
-                        //    bool disable = false;
-                        //    string[] disableNodes = new string[] {  "4001", "4002", "4003", "4004", "4005", "4006", "4007", "4008","8001"};
-                        //    foreach(string disableNodeID in disableNodes)
-                        //    {
-                        //        if(node.NodeID == disableNodeID)
-                        //        {
-                        //            disable = true;
-                        //            break;
-                        //        }
-                        //    }
-                        //    if(disable)
-                        //    {
-                        //        continue;
-                        //    }
-                        //    if(node.GetType().ToString()== "NbProcessCtl.NodeAssemPack"||
-                        //        node.GetType().ToString() == "NbProcessCtl.NodeAssemBottom"||
-                        //        node.GetType().ToString() == "NbProcessCtl.NodeAssemUpper"||
-                        //        node.GetType().ToString()== "NbProcessCtl.NodePalletBind")
-                        //    {
-                        //        continue;
-                        //    }
-                        //}
                         string reStr = "";
-                        //if (!node.ReadDB1())
-                        //{
-                        //    continue;
-                        //}
+                        
                         if(!node.NodeEnabled)
                         {
                             continue;
                         }
+                        //if (node.NodeID == "12134")
+                        //{
+                        //    Console.WriteLine("{0} S1", node.NodeName);
+                        //}
                         if (!node.ReadDB2(ref reStr))
                         {
                             continue;
                         }
+                        //if (node.NodeID == "12134")
+                        //{
+                        //    Console.WriteLine("{0} S2", node.NodeName);
+                        //}
                         if (!node.ExeBusiness(ref reStr))
                         {
                             continue;
                         }
+                        //if (node.NodeID == "12134")
+                        //{
+                        //    Console.WriteLine("{0} S3", node.NodeName);
+                        //}
                         if (!node.NodeCmdCommit(true, ref reStr))
                         {
                             continue;
                         }
+                        //if (node.NodeID == "12134")
+                        //{
+                        //    Console.WriteLine("{0} S4", node.NodeName);
+                        //}
                     }
                     catch (Exception ex)
                     {
@@ -137,7 +125,11 @@ namespace FlowCtlBaseModel
                     }
 
                 }
-               // lastPlcStat = plcRW.PlcStatCounter;
+                //if (!SysCfg.SysCfgModel.SimMode && SysCfg.SysCfgModel.PlcCommSynMode)
+                //{
+                //    lastPlcStat = plcRW.PlcStatCounter;
+                //}
+            
                 //if (threadID == 1)
                 //{
                 //    Console.WriteLine("线程：" + threadID + "循环结束");

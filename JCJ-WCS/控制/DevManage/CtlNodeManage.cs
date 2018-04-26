@@ -182,6 +182,16 @@ namespace CtlManage
         }
         #endregion
         #region ICtlnodeMonitor接口实现
+        public bool DevReset(string nodeName, ref string reStr)
+        {
+            CtlNodeBaseModel node = GetNodeByName(nodeName);
+            if(node==null)
+            {
+                reStr = "不存在:" + reStr;
+                return false;
+            }
+            return node.DevReset(ref reStr);
+        }
        
         public List<string> GetMonitorNodeNames()
         {

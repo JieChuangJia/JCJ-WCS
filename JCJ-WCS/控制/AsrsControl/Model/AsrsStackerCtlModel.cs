@@ -366,7 +366,16 @@ namespace AsrsControl
                 }
                 ctlTask.ControlID = controlID;
                 ctlTask.TaskIndex = 1;
-                SysCfg.EnumAsrsTaskType asrsTaskType=(SysCfg.EnumAsrsTaskType)Enum.Parse(typeof(SysCfg.EnumAsrsTaskType),mainTask.TaskType);
+                SysCfg.EnumAsrsTaskType asrsTaskType = SysCfg.EnumAsrsTaskType.空;
+                if (mainTask.TaskType == "下架")
+                {
+                    asrsTaskType = SysCfg.EnumAsrsTaskType.产品出库;
+                }
+                else if (mainTask.TaskType == "上架")
+                {
+                    asrsTaskType=SysCfg.EnumAsrsTaskType.产品入库;
+                }
+               
                 ctlTask.TaskType = (int)asrsTaskType;
                 ctlTask.TaskParam = "";
                 ctlTask.TaskStatus = "待执行";

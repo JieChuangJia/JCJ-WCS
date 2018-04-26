@@ -243,7 +243,10 @@ namespace WCSAoyou
         
         #endregion
         #region IMonitorSvc方法
-        
+        public bool DevReset(string nodeName, ref string reStr)
+        {
+            return true;
+        }
         public string hello()
         {
             return "hello,WES监控服务已经启动";

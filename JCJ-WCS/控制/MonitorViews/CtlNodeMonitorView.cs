@@ -46,11 +46,13 @@ namespace MonitorViews
         {
             this.comboBoxDevList.Items.AddRange(NodeMonitor.GetMonitorNodeNames().ToArray());
             this.comboBoxDevList.SelectedIndex = 0;
+            this.cbxWMSimTasktype.Items.AddRange(new string[] { "上架", "下架" });
+            this.cbxWMSimTasktype.SelectedIndex = 0;
             DataTable dt = new DataTable("模拟WMS任务列表");
             dt.Columns.AddRange(new DataColumn[]{new DataColumn("管理任务ID"),new DataColumn("任务类型"),new DataColumn("任务状态"),new DataColumn("托盘码"),
             new DataColumn("起始设备号"),new DataColumn("起始设备类型"),new DataColumn("起始设备参数"),new DataColumn("目标设备号"),
             new DataColumn("目标设备类型"),new DataColumn("目标设备参数"),new DataColumn("备注")});
-
+            /*
             DataRow dr = dt.Rows.Add();
             dr["管理任务ID"] = System.Guid.NewGuid().ToString();
             dr["任务类型"] = "产品入库";
@@ -62,9 +64,10 @@ namespace MonitorViews
             dr["目标设备号"] = "11001";
             dr["目标设备类型"] = "货位";
             dr["目标设备参数"] = "1-1-1";
-            dr["备注"] = "";
+            dr["备注"] = "";*/
             this.dataGridView1.DataSource = dt;
             this.dataGridView1.AutoSizeColumnsMode= DataGridViewAutoSizeColumnsMode.AllCells;
+            OnRefreshWMSDt();
             return true;
         }
         
@@ -310,8 +313,6 @@ namespace MonitorViews
             
         }
        
-       
-     
         private void buttonRfidSimWrite_Click(object sender, EventArgs e)
         {
             try
@@ -339,13 +340,14 @@ namespace MonitorViews
             }
         }
         #endregion     
-        #region 委托调用
+        #region wms模拟
         private void button1_Click(object sender, EventArgs e)
         {
             if(dlgtWMSTaskCommit != null)
             {
                 string reStr = "";
-                if(dlgtWMSTaskCommit(this.dataGridView1.DataSource as DataTable,ref reStr))
+                DataTable dt = this.dataGridView1.DataSource as DataTable;
+                if (dlgtWMSTaskCommit(dt.Copy(), ref reStr))
                 {
                     MessageBox.Show("WMS任务模拟数据提交成功");
                 }
@@ -355,6 +357,92 @@ namespace MonitorViews
                 }
             }
         }
+        private void OnAddWmsTask()
+        {
+            string taskType = this.cbxWMSimTasktype.Text;
+            string barcode = this.textBoxWmsBarcode.Text;
+            string wmsTaskID = System.Guid.NewGuid().ToString();
+            string stDev = this.textBoxWmsDevSt.Text;
+            string stDevParam = this.textBoxWmsDevstParam.Text;
+            string targetDev = this.textBoxWmsTargetDev.Text;
+            string targetDevParam = this.textBoxWmsTargetDevParam.Text;
+
+            if(taskType != "上架" && taskType != "下架")
+            {
+                MessageBox.Show("不支持的任务类型，要求为：上架、下架");
+                return;
+            }
+            DataTable dt = (this.dataGridView1.DataSource as DataTable).Copy();
+            DataRow dr = dt.Rows.Add();
+            dr["管理任务ID"] = wmsTaskID;
+            dr["任务类型"] = taskType;
+            dr["任务状态"] = "待执行";
+            dr["托盘码"] = barcode;
+            dr["起始设备号"] = stDev;
+            
+            dr["起始设备参数"] = stDevParam;
+            dr["目标设备号"] = targetDev;
+           
+            dr["目标设备参数"] = targetDevParam;
+            dr["备注"] = "";
+            if(taskType=="上架")
+            {
+                dr["起始设备类型"] = "工位";
+                dr["目标设备类型"] = "货位";
+            }
+            else
+            {
+                dr["起始设备类型"] = "货位";
+                dr["目标设备类型"] = "工位";
+            }
+         
+            this.dataGridView1.DataSource = dt;
+        }
+        private void btnWMSAdd_Click(object sender, EventArgs e)
+        {
+            OnAddWmsTask();
+
+        }
+        private void OnRefreshWMSDt()
+        {
+            CtlDBAccess.BLL.MainControlTaskBll mainTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
+            List<CtlDBAccess.Model.MainControlTaskModel> mainTaskList= mainTaskBll.GetModelList("TaskStatus='待执行' or TaskStatus='执行中' ");
+            DataTable dt = (this.dataGridView1.DataSource as DataTable).Clone();
+            foreach(CtlDBAccess.Model.MainControlTaskModel mainTask in mainTaskList)
+            {
+                DataRow dr = dt.Rows.Add();
+                dr["管理任务ID"] = mainTask.WMSTaskID;
+                dr["任务类型"] = mainTask.TaskType;
+                dr["任务状态"] = mainTask.TaskStatus;
+                dr["托盘码"] = mainTask.PalletCode;
+                dr["起始设备号"] = mainTask.StDevice;
+                dr["起始设备类型"] = mainTask.StDeviceCata;
+                dr["目标设备类型"] = mainTask.EndDeviceCata;
+                dr["起始设备参数"] = mainTask.StDeviceParam;
+                dr["目标设备号"] = mainTask.EndDevice;
+
+                dr["目标设备参数"] = mainTask.EndDeviceParam;
+                dr["备注"] = "";
+            }
+            this.dataGridView1.DataSource = dt;
+
+        }
+        private void btnRefreshWMSTaskDT_Click(object sender, EventArgs e)
+        {
+            OnRefreshWMSDt();
+        }
         #endregion
+
+        private void buttonClearDevCmd_Click(object sender, EventArgs e)
+        {
+            string nodeName = this.comboBoxDevList.Text;
+            string reStr="";
+            if(!NodeMonitor.DevReset(nodeName, ref reStr))
+            {
+                Console.WriteLine(reStr);
+            }
+        }
+
+
     }
 }

@@ -174,6 +174,9 @@ namespace WCSAoyou
 
                 presenter = new MainPresenter(this);
                 presenter.WmsSvc = this.wmsSvcSim;
+               // string svcAddr = ConfigurationManager.AppSettings["WMSSvcAddr"];
+               // presenter.WmsSvc = ChannelFactory<WMS_Interface.IWMSToWCSSvr>.CreateChannel(new BasicHttpBinding(), new EndpointAddress(svcAddr));
+
                 childList = new List<string>();
                 childViews = new List<BaseChildView>();
 
@@ -490,9 +493,9 @@ namespace WCSAoyou
             nodeMonitorView.SetLoginterface(logView.GetLogrecorder());
             nodeMonitorView.SetAsrsMonitors(asrsCtlView.AsrsMonitors);
 
-            
 
-            AsrsInterface.IAsrsManageToCtl asrsResManage = wmsSvcSim;
+
+            AsrsInterface.IAsrsManageToCtl asrsResManage = presenter.WmsSvc;// wmsSvcSim;
             AsrsInterface.IAsrsCtlToManage asrsCtl = presenter.GetAsrsCtlInterfaceObj();
             asrsCtlView.SetAsrsResManage(asrsResManage);
 

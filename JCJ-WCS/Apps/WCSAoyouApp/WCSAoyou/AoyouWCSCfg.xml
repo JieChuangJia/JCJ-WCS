@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ProcessCfg>
   <sysSet>
-    <RunMode sim="false" RfidSimMode="False" UnBindedMode="False">运行模式</RunMode>
+    <RunMode sim="true" RfidSimMode="False" UnBindedMode="False">运行模式</RunMode>
     <!--线体控制，速度，启动/停止-->
     <HouseAreaColorSet>
       <HouseArea houseAreaID="1" areaName="通用分区">153,153,153</HouseArea>
@@ -55,17 +55,17 @@
   <CommDevCfg>
     <PLCCfg>
       <PLCVendor>三菱</PLCVendor>
-      <PLC id="1" cata="FX5U" role="A1库堆垛机" db1Len="20"  db2Len="20" >192.168.10.101:7000</PLC>
-      <PLC id="2" cata="FX5U" role="A2库堆垛机" db1Len="20" db2Len="20" >192.168.10.104:7000</PLC>
-      <PLC id="3" cata="FX5U" role="A3库堆垛机" db1Len="20" db2Len="20" >192.168.10.107:7000</PLC>
-       <PLC id="4" cata="FX5U" role="A4库堆垛机" db1Len="20" db2Len="20" >192.168.10.110:7000</PLC>
-      <PLC id="5" cata="FX5U" role="A5库堆垛机" db1Len="20" db2Len="20" >192.168.10.113:7000</PLC>
-      <PLC id="6" cata="FX5U" role="A6库堆垛机" db1Len="20" db2Len="20" >192.168.10.116:7000</PLC> -->
-      <PLC id="7" cata="FX5U" role="A7库堆垛机" db1Len="20" db2Len="20" >192.168.10.119:7000</PLC> -->
-      <PLC id="8" cata="FX5U" role="1号RGV" db1Len="20" db2Len="20">192.168.10.122:7000</PLC>
-      <PLC id="9" cata="FX5U" role="2号RGV" db1Len="20" db2Len="20">192.168.10.123:7000</PLC>
-      <PLC id="10" cata="FX5U" role="3号RGV" db1Len="20" db2Len="20">192.168.10.124:7000</PLC>
-      <PLC id="11" cata="Qn" role="站台控制" db1Len="400" db2Len="400">192.168.10.125:7000</PLC>
+      <PLC id="1" cata="FX5U" role="A1库堆垛机" db1St="D2001" db1Len="20" db2St="3001" db2Len="20" SynMode="true">192.168.10.101:7000</PLC>
+      <PLC id="2" cata="FX5U" role="A2库堆垛机" db1St="D2001" db1Len="20" db2St="3001" db2Len="20" SynMode="true">192.168.10.104:7000</PLC>
+      <PLC id="3" cata="FX5U" role="A3库堆垛机" db1St="D2001" db1Len="20" db2St="3001" db2Len="20" SynMode="true" >192.168.10.107:7000</PLC>
+       <PLC id="4" cata="FX5U" role="A4库堆垛机" db1St="D2001" db1Len="20" db2St="3001" db2Len="20" SynMode="true" >192.168.10.110:7000</PLC>
+      <PLC id="5" cata="FX5U" role="A5库堆垛机" db1St="D2001" db1Len="20" db2St="3001" db2Len="20" SynMode="true" >192.168.10.113:7000</PLC>
+      <PLC id="6" cata="FX5U" role="A6库堆垛机" db1St="D2001" db1Len="20" db2St="3001" db2Len="20" SynMode="true">192.168.10.116:7000</PLC> -->
+      <PLC id="7" cata="FX5U" role="A7库堆垛机" db1St="D2001" db1Len="20" db2St="3001" db2Len="20" SynMode="true">192.168.10.119:7000</PLC> -->
+      <PLC id="8" cata="FX5U" role="1号RGV" db1St="D2001" db1Len="20" db2St="3001" db2Len="20" SynMode="true">192.168.10.122:7000</PLC>
+      <PLC id="9" cata="FX5U" role="2号RGV" db1St="D2001" db1Len="20" db2St="3001" db2Len="20" SynMode="true">192.168.10.123:7000</PLC>
+      <PLC id="10" cata="FX5U" role="3号RGV" db1St="D2001" db1Len="20" db2St="3001" db2Len="20" SynMode="true">192.168.10.124:7000</PLC>
+      <PLC id="11" cata="Qn" role="站台控制" db1St="D2001" db1Len="600" db2St="D3001" db2Len="600" SynMode="false">192.168.10.125:7000</PLC>
     </PLCCfg>
     <!--RFID配置-->
     <RfidCfg CommType="TCPIP">
@@ -132,7 +132,7 @@
         <DB1Addr addrStart="D2101" blockNum="10">DB1数据区地址信息</DB1Addr>　
         <DB2Addr addrStart="D3101" blockNum="10">DB2数据区地址信息</DB2Addr>
       </BaseDatainfo>
-      <SelfDatainfo transMode="1">
+      <SelfDatainfo transMode="1" barcodeCheck="true">
         <Db1Desc>预留;预留;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;任务处理标志,1:复位,2:完成;命令字,21:送出;任务号;目标设备号</Db1Desc>
         <Db2Desc>位置1状态,1:无板，2:有板;位置2状态,1:无板，2:有板;货物高度检测，1:低货,2:高货;预留;预留;读写标志,1:写入数据,2:读数据完成;设备状态，１:空闲，２:工作中,3:任务完成;任务号</Db2Desc>
         <!--<SwitchPath>2001,2005</SwitchPath>-->

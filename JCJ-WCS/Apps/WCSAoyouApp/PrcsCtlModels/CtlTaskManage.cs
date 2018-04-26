@@ -36,6 +36,10 @@ namespace PrcsCtlModelsAoyou
             foreach(FlowCtlBaseModel.CtlNodeBaseModel node in  NodeManager.MonitorNodeList)
             {
                 node.dlgtCreateNextTask = CreateNodeNextTask;
+                if(node.DevCata=="RGV")
+                {
+                    (node as TransDevModel.NodeRGV).dlgtTaskAllocate = RgvTasksndAllocate;
+                }
             }
             return true;
         }
@@ -126,6 +130,7 @@ namespace PrcsCtlModelsAoyou
                         return false;
                     }
                     mainTask.TaskStatus = "已完成";
+                    mainTask.FinishTime = System.DateTime.Now;
                     if(!mainCtlTaskBll.Update(mainTask))
                     {
                         reStr = string.Format("更新主控制任务:{0}状态失败",mainTask.MainTaskID);
@@ -188,6 +193,13 @@ namespace PrcsCtlModelsAoyou
                     FlowCtlBaseModel.WCSPathNodeModel rgvTargetWcsNode = wcsPath.GetNodeByID(wcsNode.NextNodeID);
                     if (rgvTargetWcsNode.NodeFlag == "终点")
                     {
+                        mainTask.TaskStatus = "已完成";
+                        mainTask.FinishTime = System.DateTime.Now;
+                        if (!mainCtlTaskBll.Update(mainTask))
+                        {
+                            reStr = string.Format("更新主控制任务:{0}状态失败", mainTask.MainTaskID);
+                            return false;
+                        }
                         //管理任务完成
                         WmsSvc.UpdateManageTaskStatus(mainTask.WMSTaskID, "已完成");
                         return true;
@@ -228,6 +240,13 @@ namespace PrcsCtlModelsAoyou
                     FlowCtlBaseModel.WCSPathNodeModel targetWcsNode = wcsPath.GetNodeByID(wcsNode.NextNodeID);
                     if (targetWcsNode.NodeFlag == "终点")
                     {
+                        mainTask.TaskStatus = "已完成";
+                        mainTask.FinishTime = System.DateTime.Now;
+                        if (!mainCtlTaskBll.Update(mainTask))
+                        {
+                            reStr = string.Format("更新主控制任务:{0}状态失败", mainTask.MainTaskID);
+                            return false;
+                        }
                         //管理任务完成
                         WmsSvc.UpdateManageTaskStatus(mainTask.WMSTaskID, "已完成");
                         return true;
@@ -263,6 +282,7 @@ namespace PrcsCtlModelsAoyou
             catch (Exception ex)
             {
                 reStr = ex.ToString();
+                Console.WriteLine(ex.ToString());
                 return false;
             }
         }
@@ -336,13 +356,12 @@ namespace PrcsCtlModelsAoyou
                 reStr = "没有可用的控制ID";
                 return null;
             }
-            SysCfg.EnumAsrsTaskType enumTasktype = (SysCfg.EnumAsrsTaskType)Enum.Parse(typeof(SysCfg.EnumAsrsTaskType), mainTask.TaskType);
-            
+
             nextCtlTask.TaskID = System.Guid.NewGuid().ToString();
             nextCtlTask.DeviceID = stackerNodeID;
             nextCtlTask.DeviceCata = "堆垛机";
-            nextCtlTask.TaskType = (int)enumTasktype;
-            if (mainTask.TaskType == SysCfg.EnumAsrsTaskType.产品入库.ToString() || mainTask.TaskType == SysCfg.EnumAsrsTaskType.空筐入库.ToString())
+           
+            if (mainTask.TaskType == "上架")
             {
                 nextCtlTask.StDevice = portNode.NodeID;
                 nextCtlTask.StDeviceCata = portNode.DevCata;
@@ -350,8 +369,9 @@ namespace PrcsCtlModelsAoyou
                 nextCtlTask.EndDevice = stackerNodeID;
                 nextCtlTask.EndDeviceCata = "货位";
                 nextCtlTask.EndDeviceParam = mainTask.EndDeviceParam;
+                nextCtlTask.TaskType = (int)SysCfg.EnumAsrsTaskType.产品入库;
             }
-            else if (mainTask.TaskType == SysCfg.EnumAsrsTaskType.产品出库.ToString() || mainTask.TaskType == SysCfg.EnumAsrsTaskType.空筐出库.ToString())
+            else if (mainTask.TaskType == "下架")
             {
                 nextCtlTask.StDevice = stackerNodeID;
                 nextCtlTask.StDeviceCata = "货位";
@@ -359,6 +379,7 @@ namespace PrcsCtlModelsAoyou
                 nextCtlTask.EndDevice = portNode.NodeID;
                 nextCtlTask.EndDeviceCata = portNode.DevCata;
                 nextCtlTask.EndDeviceParam = "";
+                nextCtlTask.TaskType = (int)SysCfg.EnumAsrsTaskType.产品出库;
             
             }
             else
@@ -375,6 +396,41 @@ namespace PrcsCtlModelsAoyou
             nextCtlTask.CreateTime = System.DateTime.Now;
             nextCtlTask.CreateMode = "自动";
             return nextCtlTask;
+        }
+       
+        /// <summary>
+       /// RGV任务调度
+       /// </summary>
+       /// <param name="ctlTaskList"></param>
+       /// <param name="reStr"></param>
+       /// <returns></returns>
+        private CtlDBAccess.Model.ControlTaskModel RgvTasksndAllocate(TransDevModel.NodeRGV rgv, ref string reStr)
+        {
+            CtlDBAccess.Model.ControlTaskModel ctlTask = null;
+            List<CtlDBAccess.Model.ControlTaskModel> taskList = ctlTaskBll.GetTaskToRunList((int)SysCfg.EnumAsrsTaskType.RGV上下料, SysCfg.EnumTaskStatus.待执行.ToString(), rgv.NodeID, true);
+            foreach(CtlDBAccess.Model.ControlTaskModel taskModel in taskList)
+            {
+                string devSt = taskModel.StDevice;
+                string devTarget = taskModel.EndDevice;
+                FlowCtlBaseModel.CtlNodeBaseModel stNode= NodeManager.GetNodeByID(devSt);
+                FlowCtlBaseModel.CtlNodeBaseModel targetNode = NodeManager.GetNodeByID(devTarget);
+                if(stNode == null || stNode.DevCata != "站台")
+                {
+                    continue;
+                }
+                if(targetNode == null || targetNode.DevCata != "站台")
+                {
+                    continue;
+                }
+                //起点有板，终点空闲，无板
+                if(stNode.Db2Vals[0] == 2 && targetNode.Db2Vals[0] ==1 && targetNode.Db2Vals[6] ==1)
+                {
+                    ctlTask = taskModel;
+                    break;
+                }
+
+            }
+            return ctlTask;
         }
         private void WMSTaskMonitorProc()
         {
@@ -398,7 +454,20 @@ namespace PrcsCtlModelsAoyou
                     mainCtlTask.FlowPathKey = wmsTask.StartDevice.DeviceCode + "-" + wmsTask.TargetDevice.DeviceCode;
                     mainCtlTask.PalletCode = wmsTask.PalletCode;
                     mainCtlTask.TaskStatus = "待执行";
+                    //if(wmsTask.Type == "下架")
+                    //{
+                    //    mainCtlTask.TaskType = "产品出库";
+                    //}
+                    //else if(wmsTask.Type=="上架")
+                    //{
+                    //    mainCtlTask.TaskType = "产品入库";
+                    //}
+                    //else
+                    //{
+                    //    mainCtlTask.TaskType = wmsTask.Type;
+                    //}
                     mainCtlTask.TaskType = wmsTask.Type;
+     
                     mainCtlTask.StDevice = wmsTask.StartDevice.DeviceCode;
                     mainCtlTask.StDeviceCata = wmsTask.StartDevice.DeviceType;
                     mainCtlTask.EndDevice = wmsTask.TargetDevice.DeviceCode;
@@ -425,6 +494,7 @@ namespace PrcsCtlModelsAoyou
                 string pathKey = mainTask.FlowPathKey;
                 if (!wcsPathMap.Keys.Contains(pathKey))
                 {
+                    Console.WriteLine("不存在的路径配置：{0}", pathKey);
                     continue;
                 }
                 FlowCtlBaseModel.WCSFlowPathModel wcsPath = wcsPathMap[pathKey];

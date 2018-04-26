@@ -228,7 +228,7 @@ namespace CtlDBAccess.BLL
             for(UInt16 i=1000;i<20000;i++)
             {
                 UInt16 controlID = i;
-                DataSet ds = GetList(string.Format("ControlID = '{0}' and TaskStatus='执行中' ",controlID));
+                DataSet ds = GetList(string.Format("ControlID = '{0}' and (TaskStatus='执行中' or TaskStatus='待执行')",controlID));
                 if(ds.Tables[0].Rows.Count==0)
                 {
                     return controlID;

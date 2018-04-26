@@ -7,6 +7,8 @@ namespace TransDevModel
 {
     public class NodeRGV:CtlNodeBaseModel
     {
+        public delegate CtlDBAccess.Model.ControlTaskModel DlgtRgvTaskAllocate(NodeRGV rgv, ref string reStr);
+        public DlgtRgvTaskAllocate dlgtTaskAllocate = null;
         public NodeRGV()
         {
             devCata = "RGV";
@@ -24,12 +26,18 @@ namespace TransDevModel
             }
             if (this.db2Vals[1] == 1 && this.currentTask == null) //设备空闲
             {
-                List<CtlDBAccess.Model.ControlTaskModel> taskList = ctlTaskBll.GetTaskToRunList((int)SysCfg.EnumAsrsTaskType.RGV上下料, SysCfg.EnumTaskStatus.待执行.ToString(), this.NodeID, true);
-                if(taskList != null && taskList.Count()>0)
+                if(dlgtTaskAllocate != null)
                 {
-                    this.currentTask = taskList[0];
+                    this.currentTask=dlgtTaskAllocate(this, ref reStr);
                     this.currentTaskPhase = 0;
                 }
+             //   this.currentTask = dlg
+                //List<CtlDBAccess.Model.ControlTaskModel> taskList = ctlTaskBll.GetTaskToRunList((int)SysCfg.EnumAsrsTaskType.RGV上下料, SysCfg.EnumTaskStatus.待执行.ToString(), this.NodeID, true);
+                //if(taskList != null && taskList.Count()>0)
+                //{
+                //    this.currentTask = taskList[0];
+                //    this.currentTaskPhase = 0;
+                //}
             }
           
             switch(this.currentTaskPhase)
@@ -69,6 +77,7 @@ namespace TransDevModel
                             break;
                         }
                         logRecorder.AddDebugLog(nodeName, "参数发送完成");
+                        this.currentTask.TaskStatus = "执行中";
                         this.currentTaskPhase++;
                         this.currentTask.TaskPhase = currentTaskPhase;
                         ctlTaskBll.Update(currentTask);
@@ -92,7 +101,8 @@ namespace TransDevModel
                         {
                             if(!dlgtCreateNextTask(this,this.currentTask,ref reStr))
                             {
-                                break;
+                                currentTaskDescribe = string.Format("发送下一步任务失败,主任务ID{0},{1}", this.currentTask.MainTaskID,reStr);
+                               // break;
                             }
                         }
                         string logInfo = string.Format("任务完成:{0},上料站台：{1}，下料站台:{2}", ((SysCfg.EnumAsrsTaskType)currentTask.TaskType).ToString(),this.currentTask.StDevice,this.currentTask.EndDevice);
@@ -135,6 +145,16 @@ namespace TransDevModel
                     break;
             }
             return true;
+        }
+        public override bool DevReset(ref string reStr)
+        {
+            if(!base.DevReset(ref reStr))
+            {
+                return false;
+            }
+            this.db1ValsToSnd[0] = 1;
+            this.db1ValsToSnd[1] = 1;
+            return NodeCmdCommit(false,ref reStr);
         }
     }
 }

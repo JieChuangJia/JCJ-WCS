@@ -15,6 +15,7 @@ namespace TransDevModel
         private int taskMode = 0;
         private int recvTaskPhase = 0;
         protected int transMode = 0; //输送站台任务模式,0:不发任务，也不收任务，1：只发任务，2：只收任务
+        protected bool barcodeCheck = false;
         public NodeTransStation()
         {
             devCata = "站台";
@@ -32,7 +33,19 @@ namespace TransDevModel
                 {
                     transMode = int.Parse(selfDataXE.Attribute("transMode").Value.ToString());
                 }
+                if(selfDataXE.Attribute("barcodeCheck") != null)
+                {
+                    if(selfDataXE.Attribute("barcodeCheck").Value.ToString().ToUpper() == "TRUE")
+                    {
+                        barcodeCheck = true;
+                    }
+                    else
+                    {
+                        barcodeCheck = false;
+                    }
+                }
             }
+
             return true;
         }
         public override bool ExeBusiness(ref string reStr)
@@ -167,6 +180,13 @@ namespace TransDevModel
                                 break;
                             }
 
+                            
+                           
+                            this.currentTaskPhase++;
+                            break;
+                        }
+                    case 2:
+                        {
                             if (SysCfg.SysCfgModel.SimMode)
                             {
                                 this.rfidUID = this.SimRfidUID;
@@ -174,19 +194,17 @@ namespace TransDevModel
                             }
                             else
                             {
-                                if(this.barcodeRW != null)
+                                if (this.barcodeRW != null && barcodeCheck)
                                 {
                                     this.rfidUID = this.barcodeRW.ReadBarcode().Trim();//this.barcodeRW.Trim();
+                                    if (string.IsNullOrWhiteSpace(this.rfidUID))
+                                    {
+                                        break;
+                                    }
                                     logRecorder.AddDebugLog(this.nodeName, "读到托盘号:" + this.rfidUID);
                                 }
-                               
+
                             }
-                           
-                            this.currentTaskPhase++;
-                            break;
-                        }
-                    case 2:
-                        {
                             this.currentTask = null;
                             currentTaskDescribe = "等待检索待执行任务";
                             List<CtlDBAccess.Model.ControlTaskModel> taskList = ctlTaskBll.GetTaskToRunList((int)SysCfg.EnumAsrsTaskType.输送机送出, "待执行", this.nodeID);
@@ -194,12 +212,7 @@ namespace TransDevModel
                             
                             foreach (CtlDBAccess.Model.ControlTaskModel task in taskList)
                             {
-                                if(string.IsNullOrWhiteSpace(this.rfidUID))
-                                {
-                                    this.currentTask = task;
-                                    break;
-                                }
-                                else
+                                if(barcodeCheck)
                                 {
                                     if (task.PalletCode == this.rfidUID)
                                     {
@@ -207,7 +220,11 @@ namespace TransDevModel
                                         break;
                                     }
                                 }
-                                
+                                else
+                                {
+                                    this.currentTask = task;
+                                    break;
+                                }
                             }
                             if (this.currentTask == null)
                             {
@@ -219,7 +236,7 @@ namespace TransDevModel
                             this.db1ValsToSnd[7] = 21;
                             this.db1ValsToSnd[8] = (short)this.currentTask.ControlID;
                             this.db1ValsToSnd[9] = short.Parse(this.currentTask.EndDevice);
-
+                            logRecorder.AddDebugLog(nodeName, "任务执行到第2步,发送参数，等待PLC读数据完成");
                             this.currentTaskPhase++;
                             break;
                         }
@@ -238,7 +255,7 @@ namespace TransDevModel
                             this.db1ValsToSnd[7] = 0;
                             this.db1ValsToSnd[8] = 0;
                             this.db1ValsToSnd[9] = 0;
-                            
+                            logRecorder.AddDebugLog(nodeName, "任务执行到第3步,参数复位");
                             this.currentTaskPhase++;
                             ctlTaskBll.Update(currentTask);
                             break;

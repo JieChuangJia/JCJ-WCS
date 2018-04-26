@@ -102,6 +102,10 @@
       <Project>{ca19b9f8-8521-40c8-8918-33b15b2935d2}</Project>
       <Name>SysCfg</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CtlDBAccess\CtlDBAccess.csproj">
+      <Project>{2180a519-31fe-4c19-8d39-a4dfec26cf9a}</Project>
+      <Name>CtlDBAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CtlMonitorInterface\CtlMonitorInterface.csproj">
       <Project>{4863621a-2226-4318-8b40-cceb8feb390c}</Project>
       <Name>CtlMonitorInterface</Name>

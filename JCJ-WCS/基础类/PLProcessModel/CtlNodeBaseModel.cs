@@ -252,7 +252,7 @@ namespace FlowCtlBaseModel
                 else
                 {
                     //异步通信
-                    int addrStInt = 3000;
+                    int addrStInt = 3001;
                     int addrSt = int.Parse(this.db2StartAddr.Substring(1)) - addrStInt; 
                     for (int i = 0; i < blockNum; i++)
                     {
@@ -322,6 +322,13 @@ namespace FlowCtlBaseModel
             string taskInfo =string.Format("流程执行到第{0}步",this.currentTaskPhase)+":"+currentTaskDescribe;
             return taskInfo;
 
+        }
+        public virtual bool DevReset(ref string reStr)
+        {
+            this.currentTask = null;
+            this.currentTaskPhase = 0;
+            Array.Clear(this.db1ValsToSnd, 0, this.db1ValsToSnd.Length);
+            return NodeCmdCommit(false, ref reStr);
         }
         public void ClearErrorStat(string content)
         {
@@ -438,7 +445,8 @@ namespace FlowCtlBaseModel
                 }
                 else
                 {
-                    int addrSt = int.Parse(this.db1StartAddr.Substring(1)) - 2000;
+                   
+                    int addrSt = int.Parse(this.db1StartAddr.Substring(1)) - 2001;
                     for (int i = 0; i < blockNum; i++)
                     {
                         int commID = i + 1;

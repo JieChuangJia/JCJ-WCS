@@ -70,9 +70,23 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBoxWmsTargetDevParam = new System.Windows.Forms.TextBox();
+            this.textBoxWmsDevstParam = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxWmsTargetDev = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxWmsBarcode = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxWmsDevSt = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbxWMSimTasktype = new System.Windows.Forms.ComboBox();
+            this.btnWMSAdd = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.timerNodeStatus = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnRefreshWMSTaskDT = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel13.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -109,7 +123,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.60163F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 87.39838F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1341, 738);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1696, 738);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // flowLayoutPanelAsrs
@@ -121,7 +135,7 @@
             this.flowLayoutPanelAsrs.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanelAsrs.Name = "flowLayoutPanelAsrs";
             this.tableLayoutPanel1.SetRowSpan(this.flowLayoutPanelAsrs, 2);
-            this.flowLayoutPanelAsrs.Size = new System.Drawing.Size(1318, 730);
+            this.flowLayoutPanelAsrs.Size = new System.Drawing.Size(1673, 730);
             this.flowLayoutPanelAsrs.TabIndex = 7;
             this.flowLayoutPanelAsrs.SizeChanged += new System.EventHandler(this.flowLayoutPanelAsrs_SizeChanged);
             // 
@@ -156,7 +170,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1357, 778);
+            this.tabControl1.Size = new System.Drawing.Size(1712, 778);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -166,7 +180,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(1349, 746);
+            this.tabPage1.Size = new System.Drawing.Size(1704, 746);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "立库状态监控";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -178,7 +192,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(1349, 746);
+            this.tabPage2.Size = new System.Drawing.Size(1704, 746);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "通信监控";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -205,7 +219,7 @@
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.splitContainer2.Panel2.Controls.Add(this.tableLayoutPanel3);
-            this.splitContainer2.Size = new System.Drawing.Size(1341, 738);
+            this.splitContainer2.Size = new System.Drawing.Size(1696, 738);
             this.splitContainer2.SplitterDistance = 398;
             this.splitContainer2.SplitterWidth = 6;
             this.splitContainer2.TabIndex = 1;
@@ -410,6 +424,7 @@
             this.buttonClearDevCmd.Text = "复位";
             this.buttonClearDevCmd.UseVisualStyleBackColor = true;
             this.buttonClearDevCmd.Visible = false;
+            this.buttonClearDevCmd.Click += new System.EventHandler(this.buttonClearDevCmd_Click);
             // 
             // buttonRefreshDevStatus
             // 
@@ -448,7 +463,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(937, 738);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1292, 738);
             this.tableLayoutPanel3.TabIndex = 9;
             // 
             // label24
@@ -473,7 +488,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(632, 132);
+            this.groupBox1.Size = new System.Drawing.Size(987, 132);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "流程详细";
@@ -485,7 +500,7 @@
             this.richTextBoxTaskInfo.Location = new System.Drawing.Point(4, 25);
             this.richTextBoxTaskInfo.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBoxTaskInfo.Name = "richTextBoxTaskInfo";
-            this.richTextBoxTaskInfo.Size = new System.Drawing.Size(624, 103);
+            this.richTextBoxTaskInfo.Size = new System.Drawing.Size(979, 103);
             this.richTextBoxTaskInfo.TabIndex = 0;
             this.richTextBoxTaskInfo.Text = "";
             // 
@@ -505,18 +520,18 @@
             this.dataGridViewDevDB1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewDevDB1.Name = "dataGridViewDevDB1";
             this.dataGridViewDevDB1.RowTemplate.Height = 23;
-            this.dataGridViewDevDB1.Size = new System.Drawing.Size(312, 556);
+            this.dataGridViewDevDB1.Size = new System.Drawing.Size(489, 556);
             this.dataGridViewDevDB1.TabIndex = 3;
             // 
             // dataGridViewDevDB2
             // 
             this.dataGridViewDevDB2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewDevDB2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewDevDB2.Location = new System.Drawing.Point(621, 38);
+            this.dataGridViewDevDB2.Location = new System.Drawing.Point(798, 38);
             this.dataGridViewDevDB2.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewDevDB2.Name = "dataGridViewDevDB2";
             this.dataGridViewDevDB2.RowTemplate.Height = 23;
-            this.dataGridViewDevDB2.Size = new System.Drawing.Size(312, 556);
+            this.dataGridViewDevDB2.Size = new System.Drawing.Size(490, 556);
             this.dataGridViewDevDB2.TabIndex = 4;
             // 
             // label8
@@ -528,7 +543,7 @@
             this.label8.Location = new System.Drawing.Point(301, 0);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(312, 34);
+            this.label8.Size = new System.Drawing.Size(489, 34);
             this.label8.TabIndex = 5;
             this.label8.Text = "DB1";
             // 
@@ -538,10 +553,10 @@
             this.label10.BackColor = System.Drawing.Color.Orange;
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label10.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label10.Location = new System.Drawing.Point(621, 0);
+            this.label10.Location = new System.Drawing.Point(798, 0);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(312, 34);
+            this.label10.Size = new System.Drawing.Size(490, 34);
             this.label10.TabIndex = 6;
             this.label10.Text = "DB2";
             // 
@@ -560,7 +575,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 28);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1349, 746);
+            this.tabPage3.Size = new System.Drawing.Size(1704, 746);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "WMS任务模拟";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -575,36 +590,159 @@
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.35135F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.64865F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1343, 740);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.91892F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.08108F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1698, 740);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 123);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 142);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 30;
-            this.dataGridView1.Size = new System.Drawing.Size(1337, 614);
+            this.dataGridView1.Size = new System.Drawing.Size(1692, 595);
             this.dataGridView1.TabIndex = 0;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.textBoxWmsTargetDevParam);
+            this.panel1.Controls.Add(this.textBoxWmsDevstParam);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.textBoxWmsTargetDev);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.textBoxWmsBarcode);
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.textBoxWmsDevSt);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.cbxWMSimTasktype);
+            this.panel1.Controls.Add(this.btnRefreshWMSTaskDT);
+            this.panel1.Controls.Add(this.btnWMSAdd);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Font = new System.Drawing.Font("宋体", 12F);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1337, 114);
+            this.panel1.Size = new System.Drawing.Size(1692, 133);
             this.panel1.TabIndex = 1;
+            // 
+            // textBoxWmsTargetDevParam
+            // 
+            this.textBoxWmsTargetDevParam.Location = new System.Drawing.Point(1330, 72);
+            this.textBoxWmsTargetDevParam.Name = "textBoxWmsTargetDevParam";
+            this.textBoxWmsTargetDevParam.Size = new System.Drawing.Size(178, 35);
+            this.textBoxWmsTargetDevParam.TabIndex = 5;
+            // 
+            // textBoxWmsDevstParam
+            // 
+            this.textBoxWmsDevstParam.Location = new System.Drawing.Point(667, 72);
+            this.textBoxWmsDevstParam.Name = "textBoxWmsDevstParam";
+            this.textBoxWmsDevstParam.Size = new System.Drawing.Size(178, 35);
+            this.textBoxWmsDevstParam.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(1218, 78);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(106, 24);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "终点参数";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(555, 78);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(106, 24);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "设备参数";
+            // 
+            // textBoxWmsTargetDev
+            // 
+            this.textBoxWmsTargetDev.Location = new System.Drawing.Point(1007, 72);
+            this.textBoxWmsTargetDev.Name = "textBoxWmsTargetDev";
+            this.textBoxWmsTargetDev.Size = new System.Drawing.Size(178, 35);
+            this.textBoxWmsTargetDev.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(858, 75);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(130, 24);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "终点设备号";
+            // 
+            // textBoxWmsBarcode
+            // 
+            this.textBoxWmsBarcode.Location = new System.Drawing.Point(667, 20);
+            this.textBoxWmsBarcode.Name = "textBoxWmsBarcode";
+            this.textBoxWmsBarcode.Size = new System.Drawing.Size(219, 35);
+            this.textBoxWmsBarcode.TabIndex = 5;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(552, 28);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(106, 24);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "托盘条码";
+            // 
+            // textBoxWmsDevSt
+            // 
+            this.textBoxWmsDevSt.Location = new System.Drawing.Point(344, 72);
+            this.textBoxWmsDevSt.Name = "textBoxWmsDevSt";
+            this.textBoxWmsDevSt.Size = new System.Drawing.Size(178, 35);
+            this.textBoxWmsDevSt.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(195, 75);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(130, 24);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "起始设备号";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(195, 31);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(106, 24);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "任务类型";
+            // 
+            // cbxWMSimTasktype
+            // 
+            this.cbxWMSimTasktype.FormattingEnabled = true;
+            this.cbxWMSimTasktype.Location = new System.Drawing.Point(344, 28);
+            this.cbxWMSimTasktype.Name = "cbxWMSimTasktype";
+            this.cbxWMSimTasktype.Size = new System.Drawing.Size(178, 32);
+            this.cbxWMSimTasktype.TabIndex = 1;
+            // 
+            // btnWMSAdd
+            // 
+            this.btnWMSAdd.Font = new System.Drawing.Font("宋体", 16F);
+            this.btnWMSAdd.Location = new System.Drawing.Point(1330, 15);
+            this.btnWMSAdd.Name = "btnWMSAdd";
+            this.btnWMSAdd.Size = new System.Drawing.Size(164, 51);
+            this.btnWMSAdd.TabIndex = 0;
+            this.btnWMSAdd.Text = "添加";
+            this.btnWMSAdd.UseVisualStyleBackColor = true;
+            this.btnWMSAdd.Click += new System.EventHandler(this.btnWMSAdd_Click);
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("宋体", 16F);
-            this.button1.Location = new System.Drawing.Point(13, 3);
+            this.button1.Location = new System.Drawing.Point(15, 28);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(224, 88);
+            this.button1.Size = new System.Drawing.Size(174, 79);
             this.button1.TabIndex = 0;
             this.button1.Text = "提交";
             this.button1.UseVisualStyleBackColor = true;
@@ -626,14 +764,25 @@
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(1365, 786);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(1720, 786);
             this.tableLayoutPanel6.TabIndex = 2;
+            // 
+            // btnRefreshWMSTaskDT
+            // 
+            this.btnRefreshWMSTaskDT.Font = new System.Drawing.Font("宋体", 16F);
+            this.btnRefreshWMSTaskDT.Location = new System.Drawing.Point(1135, 15);
+            this.btnRefreshWMSTaskDT.Name = "btnRefreshWMSTaskDT";
+            this.btnRefreshWMSTaskDT.Size = new System.Drawing.Size(164, 51);
+            this.btnRefreshWMSTaskDT.TabIndex = 0;
+            this.btnRefreshWMSTaskDT.Text = "刷新";
+            this.btnRefreshWMSTaskDT.UseVisualStyleBackColor = true;
+            this.btnRefreshWMSTaskDT.Click += new System.EventHandler(this.btnRefreshWMSTaskDT_Click);
             // 
             // CtlNodeMonitorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1365, 786);
+            this.ClientSize = new System.Drawing.Size(1720, 786);
             this.Controls.Add(this.tableLayoutPanel6);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -661,6 +810,7 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.tableLayoutPanel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -711,5 +861,19 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cbxWMSimTasktype;
+        private System.Windows.Forms.TextBox textBoxWmsDevSt;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxWmsDevstParam;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBoxWmsTargetDevParam;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxWmsTargetDev;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxWmsBarcode;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnWMSAdd;
+        private System.Windows.Forms.Button btnRefreshWMSTaskDT;
     }
 }
