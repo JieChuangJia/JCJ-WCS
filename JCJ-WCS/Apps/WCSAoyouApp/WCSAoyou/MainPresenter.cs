@@ -37,6 +37,7 @@ namespace WCSAoyou
         public AsrsControl.AsrsCtlPresenter AsrsPresenter { get { return asrsPresenter; } }
         public CtlManage.CtlNodeManage CtlNodeManager { get { return ctlNodeManager; } }
         public CtlManage.CommDevManage DevCommManager { get { return devCommManager; } }
+        public PrcsCtlModelsAoyou.CtlTaskManage TaskRunCtl { get {return taskRunCtl;}}
         public MainPresenter(IMainView view)
         {
             this.view = view;
@@ -126,6 +127,7 @@ namespace WCSAoyou
                 {
                     asrsCtl.MesAcc = mesAcc;
                 }
+               
 
                 taskRunCtl = new PrcsCtlModelsAoyou.CtlTaskManage();
                 taskRunCtl.WmsSvc = WmsSvc;

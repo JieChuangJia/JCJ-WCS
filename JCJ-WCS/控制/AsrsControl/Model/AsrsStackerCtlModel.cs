@@ -265,28 +265,25 @@ namespace AsrsControl
                             {
                                 db1ValsToSnd[i] = 0;
                             }
-                            //处理任务
-                            if(dlgtTaskCompleted != null)
+                           
+                            if (dlgtCreateNextTask != null)
                             {
-                                if(!dlgtTaskCompleted(this.taskParamModel, this.currentTask))
+                                if (!dlgtCreateNextTask(this, this.currentTask, ref reStr))
+                                {
+                                    Console.WriteLine(reStr);
+                                    break;
+                                }
+                            }
+                            //处理任务
+                            if (dlgtTaskCompleted != null)
+                            {
+                                if (!dlgtTaskCompleted(this.taskParamModel, this.currentTask))
                                 {
                                     logRecorder.AddDebugLog(nodeName, "任务完成后处理失败!");
                                     break;
                                 }
                             }
-                            if (dlgtCreateNextTask != null)
-                            {
-                                if (!dlgtCreateNextTask(this, this.currentTask, ref reStr))
-                                {
-                                    break;
-                                }
-                            }
-
-                            //if (!TaskCompletedProcess(this.taskParamModel, this.currentTask))
-                            //{
-                            //    logRecorder.AddDebugLog(nodeName, "任务完成后处理失败!");
-                            //    break;
-                            //}
+                           
                             db1ValsToSnd[1] = 2;
                             if (!NodeCmdCommit(true, ref reStr))
                             {
@@ -393,7 +390,7 @@ namespace AsrsControl
                 {
                     return false;
                 }
-                return true;
+               
             }
             catch (Exception ex)
             {

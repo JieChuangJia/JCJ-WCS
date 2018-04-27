@@ -82,11 +82,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cbxWMSimTasktype = new System.Windows.Forms.ComboBox();
+            this.btnRefreshWMSTaskDT = new System.Windows.Forms.Button();
             this.btnWMSAdd = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.timerNodeStatus = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnRefreshWMSTaskDT = new System.Windows.Forms.Button();
+            this.buttonDelMaintask = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel13.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -597,12 +598,14 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 142);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 143);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 30;
-            this.dataGridView1.Size = new System.Drawing.Size(1692, 595);
+            this.dataGridView1.Size = new System.Drawing.Size(1692, 594);
             this.dataGridView1.TabIndex = 0;
             // 
             // panel1
@@ -620,13 +623,14 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.cbxWMSimTasktype);
             this.panel1.Controls.Add(this.btnRefreshWMSTaskDT);
+            this.panel1.Controls.Add(this.buttonDelMaintask);
             this.panel1.Controls.Add(this.btnWMSAdd);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Font = new System.Drawing.Font("宋体", 12F);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1692, 133);
+            this.panel1.Size = new System.Drawing.Size(1692, 134);
             this.panel1.TabIndex = 1;
             // 
             // textBoxWmsTargetDevParam
@@ -726,10 +730,21 @@
             this.cbxWMSimTasktype.Size = new System.Drawing.Size(178, 32);
             this.cbxWMSimTasktype.TabIndex = 1;
             // 
+            // btnRefreshWMSTaskDT
+            // 
+            this.btnRefreshWMSTaskDT.Font = new System.Drawing.Font("宋体", 16F);
+            this.btnRefreshWMSTaskDT.Location = new System.Drawing.Point(1135, 15);
+            this.btnRefreshWMSTaskDT.Name = "btnRefreshWMSTaskDT";
+            this.btnRefreshWMSTaskDT.Size = new System.Drawing.Size(164, 51);
+            this.btnRefreshWMSTaskDT.TabIndex = 0;
+            this.btnRefreshWMSTaskDT.Text = "刷新";
+            this.btnRefreshWMSTaskDT.UseVisualStyleBackColor = true;
+            this.btnRefreshWMSTaskDT.Click += new System.EventHandler(this.btnRefreshWMSTaskDT_Click);
+            // 
             // btnWMSAdd
             // 
             this.btnWMSAdd.Font = new System.Drawing.Font("宋体", 16F);
-            this.btnWMSAdd.Location = new System.Drawing.Point(1330, 15);
+            this.btnWMSAdd.Location = new System.Drawing.Point(1320, 15);
             this.btnWMSAdd.Name = "btnWMSAdd";
             this.btnWMSAdd.Size = new System.Drawing.Size(164, 51);
             this.btnWMSAdd.TabIndex = 0;
@@ -767,16 +782,16 @@
             this.tableLayoutPanel6.Size = new System.Drawing.Size(1720, 786);
             this.tableLayoutPanel6.TabIndex = 2;
             // 
-            // btnRefreshWMSTaskDT
+            // buttonDelMaintask
             // 
-            this.btnRefreshWMSTaskDT.Font = new System.Drawing.Font("宋体", 16F);
-            this.btnRefreshWMSTaskDT.Location = new System.Drawing.Point(1135, 15);
-            this.btnRefreshWMSTaskDT.Name = "btnRefreshWMSTaskDT";
-            this.btnRefreshWMSTaskDT.Size = new System.Drawing.Size(164, 51);
-            this.btnRefreshWMSTaskDT.TabIndex = 0;
-            this.btnRefreshWMSTaskDT.Text = "刷新";
-            this.btnRefreshWMSTaskDT.UseVisualStyleBackColor = true;
-            this.btnRefreshWMSTaskDT.Click += new System.EventHandler(this.btnRefreshWMSTaskDT_Click);
+            this.buttonDelMaintask.Font = new System.Drawing.Font("宋体", 16F);
+            this.buttonDelMaintask.Location = new System.Drawing.Point(1500, 14);
+            this.buttonDelMaintask.Name = "buttonDelMaintask";
+            this.buttonDelMaintask.Size = new System.Drawing.Size(164, 51);
+            this.buttonDelMaintask.TabIndex = 0;
+            this.buttonDelMaintask.Text = "删除";
+            this.buttonDelMaintask.UseVisualStyleBackColor = true;
+            this.buttonDelMaintask.Click += new System.EventHandler(this.buttonDelMaintask_Click);
             // 
             // CtlNodeMonitorView
             // 
@@ -875,5 +890,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnWMSAdd;
         private System.Windows.Forms.Button btnRefreshWMSTaskDT;
+        private System.Windows.Forms.Button buttonDelMaintask;
     }
 }

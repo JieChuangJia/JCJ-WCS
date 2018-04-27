@@ -174,8 +174,7 @@ namespace WCSAoyou
 
                 presenter = new MainPresenter(this);
                // presenter.WmsSvc = this.wmsSvcSim;
-                string svcAddr = ConfigurationManager.AppSettings["WMSSvcAddr"];
-                presenter.WmsSvc = ChannelFactory<WMS_Interface.IWMSToWCSSvr>.CreateChannel(new BasicHttpBinding(), new EndpointAddress(svcAddr));
+              
 
                 childList = new List<string>();
                 childViews = new List<BaseChildView>();
@@ -193,7 +192,17 @@ namespace WCSAoyou
                 {
                     return;
                 }
-             
+                if (SysCfg.SysCfgModel.WmsConnMode)
+                {
+                    string svcAddr = ConfigurationManager.AppSettings["WMSSvcAddr"];
+                    presenter.WmsSvc = ChannelFactory<WMS_Interface.IWMSToWCSSvr>.CreateChannel(new BasicHttpBinding(), new EndpointAddress(svcAddr));
+                }
+                else
+                {
+                    presenter.WmsSvc = this.wmsSvcSim;
+                  
+                }
+                presenter.TaskRunCtl.WmsSvc = presenter.WmsSvc;
                 if (!LoadModules())//加载子模块
                 {
                     MessageBox.Show("子模块加载错误");
@@ -495,7 +504,7 @@ namespace WCSAoyou
 
 
 
-            AsrsInterface.IAsrsManageToCtl asrsResManage = presenter.WmsSvc;// wmsSvcSim;
+            AsrsInterface.IAsrsManageToCtl asrsResManage = presenter.WmsSvc;
             AsrsInterface.IAsrsCtlToManage asrsCtl = presenter.GetAsrsCtlInterfaceObj();
             asrsCtlView.SetAsrsResManage(asrsResManage);
 

@@ -343,6 +343,8 @@ namespace MonitorViews
         #region wms模拟
         private void button1_Click(object sender, EventArgs e)
         {
+            WcsMainTaskCommit();
+            /*
             if(dlgtWMSTaskCommit != null)
             {
                 string reStr = "";
@@ -355,6 +357,54 @@ namespace MonitorViews
                 {
                     MessageBox.Show("WMS任务模拟数据提交失败,"+reStr);
                 }
+            }*/
+        }
+        private void WcsMainTaskCommit()
+        {
+            DataTable dt = this.dataGridView1.DataSource as DataTable;
+            CtlDBAccess.BLL.MainControlTaskBll mainCtlTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
+            foreach(DataRow dr in dt.Rows)
+            {
+                if (mainCtlTaskBll.Exists(dr["管理任务ID"].ToString()))
+                {
+                    continue;
+                }
+                CtlDBAccess.Model.MainControlTaskModel mainCtlTask = new CtlDBAccess.Model.MainControlTaskModel();
+                mainCtlTask.WMSTaskID = dr["管理任务ID"].ToString();
+                mainCtlTask.MainTaskID = dr["管理任务ID"].ToString();
+                mainCtlTask.FlowPathKey = dr["起始设备号"].ToString() + "-" + dr["目标设备号"].ToString();
+                mainCtlTask.PalletCode = dr["托盘码"].ToString();
+                mainCtlTask.TaskStatus = "待执行";
+                //if(wmsTask.Type == "下架")
+                //{
+                //    mainCtlTask.TaskType = "产品出库";
+                //}
+                //else if(wmsTask.Type=="上架")
+                //{
+                //    mainCtlTask.TaskType = "产品入库";
+                //}
+                //else
+                //{
+                //    mainCtlTask.TaskType = wmsTask.Type;
+                //}
+                mainCtlTask.TaskType = dr["任务类型"].ToString();
+
+                mainCtlTask.StDevice = dr["起始设备号"].ToString();
+                mainCtlTask.StDeviceCata = dr["起始设备类型"].ToString();//
+                mainCtlTask.EndDevice = dr["目标设备号"].ToString();
+                mainCtlTask.EndDeviceCata = dr["目标设备类型"].ToString();
+                if (mainCtlTask.StDeviceCata == "货位")
+                {
+                    mainCtlTask.StDeviceParam = dr["起始设备参数"].ToString();
+                }
+                if (mainCtlTask.EndDeviceCata == "货位")
+                {
+                    mainCtlTask.EndDeviceParam = dr["目标设备参数"].ToString(); ;
+                }
+                mainCtlTask.CreateTime = System.DateTime.Now;
+                mainCtlTask.CreateMode = "自动";
+                mainCtlTaskBll.Add(mainCtlTask);
+
             }
         }
         private void OnAddWmsTask()
@@ -431,6 +481,35 @@ namespace MonitorViews
         {
             OnRefreshWMSDt();
         }
+        private void OnDelMaintask()
+        {
+            CtlDBAccess.BLL.MainControlTaskBll mainTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
+            foreach(DataGridViewRow rw in  this.dataGridView1.SelectedRows)
+            {
+                string mainTaskID = rw.Cells["管理任务ID"].Value.ToString();
+                CtlDBAccess.Model.MainControlTaskModel mainTask= mainTaskBll.GetModel(mainTaskID);
+                if(mainTask ==null)
+                {
+                    continue;
+                }
+                if(mainTask.TaskStatus!="执行中")
+                {
+                    mainTaskBll.Delete(mainTaskID);
+                }
+            }
+            OnRefreshWMSDt();
+        }
+        private void buttonDelMaintask_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OnDelMaintask();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
         #endregion
 
         private void buttonClearDevCmd_Click(object sender, EventArgs e)
@@ -442,6 +521,7 @@ namespace MonitorViews
                 Console.WriteLine(reStr);
             }
         }
+       
 
 
     }

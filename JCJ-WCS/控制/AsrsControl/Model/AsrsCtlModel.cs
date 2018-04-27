@@ -1830,54 +1830,6 @@ namespace AsrsControl
             
         }
 
-        ///// <summary>
-        ///// 查询是否存在未完成的任务，包括待执行的
-        ///// </summary>
-        ///// <param name="taskType"></param>
-        ///// <returns></returns>
-        //private bool ExistUnCompletedTask(int taskType)
-        //{
-        //    string strWhere = string.Format("TaskType={0} and DeviceID='{1}' and TaskStatus<>'{2}' and TaskStatus<>'{3}'",
-        //        taskType, this.stacker.NodeID, SysCfg.EnumTaskStatus.已完成.ToString(), SysCfg.EnumTaskStatus.任务撤销.ToString());
-        //    DataSet ds = ctlTaskBll.GetList(strWhere);
-        //    if(ds !=null && ds.Tables.Count>0&& ds.Tables[0].Rows.Count>0)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
-        //private string SimModuleGenerate()
-        //{
-        //    string batchName = SysCfg.SysCfgModel.CheckinBatchHouseA;
-
-        //    //zwx,此处需要修改
-        //    //if (this.houseName == EnumStoreHouse.B1库房.ToString())
-        //    //{
-        //    //    batchName = SysCfg.SysCfgModel.CheckinBatchHouseB;
-        //    //}
-        //    //if (batchName == "空")
-        //    //{
-        //    //    batchName = string.Empty;
-        //    //}
-        //    string palletID = System.Guid.NewGuid().ToString();
-        //    //for(int i=0;i<2;i++)
-        //    //{
-        //    //    string modID = System.Guid.NewGuid().ToString();
-        //    //    CtlDBAccess.Model.BatteryModuleModel batModule = new  CtlDBAccess.Model.BatteryModuleModel();
-        //    //    batModule.asmTime = System.DateTime.Now;
-        //    //    batModule.batModuleID = modID;
-        //    //    batModule.curProcessStage = SysCfg.EnumModProcessStage.模组焊接下盖.ToString();
-        //    //    batModule.topcapOPWorkerID = "W0001";
-        //    //    batModule.palletBinded = true;
-        //    //    batModule.palletID = palletID;
-        //    //    batModule.batchName = batchName;
-        //    //    batModuleBll.Add(batModule);
-        //    //}
-        //    return palletID;
-        //}
         /// <summary>
         /// 处理任务完成信息，更新货位状态
         /// </summary>
@@ -1904,47 +1856,7 @@ namespace AsrsControl
                                 return false;
                             }
                             //2 更新库存状态
-                            //获取入库批次，临时调试用
-                            //string batchName = SysCfgModel.CheckinBatchHouseA;
-                            //if(this.houseName == EnumStoreHouse.B库房.ToString())
-                            //{
-                            //    batchName = SysCfgModel.CheckinBatchHouseB;
-                            //}
-                            string batchName = "空";
-
-                            int stepUpdate = 2;
-                            int curStep=0;
-                            /*
-                            #region MES处理
-                            if (taskParamModel.InputCellGoods != null && taskParamModel.InputCellGoods.Count() > 0)
-                            {
-                                string pallet = taskParamModel.InputCellGoods[0];
-                                batchName = productOnlineBll.GetBatchNameofPallet(pallet);
-                                if (!MesAcc.GetStep(pallet, out curStep, ref reStr))
-                                {
-                                    return false;
-                                }
-                                foreach(string palletID in taskParamModel.InputCellGoods)
-                                {
-                                   
-                                    if (dlgtUpdateStep != null)
-                                    {
-                                        dlgtUpdateStep(palletID, this, curStep);
-                                    }
-                                    else
-                                    {
-                                        stepUpdate = SysCfg.SysCfgModel.asrsStepCfg.GetNextStep(curStep);
-                                        if (!MesAcc.UpdateStep(stepUpdate, palletID, ref reStr))
-                                        {
-                                            return false;
-                                        }
-                                    }
-                                }
-                               // string palletID = taskParamModel.InputCellGoods[0];
-                            }
-                            #endregion
-                            this.asrsResManage.AddStack(this.houseName, taskParamModel.CellPos1, batchName, taskParamModel.InputCellGoods, ref reStr);
-                            */
+                   
                             //3 更新出入库操作状态
                             this.asrsResManage.UpdateGSOper(this.houseName, taskParamModel.CellPos1, EnumGSOperate.无, ref reStr);
 
@@ -1955,7 +1867,7 @@ namespace AsrsControl
                                 for (int i = 0; i < taskParamModel.InputCellGoods.Count(); i++)
                                 {
                                    
-                                    string logStr = string.Format("产品入库:{0},货位：{1}-{2}-{3},更新MES步次{4}", houseName, taskParamModel.CellPos1.Row, taskParamModel.CellPos1.Col, taskParamModel.CellPos1.Layer,stepUpdate);
+                                    string logStr = string.Format("产品入库:{0},货位：{1}-{2}-{3}", houseName, taskParamModel.CellPos1.Row, taskParamModel.CellPos1.Col, taskParamModel.CellPos1.Layer);
                                     AddProduceRecord(taskParamModel.InputCellGoods[i], logStr);
 
                                 }
@@ -2015,14 +1927,6 @@ namespace AsrsControl
                                    return false;
                                }
                            }
-
-                            #region 上传MES 出入库时间，库位，托盘号
-                            //DateTime checkInTime = DateTime.Now;
-                         //   DateTime checkOutTime = DateTime.Now;
-                 
-                          //  this.MesAcc.UpdateStep(stepUpdate, palletID);
-                            #endregion
-                          
                             if (!this.asrsResManage.UpdateCellStatus(this.houseName, taskParamModel.CellPos1,
                                 EnumCellStatus.空闲,
                                 EnumGSTaskStatus.完成,
@@ -2066,7 +1970,7 @@ namespace AsrsControl
 
                                 return false;
                             }
-                            //this.asrsResManage.RemoveStack(this.houseName, taskParamModel.CellPos1, ref reStr);
+                           
                             this.asrsResManage.UpdateGSOper(this.houseName, taskParamModel.CellPos1, EnumGSOperate.无, ref reStr);
 
                             //增加出入库操作记录
@@ -2093,13 +1997,12 @@ namespace AsrsControl
 
                             string batchName = string.Empty;
                             //zwx,此处需要修改
-                            //  CtlDBAccess.BLL.BatteryModuleBll batModuleBll = new CtlDBAccess.BLL.BatteryModuleBll();
+                           
                             if (taskParamModel.InputCellGoods != null && taskParamModel.InputCellGoods.Count() > 0)
                             {
                                 string palletID = taskParamModel.InputCellGoods[0];
                                 batchName = productOnlineBll.GetBatchNameofPallet(palletID);
-                                // CtlDBAccess.Model.BatteryModuleModel batModule = batModuleBll.GetModel(taskParamModel.InputCellGoods[0]);
-                                // batchName = batModule.batchName;
+                               
                             }
 
                             this.asrsResManage.RemoveStack(houseName, taskParamModel.CellPos1, ref reStr);

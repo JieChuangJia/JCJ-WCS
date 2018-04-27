@@ -126,7 +126,7 @@ namespace PrcsCtlModelsAoyou
                     WMS_Interface.ResposeData res= WmsSvc.UpdateManageTaskStatus(mainTask.WMSTaskID, "已完成");
                     if(!res.Status)
                     {
-                        reStr = string.Format("更新WMS任务:{0}状态失败",mainTask.WMSTaskID);
+                        reStr = string.Format("更新WMS任务:{0}状态失败,{1}",mainTask.WMSTaskID,res.Describe);
                         return false;
                     }
                     mainTask.TaskStatus = "已完成";
@@ -201,7 +201,12 @@ namespace PrcsCtlModelsAoyou
                             return false;
                         }
                         //管理任务完成
-                        WmsSvc.UpdateManageTaskStatus(mainTask.WMSTaskID, "已完成");
+                        WMS_Interface.ResposeData res = WmsSvc.UpdateManageTaskStatus(mainTask.WMSTaskID, "已完成");
+                        if (!res.Status)
+                        {
+                            reStr = string.Format("更新WMS任务:{0}状态失败,{1}", mainTask.WMSTaskID, res.Describe);
+                            return false;
+                        }
                         return true;
                     }
                     FlowCtlBaseModel.CtlNodeBaseModel rgvTargetNode = NodeManager.GetNodeByID(rgvTargetWcsNode.NodeID);
@@ -248,7 +253,12 @@ namespace PrcsCtlModelsAoyou
                             return false;
                         }
                         //管理任务完成
-                        WmsSvc.UpdateManageTaskStatus(mainTask.WMSTaskID, "已完成");
+                        WMS_Interface.ResposeData res = WmsSvc.UpdateManageTaskStatus(mainTask.WMSTaskID, "已完成");
+                        if (!res.Status)
+                        {
+                            reStr = string.Format("更新WMS任务:{0}状态失败,{1}", mainTask.WMSTaskID, res.Describe);
+                            return false;
+                        }
                         return true;
                     }
                     FlowCtlBaseModel.CtlNodeBaseModel nextNode2 = NodeManager.GetNodeByID(targetWcsNode.NextNodeID);
@@ -423,7 +433,7 @@ namespace PrcsCtlModelsAoyou
                     continue;
                 }
                 //起点有板，终点空闲，无板
-                if(stNode.Db2Vals[0] == 2 && targetNode.Db2Vals[0] ==1 && targetNode.Db2Vals[6] ==1)
+                if(stNode.Db2Vals[0] == 2 && targetNode.Db2Vals[0] ==1)
                 {
                     ctlTask = taskModel;
                     break;

@@ -160,6 +160,20 @@ namespace TransDevModel
             }
             
         }
+        public override string GetRunningTaskDetail()
+        {
+             string taskInfo="";
+            if(taskMode==2)
+            {
+                taskInfo = string.Format("流程执行到第{0}步", this.recvTaskPhase) + ":" + currentTaskDescribe;
+            }
+            else
+            {
+                taskInfo = string.Format("流程执行到第{0}步", this.currentTaskPhase) + ":" + currentTaskDescribe;
+            }
+            return taskInfo;
+
+        }
         private bool ExeSndTaskBusiness(ref string reStr)
         {
             try
@@ -180,8 +194,6 @@ namespace TransDevModel
                                 break;
                             }
 
-                            
-                           
                             this.currentTaskPhase++;
                             break;
                         }
@@ -236,7 +248,7 @@ namespace TransDevModel
                             this.db1ValsToSnd[7] = 21;
                             this.db1ValsToSnd[8] = (short)this.currentTask.ControlID;
                             this.db1ValsToSnd[9] = short.Parse(this.currentTask.EndDevice);
-                            logRecorder.AddDebugLog(nodeName, "任务执行到第2步,发送参数，等待PLC读数据完成");
+                            logRecorder.AddDebugLog(nodeName, string.Format("控制ID{0}执行到第2步,发送参数，等待PLC读数据完成",this.currentTask.ControlID));
                             this.currentTaskPhase++;
                             break;
                         }
@@ -255,7 +267,7 @@ namespace TransDevModel
                             this.db1ValsToSnd[7] = 0;
                             this.db1ValsToSnd[8] = 0;
                             this.db1ValsToSnd[9] = 0;
-                            logRecorder.AddDebugLog(nodeName, "任务执行到第3步,参数复位");
+                            logRecorder.AddDebugLog(nodeName, string.Format("控制ID{0}任务执行到第3步,参数复位",this.currentTask.ControlID));
                             this.currentTaskPhase++;
                             ctlTaskBll.Update(currentTask);
                             break;
@@ -303,6 +315,7 @@ namespace TransDevModel
                                 {
                                     break;
                                 }
+                                this.currentTask.FinishTime = System.DateTime.Now;
                                 this.currentTask.TaskStatus = "已完成";
                                 this.db1ValsToSnd[6] = 2;
                                 this.ctlTaskBll.Update(this.currentTask);
@@ -318,6 +331,7 @@ namespace TransDevModel
                             {
                                 break;
                             }
+                            logRecorder.AddDebugLog(nodeName, string.Format("控制ID{0} 任务完成收到", this.currentTask.ControlID));
                             this.db1ValsToSnd[6] = 1;
                             recvTaskPhase++;
                             break;

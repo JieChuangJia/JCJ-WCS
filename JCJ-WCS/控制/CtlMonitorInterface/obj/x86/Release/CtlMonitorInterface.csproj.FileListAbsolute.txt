@@ -13,4 +13,3 @@ E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\�
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\CtlMonitorInterface\bin\Release\CtlMonitorInterface.pdb
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\CtlMonitorInterface\obj\x86\Release\CtlMonitorInterface.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\CtlMonitorInterface\obj\x86\Release\CtlMonitorInterface.pdb
-E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\控制\CtlMonitorInterface\obj\x86\Release\CtlMonitorInterface.csprojResolveAssemblyReference.cache

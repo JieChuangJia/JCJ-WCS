@@ -115,6 +115,7 @@ namespace TransDevModel
                         logRecorder.AddDebugLog(nodeName, logInfo);
                         currentTaskDescribe = "任务完成";
                         this.currentTask.TaskStatus = "已完成";
+                        this.currentTask.FinishTime = System.DateTime.Now;
                         this.currentTaskPhase++;
                         this.currentTask.TaskPhase = currentTaskPhase;
                         ctlTaskBll.Update(currentTask);
