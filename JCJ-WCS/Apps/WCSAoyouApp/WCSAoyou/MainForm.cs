@@ -24,7 +24,7 @@ namespace WCSAoyou
     {
         #region 数据
         private string appTitle = "锂电WCS系统-捷创嘉智能物流";
-        private string version = "系统版本:1.0.0  2018-4-8";
+        private string version = "系统版本:1.0.1  2018-5-6";
         private int roleID = 3;
         private string userName = "操作员";
         const int CLOSE_SIZE = 10;

@@ -54,7 +54,7 @@ namespace AsrsControl
                     string[] cellPos = ctlTask.StDeviceParam.Split(new string[] { "-" }, StringSplitOptions.RemoveEmptyEntries);
                     if (cellPos == null || cellPos.Count() < 3)
                     {
-                        reStr = "出入库参数解析错误";
+                        reStr = "出入库参数解析错误,货位参数不足3个";
                         return false;
                     }
                     short row = short.Parse(cellPos[0]);
@@ -67,7 +67,7 @@ namespace AsrsControl
                     string[] cellPos = ctlTask.StDeviceParam.Split(new string[] { "-" }, StringSplitOptions.RemoveEmptyEntries);
                     if (cellPos == null || cellPos.Count() < 3)
                     {
-                        reStr = "出入库参数解析错误";
+                        reStr = "出入库参数解析错误，货位参数不足3个";
                         return false;
                     }
                     short row = short.Parse(cellPos[0]);
@@ -78,7 +78,7 @@ namespace AsrsControl
                     cellPos = ctlTask.EndDeviceParam.Split(new string[] { "-" }, StringSplitOptions.RemoveEmptyEntries);
                     if (cellPos == null || cellPos.Count() < 3)
                     {
-                        reStr = "出入库参数解析错误";
+                        reStr = "出入库参数解析错误，货位参数不足3个";
                         return false;
                     }
                     row = short.Parse(cellPos[0]);

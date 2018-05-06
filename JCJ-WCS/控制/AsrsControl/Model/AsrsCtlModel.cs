@@ -1629,6 +1629,7 @@ namespace AsrsControl
 
                         if (!paramModel.ParseParam(task, ref reStr))
                         {
+                            Console.WriteLine(reStr);
                             continue;
                         }
                         EnumGSEnabledStatus cellEnabledStatus = EnumGSEnabledStatus.启用;
@@ -1654,7 +1655,16 @@ namespace AsrsControl
                             //    continue;
                             //}
                         }
-
+                        if(task.TaskIndex==1)
+                        {
+                            MainControlTaskBll mainTaskBll = new MainControlTaskBll();
+                            MainControlTaskModel mainTask=mainTaskBll.GetModel(task.MainTaskID);
+                            if(mainTask != null)
+                            {
+                                mainTask.TaskStatus = "执行中";
+                                mainTaskBll.Update(mainTask);
+                            }
+                        }
                         if (stacker.FillTask(task, ref reStr))
                         {
                             break;

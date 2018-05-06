@@ -595,7 +595,11 @@ namespace CtlDBAccess.Dal
 
         #endregion  BasicMethod
         #region  ExtensionMethod
-
+        public long GetMaxControlID()
+        {
+            //string SELECT MAX(字段) FORM 表格1 WHERE 你的条件
+            return DbHelperSQL.GetMaxID("ControlID", "ControlTask");
+        }
         #endregion  ExtensionMethod
     }
 }

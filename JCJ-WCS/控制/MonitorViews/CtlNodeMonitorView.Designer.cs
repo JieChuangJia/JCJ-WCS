@@ -83,11 +83,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cbxWMSimTasktype = new System.Windows.Forms.ComboBox();
             this.btnRefreshWMSTaskDT = new System.Windows.Forms.Button();
+            this.buttonDelMaintask = new System.Windows.Forms.Button();
             this.btnWMSAdd = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.timerNodeStatus = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.buttonDelMaintask = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel13.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -228,7 +228,7 @@
             // checkBoxAutorefresh
             // 
             this.checkBoxAutorefresh.AutoSize = true;
-            this.checkBoxAutorefresh.Location = new System.Drawing.Point(14, 80);
+            this.checkBoxAutorefresh.Location = new System.Drawing.Point(14, 137);
             this.checkBoxAutorefresh.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxAutorefresh.Name = "checkBoxAutorefresh";
             this.checkBoxAutorefresh.Size = new System.Drawing.Size(106, 22);
@@ -414,10 +414,11 @@
             this.comboBoxDevList.Name = "comboBoxDevList";
             this.comboBoxDevList.Size = new System.Drawing.Size(386, 26);
             this.comboBoxDevList.TabIndex = 5;
+            this.comboBoxDevList.SelectedIndexChanged += new System.EventHandler(this.comboBoxDevList_SelectedIndexChanged_1);
             // 
             // buttonClearDevCmd
             // 
-            this.buttonClearDevCmd.Location = new System.Drawing.Point(150, 112);
+            this.buttonClearDevCmd.Location = new System.Drawing.Point(150, 169);
             this.buttonClearDevCmd.Margin = new System.Windows.Forms.Padding(4);
             this.buttonClearDevCmd.Name = "buttonClearDevCmd";
             this.buttonClearDevCmd.Size = new System.Drawing.Size(135, 40);
@@ -429,7 +430,7 @@
             // 
             // buttonRefreshDevStatus
             // 
-            this.buttonRefreshDevStatus.Location = new System.Drawing.Point(10, 112);
+            this.buttonRefreshDevStatus.Location = new System.Drawing.Point(10, 169);
             this.buttonRefreshDevStatus.Margin = new System.Windows.Forms.Padding(4);
             this.buttonRefreshDevStatus.Name = "buttonRefreshDevStatus";
             this.buttonRefreshDevStatus.Size = new System.Drawing.Size(130, 40);
@@ -741,6 +742,17 @@
             this.btnRefreshWMSTaskDT.UseVisualStyleBackColor = true;
             this.btnRefreshWMSTaskDT.Click += new System.EventHandler(this.btnRefreshWMSTaskDT_Click);
             // 
+            // buttonDelMaintask
+            // 
+            this.buttonDelMaintask.Font = new System.Drawing.Font("宋体", 16F);
+            this.buttonDelMaintask.Location = new System.Drawing.Point(1500, 14);
+            this.buttonDelMaintask.Name = "buttonDelMaintask";
+            this.buttonDelMaintask.Size = new System.Drawing.Size(164, 51);
+            this.buttonDelMaintask.TabIndex = 0;
+            this.buttonDelMaintask.Text = "删除";
+            this.buttonDelMaintask.UseVisualStyleBackColor = true;
+            this.buttonDelMaintask.Click += new System.EventHandler(this.buttonDelMaintask_Click);
+            // 
             // btnWMSAdd
             // 
             this.btnWMSAdd.Font = new System.Drawing.Font("宋体", 16F);
@@ -781,17 +793,6 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(1720, 786);
             this.tableLayoutPanel6.TabIndex = 2;
-            // 
-            // buttonDelMaintask
-            // 
-            this.buttonDelMaintask.Font = new System.Drawing.Font("宋体", 16F);
-            this.buttonDelMaintask.Location = new System.Drawing.Point(1500, 14);
-            this.buttonDelMaintask.Name = "buttonDelMaintask";
-            this.buttonDelMaintask.Size = new System.Drawing.Size(164, 51);
-            this.buttonDelMaintask.TabIndex = 0;
-            this.buttonDelMaintask.Text = "删除";
-            this.buttonDelMaintask.UseVisualStyleBackColor = true;
-            this.buttonDelMaintask.Click += new System.EventHandler(this.buttonDelMaintask_Click);
             // 
             // CtlNodeMonitorView
             // 

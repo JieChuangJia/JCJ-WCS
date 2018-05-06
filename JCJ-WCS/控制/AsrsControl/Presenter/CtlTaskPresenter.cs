@@ -40,67 +40,76 @@ namespace AsrsControl
         }
         public void QueryTask()
         {
-            StringBuilder strWhere = new StringBuilder();
-            strWhere.AppendFormat("CreateTime >= '{0}' and CreateTime<='{1}' ",
-               taskFilter.StartDate.ToString("yyyy-MM-dd HH:mm:ss"),
-               taskFilter.EndDate.ToString("yyyy-MM-dd HH:mm:ss"));
-            if(taskFilter.NodeName != "所有")
+            try
             {
-                strWhere.AppendFormat(" and DeviceID='{0}'", nodeNameMapID[taskFilter.NodeName]);
+                StringBuilder strWhere = new StringBuilder();
+                strWhere.AppendFormat("CreateTime >= '{0}' and CreateTime<='{1}' ",
+                   taskFilter.StartDate.ToString("yyyy-MM-dd HH:mm:ss"),
+                   taskFilter.EndDate.ToString("yyyy-MM-dd HH:mm:ss"));
+                if (taskFilter.NodeName != "所有")
+                {
+                    strWhere.AppendFormat(" and DeviceID='{0}'", nodeNameMapID[taskFilter.NodeName]);
+                }
+                if (taskFilter.TaskType != "所有")
+                {
+
+                    strWhere.AppendFormat(" and TaskType={0}", (int)(Enum.Parse(typeof(SysCfg.EnumAsrsTaskType), taskFilter.TaskType)));
+                }
+                if (taskFilter.TaskStatus != "所有")
+                {
+                    strWhere.AppendFormat(" and TaskStatus='{0}'", taskFilter.TaskStatus);
+                }
+                if (taskFilter.CellCondition)
+                {
+                    strWhere.AppendFormat(" and tag2 Like '%{0}%'", taskFilter.Cell);
+                }
+                if (taskFilter.LikeQuery)
+                {
+                    strWhere.AppendFormat(" and TaskParam Like '%{0}%' ", taskFilter.LikeStr);
+                }
+                if (taskFilter.PrivelegeType == "由高到低")
+                {
+                    strWhere.AppendFormat(" order by cast(tag4 as INTEGER) desc,CreateTime asc");
+                }
+                else if (taskFilter.PrivelegeType == "由低到高")
+                {
+                    strWhere.AppendFormat(" order by cast(tag4 as INTEGER) asc,CreateTime asc");
+                }
+                else
+                {
+                    strWhere.AppendFormat(" order by CreateTime asc");
+                }
+                DataSet ds = taskBll.GetList(strWhere.ToString());
+                DataTable dt = ds.Tables[0];
+                dt.Columns["TaskID"].ColumnName = "任务ID";
+                dt.Columns["TaskType"].ColumnName = "任务类型";
+                dt.Columns["TaskParam"].ColumnName = "任务参数";
+                dt.Columns["TaskStatus"].ColumnName = "任务状态";
+                dt.Columns["TaskPhase"].ColumnName = "任务当前步号";
+                dt.Columns["CreateTime"].ColumnName = "创建时间";
+                dt.Columns["FinishTime"].ColumnName = "完成时间";
+                dt.Columns["CreateMode"].ColumnName = "创建模式";
+                dt.Columns["DeviceID"].ColumnName = "设备ID";
+                dt.Columns["tag1"].ColumnName = "库房";
+                dt.Columns["tag2"].ColumnName = "货位";
+                dt.Columns["tag4"].ColumnName = "优先级";
+                dt.Columns.Remove("tag3");
+
+                dt.Columns.Remove("tag5");
+                dt.Columns["Remark"].ColumnName = "备注";
+                dt.Columns.Add("设备");
+                foreach (DataRow dr in dt.Rows)
+                {
+                    dr["设备"] = nodeIDMapName[dr["设备ID"].ToString()];
+                }
+                view.RefreshTaskDisp(dt);
             }
-            if(taskFilter.TaskType != "所有")
+            catch (Exception ex)
             {
-               
-                strWhere.AppendFormat(" and TaskType={0}", (int)(Enum.Parse(typeof(SysCfg.EnumAsrsTaskType),taskFilter.TaskType)));
+                Console.WriteLine(ex.ToString());
+              
             }
-            if(taskFilter.TaskStatus != "所有")
-            {
-                strWhere.AppendFormat(" and TaskStatus='{0}'", taskFilter.TaskStatus);
-            }
-            if(taskFilter.CellCondition)
-            {
-                strWhere.AppendFormat(" and tag2 Like '%{0}%'", taskFilter.Cell);
-            }
-            if(taskFilter.LikeQuery)
-            {
-                strWhere.AppendFormat(" and TaskParam Like '%{0}%' ", taskFilter.LikeStr);
-            }
-            if(taskFilter.PrivelegeType == "由高到低")
-            {
-                strWhere.AppendFormat(" order by cast(tag4 as INTEGER) desc,CreateTime asc");
-            }
-            else if(taskFilter.PrivelegeType == "由低到高")
-            {
-                strWhere.AppendFormat(" order by cast(tag4 as INTEGER) asc,CreateTime asc");
-            }
-            else
-            {
-                strWhere.AppendFormat(" order by CreateTime asc");
-            }
-            DataSet ds = taskBll.GetList(strWhere.ToString());
-            DataTable dt = ds.Tables[0];
-            dt.Columns["TaskID"].ColumnName= "任务ID";
-            dt.Columns["TaskType"].ColumnName = "任务类型";
-            dt.Columns["TaskParam"].ColumnName = "任务参数";
-            dt.Columns["TaskStatus"].ColumnName = "任务状态";
-            dt.Columns["TaskPhase"].ColumnName = "任务当前步号";
-            dt.Columns["CreateTime"].ColumnName = "创建时间";
-            dt.Columns["FinishTime"].ColumnName = "完成时间";
-            dt.Columns["CreateMode"].ColumnName = "创建模式";
-            dt.Columns["DeviceID"].ColumnName = "设备ID";
-            dt.Columns["tag1"].ColumnName = "库房";
-            dt.Columns["tag2"].ColumnName = "货位";
-            dt.Columns["tag4"].ColumnName = "优先级";
-            dt.Columns.Remove("tag3");
-          
-            dt.Columns.Remove("tag5");
-            dt.Columns["Remark"].ColumnName = "备注";
-            dt.Columns.Add("设备");
-            foreach(DataRow dr in dt.Rows)
-            {
-                dr["设备"] = nodeIDMapName[dr["设备ID"].ToString()];
-            }
-            view.RefreshTaskDisp(dt);
+           
         }
         public void DelTask(List<string> taskIDs)
         {

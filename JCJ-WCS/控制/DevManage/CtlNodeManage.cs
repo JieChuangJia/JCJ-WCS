@@ -182,6 +182,34 @@ namespace CtlManage
         }
         #endregion
         #region ICtlnodeMonitor接口实现
+        public List<string> GetMonitorNodeNames()
+        {
+            List<string> nodeNames = new List<string>();
+            foreach(CtlNodeBaseModel node in monitorNodeList)
+            {
+                nodeNames.Add(node.NodeName);
+            }
+            return nodeNames;
+        }
+
+        public string GetNodeName(string nodeID)
+        {
+            CtlNodeBaseModel node = GetNodeByID(nodeID);
+            if(node==null)
+            {
+                return string.Empty;
+            }
+            return node.NodeName;
+        }
+        public  List<string> GetMonitorNodeIDS()
+        {
+            List<string> nodeIDS = new List<string>();
+            foreach (CtlNodeBaseModel node in monitorNodeList)
+            {
+                nodeIDS.Add(node.NodeID);
+            }
+            return nodeIDS;
+        }
         public bool DevReset(string nodeName, ref string reStr)
         {
             CtlNodeBaseModel node = GetNodeByName(nodeName);
@@ -193,19 +221,6 @@ namespace CtlManage
             return node.DevReset(ref reStr);
         }
        
-        public List<string> GetMonitorNodeNames()
-        {
-            List<string> names = new List<string>();
-            foreach (CtlNodeBaseModel node in monitorNodeList)
-            {
-                if (node.NodeEnabled)
-                {
-                    names.Add(node.NodeName);
-                }
-
-            }
-            return names;
-        }
         public bool GetDevRunningInfo(string nodeName, ref DataTable db1Dt, ref DataTable db2Dt, ref string taskDetail)
         {
             CtlNodeBaseModel node = GetMonitorNode(nodeName);

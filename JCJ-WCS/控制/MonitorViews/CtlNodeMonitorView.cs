@@ -44,7 +44,14 @@ namespace MonitorViews
         }
         public  bool Init()
         {
-            this.comboBoxDevList.Items.AddRange(NodeMonitor.GetMonitorNodeNames().ToArray());
+            List<string> nodeList = new List<string>();
+            List<string> nodeIDS = NodeMonitor.GetMonitorNodeIDS();
+            foreach(string nodeID in nodeIDS)
+            {
+                string nodeName=NodeMonitor.GetNodeName(nodeID);
+                nodeList.Add(nodeID + ":" + nodeName);
+            }
+            this.comboBoxDevList.Items.AddRange(nodeList.ToArray());
             this.comboBoxDevList.SelectedIndex = 0;
             this.cbxWMSimTasktype.Items.AddRange(new string[] { "上架", "下架" });
             this.cbxWMSimTasktype.SelectedIndex = 0;
@@ -246,6 +253,7 @@ namespace MonitorViews
             RefreshPLCComm();
 
         }
+      
         private void buttonDB2SimSet_Click(object sender, EventArgs e)
         {
             if (!SysCfg.SysCfgModel.SimMode)
@@ -255,9 +263,9 @@ namespace MonitorViews
             }
             try
             {
-                string devID = this.comboBoxDevList.Text;
+                string devName = GetNodenameSel();
                 int itemID = int.Parse(comboBoxDB2.Text);
-                NodeMonitor.SimSetDB2(devID, itemID, int.Parse(this.textBoxDB2ItemVal.Text));
+                NodeMonitor.SimSetDB2(devName, itemID, int.Parse(this.textBoxDB2ItemVal.Text));
 
                 RefreshPLCComm();
             }
@@ -271,7 +279,16 @@ namespace MonitorViews
         {
             RefreshPLCComm();
         }
-    
+        private string GetNodenameSel()
+        {
+            string str= this.comboBoxDevList.Text;
+            string[] strArray=str.Split(new string[]{":"},StringSplitOptions.RemoveEmptyEntries);
+            if(strArray ==null || strArray.Count()<2)
+            {
+                return string.Empty;
+            }
+            return strArray[1];
+        }
         private void RefreshPLCComm()
         {
             if(this.dataGridViewDevDB1.InvokeRequired)
@@ -281,7 +298,7 @@ namespace MonitorViews
             }
             else
             {
-                string nodeName = this.comboBoxDevList.Text;
+                string nodeName = GetNodenameSel();
 
                 DataTable dt1 = null;
                 DataTable dt2 = null;
@@ -317,7 +334,7 @@ namespace MonitorViews
         {
             try
             {
-                string nodeName = this.comboBoxDevList.Text;
+                string nodeName = GetNodenameSel();
                 string rfidVal = this.textBoxRfidVal.Text;
                 NodeMonitor.SimSetRFID(nodeName, rfidVal);
                 string barcode = this.textBoxBarcode.Text;
@@ -514,12 +531,17 @@ namespace MonitorViews
 
         private void buttonClearDevCmd_Click(object sender, EventArgs e)
         {
-            string nodeName = this.comboBoxDevList.Text;
+            string nodeName = GetNodenameSel();
             string reStr="";
             if(!NodeMonitor.DevReset(nodeName, ref reStr))
             {
                 Console.WriteLine(reStr);
             }
+        }
+
+        private void comboBoxDevList_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
         }
        
 

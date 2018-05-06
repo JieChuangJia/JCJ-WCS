@@ -117,6 +117,11 @@ namespace TransDevModel
                 {
                     if (this.db2Vals[0] == 1)
                     {
+                        this.db1ValsToSnd[5] = 0;
+                        this.db1ValsToSnd[6] = 1;
+                        this.db1ValsToSnd[7] = 0;
+                        this.db1ValsToSnd[8] = 0;
+                        this.db1ValsToSnd[9] = 0;
                         this.currentTaskDescribe = "设备空闲，等待新的任务";
                         this.currentTaskPhase = 0;
                         currentTask = null;
@@ -136,10 +141,15 @@ namespace TransDevModel
                 {
                     if (this.db2Vals[0] == 1)
                     {
+                        if (this.recvTaskPhase>0&&this.recvTaskPhase < 3)
+                        {
+                            logRecorder.AddDebugLog(nodeName, string.Format("流程异常,当前流程执行到第{0}步,有板信号复位", this.recvTaskPhase));
+                        }
                         this.currentTaskDescribe = "设备空闲，等待新的任务";
                         recvTaskPhase = 0;
                         currentTask = null;
-
+                        this.db1ValsToSnd[0] = 0;
+                        this.db1ValsToSnd[6] = 1;
                     }
                     else if (this.db2Vals[0] == 2)
                     {
@@ -248,12 +258,24 @@ namespace TransDevModel
                             this.db1ValsToSnd[7] = 21;
                             this.db1ValsToSnd[8] = (short)this.currentTask.ControlID;
                             this.db1ValsToSnd[9] = short.Parse(this.currentTask.EndDevice);
+                            if (this.currentTask.TaskIndex == 1)
+                            {
+                                CtlDBAccess.BLL.MainControlTaskBll mainTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
+                                CtlDBAccess.Model.MainControlTaskModel mainTask = mainTaskBll.GetModel(this.currentTask.MainTaskID);
+                                if (mainTask != null)
+                                {
+                                    mainTask.TaskStatus = "执行中";
+                                    mainTaskBll.Update(mainTask);
+                                }
+                            }
                             logRecorder.AddDebugLog(nodeName, string.Format("控制ID{0}执行到第2步,发送参数，等待PLC读数据完成",this.currentTask.ControlID));
                             this.currentTaskPhase++;
                             break;
                         }
                     case 3:
                         {
+                            
+
                             this.db1ValsToSnd[5] = 1; //写入数据
                             this.currentTask.TaskStatus = "执行中";
                             ctlTaskBll.Update(currentTask);
@@ -306,6 +328,12 @@ namespace TransDevModel
                             if(taskList == null || taskList.Count()<1)
                             {
                                 this.currentTaskDescribe = string.Format("不存在的任务号:{0}", controlID);
+                                if(this.db1ValsToSnd[0] != 1)
+                                {
+                                    logRecorder.AddDebugLog(nodeName, string.Format("设备号{0}接收任务错误,不存在的控制ID{1}", nodeID, currentTask.ControlID));
+                                }
+                                this.db1ValsToSnd[0] = 1; //异常，1：不存在的控制ID
+                                break;
                             }
                             else
                             {
@@ -313,6 +341,7 @@ namespace TransDevModel
                                  this.currentTask = taskList[0];
                                 if(!dlgtCreateNextTask(this,this.currentTask,ref reStr))
                                 {
+                                    this.db1ValsToSnd[0] = 2;
                                     break;
                                 }
                                 this.currentTask.FinishTime = System.DateTime.Now;
@@ -333,6 +362,7 @@ namespace TransDevModel
                             }
                             logRecorder.AddDebugLog(nodeName, string.Format("控制ID{0} 任务完成收到", this.currentTask.ControlID));
                             this.db1ValsToSnd[6] = 1;
+                            this.db1ValsToSnd[0] = 0;
                             recvTaskPhase++;
                             break;
                         }
@@ -363,43 +393,68 @@ namespace TransDevModel
             }
             WCSPathNodeModel wcsNode= wcsPath.GetNodeByID(nodeID);
             WCSPathNodeModel wcsNodeNext = wcsPath.GetNodeByID(wcsNode.NextNodeID);
-            CtlDBAccess.Model.ControlTaskModel ctlTask = new CtlDBAccess.Model.ControlTaskModel();
+            CtlDBAccess.Model.ControlTaskModel ctlTask=null;
+            ctlTask = new CtlDBAccess.Model.ControlTaskModel();
             ctlTask.TaskID = System.Guid.NewGuid().ToString();
-            ctlTask.DeviceID = nodeID;
-            ctlTask.DeviceCata = devCata;
             ctlTask.StDevice = nodeID;
             ctlTask.StDeviceCata = devCata;
-            ctlTask.StDeviceParam = "";
+            ctlTask.StDeviceParam = mainTask.StDeviceParam;
             ctlTask.EndDevice = wcsNode.NextNodeID;
             ctlTask.EndDeviceCata = wcsNodeNext.DevCata;
-            ctlTask.EndDeviceParam = "";
+            ctlTask.EndDeviceParam = mainTask.EndDeviceParam;
             ctlTask.MainTaskID = mainTask.MainTaskID;
             ctlTask.PalletCode = mainTask.PalletCode;
-            UInt16 controlID= ctlTaskBll.GetUnusedControlID();
-            if(controlID<1)
+            UInt16 controlID = ctlTaskBll.GetUnusedControlID();
+            if (controlID < 1)
             {
                 reStr = "没有可用的控制任务ID";
                 return false;
             }
             ctlTask.ControlID = controlID;
             ctlTask.TaskIndex = 1;
-            ctlTask.TaskType = (int)SysCfg.EnumAsrsTaskType.输送机送出;
             ctlTask.TaskParam = "";
             ctlTask.TaskStatus = "待执行";
             ctlTask.TaskPhase = 0;
             ctlTask.CreateTime = System.DateTime.Now;
             ctlTask.CreateMode = "自动";
-            bool re=ctlTaskBll.Add(ctlTask);
-            if(re)
+
+            if(wcsNodeNext.DevCata=="库房")
             {
-                mainTask.TaskStatus = "执行中";
-                CtlDBAccess.BLL.MainControlTaskBll mainTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
-                return mainTaskBll.Update(mainTask);
+                ctlTask.DeviceID = wcsNodeNext.NodeID;
+                ctlTask.DeviceCata ="堆垛机";
+                ctlTask.TaskType = (int)SysCfg.EnumAsrsTaskType.产品入库;
+
+            }
+            else if(wcsNodeNext.DevCata=="RGV")
+            {
+                ctlTask.DeviceID = wcsNodeNext.NodeID;
+                ctlTask.DeviceCata = wcsNodeNext.DevCata;
+                ctlTask.TaskType = (int)SysCfg.EnumAsrsTaskType.RGV上下料;
             }
             else
             {
+               
+                ctlTask.DeviceID = nodeID;
+                ctlTask.DeviceCata = devCata;
+                ctlTask.TaskType = (int)SysCfg.EnumAsrsTaskType.输送机送出;
+               
+            }
+            if(ctlTask == null)
+            {
                 return false;
             }
+            bool re=ctlTaskBll.Add(ctlTask);
+            return re;
+            //if(re)
+            //{
+            //    mainTask.TaskStatus = "执行中";
+            //    CtlDBAccess.BLL.MainControlTaskBll mainTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
+            //    return mainTaskBll.Update(mainTask);
+            //}
+            //else
+            //{
+            //    return false;
+            //}
 
         }
        

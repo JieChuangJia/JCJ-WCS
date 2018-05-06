@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ProcessCfg>
   <sysSet>
-    <RunMode sim="false" WmsConnMode="true" UnBindedMode="False">运行模式</RunMode>
+    <RunMode sim="true" WmsConnMode="false" UnBindedMode="False">运行模式</RunMode>
     <!--线体控制，速度，启动/停止-->
     <HouseAreaColorSet>
       <HouseArea houseAreaID="1" areaName="通用分区">153,153,153</HouseArea>
@@ -288,6 +288,15 @@
         <NodeID>12134</NodeID>
       </NodeContainer>
     </Thread>
+    <Thread id="7" name="线程7" loopInterval="100">
+      <NodeContainer>
+        <NodeID>12137</NodeID>
+        <NodeID>12138</NodeID>
+        <NodeID>12139</NodeID>
+        <NodeID>12140</NodeID>
+       
+      </NodeContainer>
+    </Thread>
   </ThreadAlloc>
   <AsrsNodes>
     <!--asrsOutputMode：出库模式，计时出库，条件出库,其它-->
@@ -483,6 +492,74 @@
         </SelfDatainfo>
       </Node>
     </Asrs>
+    <Asrs name="A6库房" nodeID="11006" devCata="库房">
+      <Node className="AsrsControl.AsrsStackerCtlModel" id="11006" enabled="true">
+        <BaseDatainfo plcID="6" >
+          <NodeName>A6库堆垛机</NodeName>
+          <DB1Addr addrStart="D2001" blockNum="20">DB1数据区地址信息</DB1Addr>
+          <DB2Addr addrStart="D3001" blockNum="10">DB2数据区地址信息</DB2Addr>
+        </BaseDatainfo>
+      </Node>
+      <Node className="AsrsPortalModel.AsrsPortalModel" id="12137" enabled="true">
+        <BaseDatainfo plcID="11">
+          <NodeName>6号产品入口站台</NodeName>
+          <DB1Addr addrStart="D2341" blockNum="10">DB1数据区地址信息</DB1Addr>
+          <DB2Addr addrStart="D3341" blockNum="10">DB2数据区地址信息</DB2Addr>
+        </BaseDatainfo>
+        <SelfDatainfo portSeq="1" capacity="1" >
+          <Db1Desc>预留;预留;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;任务处理标志,1:复位,2:完成;命令字,21:送出;任务号;目标设备号</Db1Desc>
+          <Db2Desc>入口状态,1:无板，2:有板;预留;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;设备状态，１:空闲，２:工作中,3:任务完成;任务号</Db2Desc>
+          <PortType>3</PortType>
+        </SelfDatainfo>
+      </Node>
+
+      <Node className="AsrsPortalModel.AsrsPortalModel" id="12138" enabled="true">
+        <BaseDatainfo plcID="11">
+          <NodeName>6号产品出口站台站台</NodeName>
+          <DB1Addr addrStart="D2351" blockNum="10">DB1数据区地址信息</DB1Addr>
+          <DB2Addr addrStart="D3351" blockNum="10">DB2数据区地址信息</DB2Addr>
+        </BaseDatainfo>
+        <SelfDatainfo portSeq="2" capacity="1" >
+          <Db1Desc>预留;预留;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;任务处理标志,1:复位,2:完成;命令字,21:送出;任务号;目标设备号</Db1Desc>
+          <Db2Desc>入口状态,1:无板，2:有板;预留;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;设备状态，１:空闲，２:工作中,3:任务完成;任务号</Db2Desc>
+          <PortType>3</PortType>
+        </SelfDatainfo>
+      </Node>
+    </Asrs>
+    <Asrs name="A7库房" nodeID="11007" devCata="库房">
+      <Node className="AsrsControl.AsrsStackerCtlModel" id="11007" enabled="true">
+        <BaseDatainfo plcID="7" >
+          <NodeName>A7库堆垛机</NodeName>
+          <DB1Addr addrStart="D2001" blockNum="20">DB1数据区地址信息</DB1Addr>
+          <DB2Addr addrStart="D3001" blockNum="10">DB2数据区地址信息</DB2Addr>
+        </BaseDatainfo>
+      </Node>
+      <Node className="AsrsPortalModel.AsrsPortalModel" id="12139" enabled="true">
+        <BaseDatainfo plcID="11">
+          <NodeName>7号巷道产品入口站台</NodeName>
+          <DB1Addr addrStart="D2361" blockNum="10">DB1数据区地址信息</DB1Addr>
+          <DB2Addr addrStart="D3361" blockNum="10">DB2数据区地址信息</DB2Addr>
+        </BaseDatainfo>
+        <SelfDatainfo portSeq="1" capacity="1" >
+          <Db1Desc>预留;预留;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;任务处理标志,1:复位,2:完成;命令字,21:送出;任务号;目标设备号</Db1Desc>
+          <Db2Desc>入口状态,1:无板，2:有板;预留;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;设备状态，１:空闲，２:工作中,3:任务完成;任务号</Db2Desc>
+          <PortType>3</PortType>
+        </SelfDatainfo>
+      </Node>
+
+      <Node className="AsrsPortalModel.AsrsPortalModel" id="12140" enabled="true">
+        <BaseDatainfo plcID="11">
+          <NodeName>7号产品出口站台</NodeName>
+          <DB1Addr addrStart="D2371" blockNum="10">DB1数据区地址信息</DB1Addr>
+          <DB2Addr addrStart="D3371" blockNum="10">DB2数据区地址信息</DB2Addr>
+        </BaseDatainfo>
+        <SelfDatainfo portSeq="2" capacity="1" >
+          <Db1Desc>预留;预留;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;任务处理标志,1:复位,2:完成;命令字,21:送出;任务号;目标设备号</Db1Desc>
+          <Db2Desc>入口状态,1:无板，2:有板;预留;预留;预留;预留;读写标志,1:写入数据,2:读数据完成;设备状态，１:空闲，２:工作中,3:任务完成;任务号</Db2Desc>
+          <PortType>3</PortType>
+        </SelfDatainfo>
+      </Node>
+    </Asrs>
   </AsrsNodes>
   <WCSPath>
     <Path ID="1" pathKey="12112-11001" desc="1号库上料路径">
@@ -622,6 +699,22 @@
       <Node seq="3"  nodeID="12402" nodeFlag="中间路径点"/>
       <Node seq="4"  nodeID="12122" nodeFlag="中间路径点"/>
       <Node seq="5"  nodeID="12124" nodeFlag="终点"/>
+    </Path>
+    <Path ID="19" pathKey="12137-11006" desc="6号库上料路径">
+      <Node seq="1" nodeID="12137"  nodeFlag="起点" />
+      <Node seq="2" nodeID="11006" nodeFlag="终点"/>
+    </Path>
+    <Path ID="20" pathKey="12139-11007" desc="7号库上料路径">
+      <Node seq="1" nodeID="12139"  nodeFlag="起点" />
+      <Node seq="2" nodeID="11007" nodeFlag="终点"/>
+    </Path>
+    <Path ID="21" pathKey="11006-12138" desc="6号库下料路径">
+      <Node seq="1" nodeID="11006"  nodeFlag="起点" />
+      <Node seq="2" nodeID="12138" nodeFlag="终点"/>
+    </Path>
+    <Path ID="22" pathKey="11007-12140" desc="7号库下料路径">
+      <Node seq="1" nodeID="11007"  nodeFlag="起点" />
+      <Node seq="2" nodeID="12140" nodeFlag="终点"/>
     </Path>
   </WCSPath>
 </ProcessCfg>

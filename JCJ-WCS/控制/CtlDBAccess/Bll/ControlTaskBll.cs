@@ -225,16 +225,34 @@ namespace CtlDBAccess.BLL
         }
         public UInt16 GetUnusedControlID()
         {
-            for(UInt16 i=1000;i<20000;i++)
+            long maxID = dal.GetMaxControlID();
+            UInt16 nextID = 0;
+            if(maxID>10000)
             {
-                UInt16 controlID = i;
-                DataSet ds = GetList(string.Format("ControlID = '{0}' and (TaskStatus='执行中' or TaskStatus='待执行')",controlID));
-                if(ds.Tables[0].Rows.Count==0)
-                {
-                    return controlID;
-                }
+                ClearHistorydata(new string[] { "已完成", "任务撤销" });
             }
-            return 0;
+            maxID = dal.GetMaxControlID();
+            if(maxID>20000) //大于20000
+            {
+                for (UInt16 i = 1000; i < 20000; i++)
+                {
+                    UInt16 controlID = i;
+                    DataSet ds = GetList(string.Format("ControlID = '{0}' and (TaskStatus='执行中' or TaskStatus='待执行')", controlID));
+                    if (ds.Tables[0].Rows.Count == 0)
+                    {
+                        nextID = controlID;
+                        break;
+                    }
+                }
+               
+            }
+            else
+            {
+                nextID = (UInt16)(maxID + 1);
+               
+            }
+            return nextID;
+           
         }
         #endregion  ExtensionMethod
     }

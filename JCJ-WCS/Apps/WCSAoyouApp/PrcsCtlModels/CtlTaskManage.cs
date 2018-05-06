@@ -450,6 +450,7 @@ namespace PrcsCtlModelsAoyou
                 ResposeData res= WmsSvc.GetWaittingToRunTaskList(stDev, ref wmsTasks);
                 if(!res.Status)
                 {
+                    Console.WriteLine("获取{0}待执行管理任务失败{1}",stDev.DeviceCode,res.Describe);
                     continue;
                 }
                 foreach(ManageTaskModel wmsTask in wmsTasks)
@@ -523,6 +524,13 @@ namespace PrcsCtlModelsAoyou
                 {
                     continue;
                 }
+                if(node.DevCata=="站台")
+                {
+                    if(node.Db2Vals[0] !=2)
+                    {
+                        continue;
+                    }
+                }
                 if (!node.WCSMainTaskStart(mainTask, wcsPath, ref reStr))
                 {
                     Console.WriteLine("{0} 启动任务：{1}失败,{2}", node.NodeName, mainTask.WMSTaskID, reStr);
@@ -530,7 +538,7 @@ namespace PrcsCtlModelsAoyou
                 else
                 {
                     WmsSvc.UpdateManageTaskStatus(mainTask.WMSTaskID, "执行中");
-                    Console.WriteLine("主控制任务{0},{1}->{2}启动", mainTask.MainTaskID, mainTask.StDevice, mainTask.EndDevice);
+                    Console.WriteLine("主控制任务{0},{1}->{2}准备启动", mainTask.MainTaskID, mainTask.StDevice, mainTask.EndDevice);
                 }
             }
             /*

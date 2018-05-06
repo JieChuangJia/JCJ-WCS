@@ -24,10 +24,10 @@ namespace AsrsControl
         public void SetNodeNames(IDictionary<string, string> nodeMap)
         {
             this.comboBox1.Items.Clear();
+            this.comboBox1.Items.Add("所有");
             foreach(string nodeID in nodeMap.Keys)
             {
                 this.comboBox1.Items.Add(nodeMap[nodeID]);
-
             }
             if(this.comboBox1.Items.Count>0)
             {
@@ -81,7 +81,9 @@ namespace AsrsControl
                 SysCfg.EnumAsrsTaskType.产品出库.ToString(), 
                 SysCfg.EnumAsrsTaskType.空筐入库.ToString(), 
                 SysCfg.EnumAsrsTaskType.空筐出库.ToString(), 
-                SysCfg.EnumAsrsTaskType.移库.ToString()});
+                SysCfg.EnumAsrsTaskType.移库.ToString(),
+                SysCfg.EnumAsrsTaskType.输送机送出.ToString(),
+                SysCfg.EnumAsrsTaskType.RGV上下料.ToString()});
 
             this.comboBox3.Items.AddRange(new string[] { "所有", SysCfg.EnumTaskStatus.待执行.ToString(), SysCfg.EnumTaskStatus.执行中.ToString(), SysCfg.EnumTaskStatus.已完成.ToString(), SysCfg.EnumTaskStatus.超时.ToString(), SysCfg.EnumTaskStatus.任务撤销.ToString() });
             this.comboBoxOrderType.Items.AddRange(new string[] { "无","由高到低","由低到高"});

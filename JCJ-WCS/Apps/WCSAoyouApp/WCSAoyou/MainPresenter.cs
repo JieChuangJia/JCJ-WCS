@@ -268,6 +268,16 @@ namespace WCSAoyou
             logSrcs.AddRange(ExtLogSrc);
             return logSrcs.ToArray();
         }
+        public string GetNodeName(string nodeID)
+        {
+            return ctlNodeManager.GetNodeName(nodeID);
+            
+        }
+        public List<string> GetMonitorNodeIDS()
+        {
+            return ctlNodeManager.GetMonitorNodeIDS();
+          
+        }
         public List<string> GetMonitorNodeNames()
         {
             return ctlNodeManager.GetMonitorNodeNames();

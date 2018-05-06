@@ -128,7 +128,7 @@ namespace AsrsControl
             }
             if(this.db2Vals[1] != this.db2ValsLast[1])
             {
-                if(this.db2Vals[1] == 1 || this.db2Vals[1] ==2)
+                if(this.db2ValsLast[1]==4 &&(this.db2Vals[1] == 1 || this.db2Vals[1] ==2))
                 {
                     logRecorder.AddDebugLog(nodeName, "切换到自动模式");
                 }
@@ -380,16 +380,17 @@ namespace AsrsControl
                 ctlTask.CreateTime = System.DateTime.Now;
                 ctlTask.CreateMode = "自动";
                 bool re = ctlTaskBll.Add(ctlTask);
-                if (re)
-                {
-                    mainTask.TaskStatus = "执行中";
-                    CtlDBAccess.BLL.MainControlTaskBll mainTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
-                    return mainTaskBll.Update(mainTask);
-                }
-                else
-                {
-                    return false;
-                }
+                return re;
+                //if (re)
+                //{
+                //    mainTask.TaskStatus = "执行中";
+                //    CtlDBAccess.BLL.MainControlTaskBll mainTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
+                //    return mainTaskBll.Update(mainTask);
+                //}
+                //else
+                //{
+                //    return false;
+                //}
                
             }
             catch (Exception ex)
