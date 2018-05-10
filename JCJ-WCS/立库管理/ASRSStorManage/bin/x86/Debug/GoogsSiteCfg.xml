@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Root> 
+  <!--库房名称-->
+  <StoreHouse name ="A库房">
+    <!--是否重新创建货位false：fou，true：是-->
+    <ReBuild>false</ReBuild>
+    <!--库存排数-->
+    <GSRowCount>2</GSRowCount>
+    <!--库存列数-->
+    <GSColCount>24</GSColCount>
+    <!--库存层数-->
+    <GSLayerCount>6</GSLayerCount>
+    <!--不可用货位列表-->
+    <GSInvalidList>
+     <!-- <GSItem>1-2-1</GSItem>-->
+      <GSItem>2-7-1</GSItem>
+      <GSItem>2-9-1</GSItem>
+      <GSItem>2-12-1</GSItem>
+    </GSInvalidList>
+  </StoreHouse>
+  <!--库房名称-->
+  <StoreHouse name ="B库房">
+    <!--是否重新创建货位false：fou，true：是-->
+    <ReBuild>false</ReBuild>
+    <!--库存排数-->
+    <GSRowCount>2</GSRowCount>
+    <!--库存列数-->
+    <GSColCount>21</GSColCount>
+    <!--库存层数-->
+    <GSLayerCount>6</GSLayerCount>
+    <!--不可用货位列表-->
+    <GSInvalidList>
+      
+    </GSInvalidList>
+  </StoreHouse>
+</Root>

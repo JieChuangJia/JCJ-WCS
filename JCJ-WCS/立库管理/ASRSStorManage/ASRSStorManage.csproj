@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{944D95F5-15BD-4C79-8D35-0DE37100AD36}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ASRSStorManage</RootNamespace>
+    <AssemblyName>ASRSStorManage</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AsrsStorage">
+      <HintPath>..\AsrsStorage\bin\Release\AsrsStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\XMLOperater.cs" />
+    <Compile Include="Model\CheckParam.cs" />
+    <Compile Include="Model\EnumModel.cs" />
+    <Compile Include="Model\EventArgsModel.cs" />
+    <Compile Include="Model\GsPosModel.cs" />
+    <Compile Include="Presenter\OutBatchSetPresenter.cs" />
+    <Compile Include="Presenter\StockManaPresenter.cs" />
+    <Compile Include="Presenter\StoragePresenter.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="StorageManager.cs" />
+    <Compile Include="TestForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForm1.Designer.cs">
+      <DependentUpon>TestForm1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddStockListView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AddStockListView.Designer.cs">
+      <DependentUpon>AddStockListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditGSStaView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\EditGSStaView.Designer.cs">
+      <DependentUpon>EditGSStaView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\LogicAreaColorSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\LogicAreaColorSet.Designer.cs">
+      <DependentUpon>LogicAreaColorSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MoveHouseManulView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MoveHouseManulView.Designer.cs">
+      <DependentUpon>MoveHouseManulView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MultiGsEnabledSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MultiGsEnabledSet.designer.cs">
+      <DependentUpon>MultiGsEnabledSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\OutBatchSetView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\OutBatchSetView.Designer.cs">
+      <DependentUpon>OutBatchSetView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\StockOperateView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\StockOperateView.Designer.cs">
+      <DependentUpon>StockOperateView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\StorageMainView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\StorageMainView.Designer.cs">
+      <DependentUpon>StorageMainView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\StockManaView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\StockManaView.Designer.cs">
+      <DependentUpon>StockManaView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\StorageView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\StorageView.Designer.cs">
+      <DependentUpon>StorageView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\WaitDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\WaitDlg.Designer.cs">
+      <DependentUpon>WaitDlg.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForm1.resx">
+      <DependentUpon>TestForm1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AddStockListView.resx">
+      <DependentUpon>AddStockListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\EditGSStaView.resx">
+      <DependentUpon>EditGSStaView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\LogicAreaColorSet.resx">
+      <DependentUpon>LogicAreaColorSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MoveHouseManulView.resx">
+      <DependentUpon>MoveHouseManulView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MultiGsEnabledSet.resx">
+      <DependentUpon>MultiGsEnabledSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\OutBatchSetView.resx">
+      <DependentUpon>OutBatchSetView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\StockManaView.resx">
+      <DependentUpon>StockManaView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\StockOperateView.resx">
+      <DependentUpon>StockOperateView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\StorageView.resx">
+      <DependentUpon>StorageView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\WaitDlg.resx">
+      <DependentUpon>WaitDlg.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\控制\CtlDBAccess\CtlDBAccess.csproj">
+      <Project>{2180a519-31fe-4c19-8d39-a4dfec26cf9a}</Project>
+      <Name>CtlDBAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\控制\MesDBAccess\MesDBAccess.csproj">
+      <Project>{6861ee48-2c2c-4034-8930-181ebe48cc7a}</Project>
+      <Name>MesDBAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\基础类\ModuleAttachInterface\ModuleCrossPnP.csproj">
+      <Project>{8ebcda91-8a16-46fa-84bd-784982f9eac8}</Project>
+      <Name>ModuleCrossPnP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\基础类\LogInterface\LogInterface.csproj">
+      <Project>{f929e2c2-43ed-4d7e-8426-356b0ec3c540}</Project>
+      <Name>LogInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\基础类\SysCfgModel\SysCfg.csproj">
+      <Project>{ca19b9f8-8521-40c8-8918-33b15b2935d2}</Project>
+      <Name>SysCfg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AsrsStorDBAcc\AsrsStorDBAcc.csproj">
+      <Project>{a1285a1e-d238-467b-89b2-bcf58bb4d2ee}</Project>
+      <Name>AsrsStorDBAcc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\控制\AsrsInterface\AsrsInterface.csproj">
+      <Project>{3a9ad116-ca47-465e-ab89-3ab3346cb661}</Project>
+      <Name>AsrsInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\控制\AsrsModel\AsrsModel.csproj">
+      <Project>{5a6fa1e2-2e9b-4faf-93ec-bc6e1ef370de}</Project>
+      <Name>AsrsModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="记录.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
