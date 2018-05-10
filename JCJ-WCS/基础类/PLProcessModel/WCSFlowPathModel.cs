@@ -14,11 +14,13 @@ namespace FlowCtlBaseModel
         private string pathKey = "";
         private string pathDesc = "";
         private string pathID = "";
+       
         private List<WCSPathNodeModel> nodePath = new List<WCSPathNodeModel>();
         public List<WCSPathNodeModel> NodeList { get { return nodePath; } }
         public string PathKey { get { return pathKey; } }
         public string PathDesc { get { return pathDesc; } }
         public string PathID { get { return pathID; } }
+        public string PathCata { get; set; }
         public WCSFlowPathModel()
         {
 
@@ -38,6 +40,7 @@ namespace FlowCtlBaseModel
                     {
                         return false;
                     }
+                   
                     AddNode(wcsNode);
                 }
                 for (int i = 0; i < nodePath.Count();i++ )
@@ -96,6 +99,18 @@ namespace FlowCtlBaseModel
                 }
             }
             return null;
+        }
+        public bool ContainNode(string nodeID)
+        {
+            WCSPathNodeModel node=GetNodeByID(nodeID);
+            if(node == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

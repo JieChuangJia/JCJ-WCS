@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Root> 
+  <!--库房名称-->
+  <StoreHouse name ="D1库房">
+   <!--库房货位申请规则，1：最小列开始申请；2：最大列开始申请，默认为1-->
+    <RequireCellRule>1</RequireCellRule>
+    <!--是否重新创建货位false：fou，true：是-->
+    <ReBuild>false</ReBuild>
+    <!--库存排数-->
+    <GSRowCount>2</GSRowCount>
+    <!--库存列数-->
+    <GSColCount>39</GSColCount>
+    <!--库存层数-->
+    <GSLayerCount>9</GSLayerCount>
+    <!--不可用货位列表-->
+    <!--<GSInvalidList>
+     --><!-- <GSItem>1-2-1</GSItem>--><!--
+      <GSItem>2-7-1</GSItem>
+      <GSItem>2-9-1</GSItem>
+      <GSItem>2-12-1</GSItem>
+    </GSInvalidList>-->
+  </StoreHouse>
+  <StoreHouse name ="D2库房">
+    <!--库房货位申请规则，1：最小列开始申请；2：最大列开始申请，默认为1-->
+    <RequireCellRule>1</RequireCellRule>
+    <!--是否重新创建货位false：fou，true：是-->
+    <ReBuild>false</ReBuild>
+    <!--库存排数-->
+    <GSRowCount>2</GSRowCount>
+    <!--库存列数-->
+    <GSColCount>39</GSColCount>
+    <!--库存层数-->
+    <GSLayerCount>9</GSLayerCount>
+   
+  </StoreHouse>
+  <!--库房名称-->
+  <StoreHouse name ="D3库房">
+    <!--库房货位申请规则，1：最小列开始申请；2：最大列开始申请，默认为1-->
+    <RequireCellRule>1</RequireCellRule>
+    <!--是否重新创建货位false：fou，true：是-->
+    <ReBuild>false</ReBuild>
+    <!--库存排数-->
+    <GSRowCount>2</GSRowCount>
+    <!--库存列数-->
+    <GSColCount>39</GSColCount>
+    <!--库存层数-->
+    <GSLayerCount>9</GSLayerCount>
+   
+  </StoreHouse>
+ 
+</Root>

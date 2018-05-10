@@ -17,6 +17,7 @@ namespace PrcsCtlModelsAoyou
         private CtlDBAccess.BLL.MainControlTaskBll mainCtlTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
         private CtlDBAccess.BLL.ControlTaskBll ctlTaskBll = new CtlDBAccess.BLL.ControlTaskBll();
         private List<TaskDeviceModel> wmsStDevList = new List<TaskDeviceModel>();
+        private object pathCheckLock = new object();
         private Dictionary<string, FlowCtlBaseModel.WCSFlowPathModel> wcsPathMap = new Dictionary<string, FlowCtlBaseModel.WCSFlowPathModel>();
         public WMS_Interface.IWMSToWCSSvr WmsSvc{get;set;}
        
@@ -30,7 +31,7 @@ namespace PrcsCtlModelsAoyou
             wmsStDevList.AddRange(new TaskDeviceModel[] { new TaskDeviceModel("12112","工位"),new TaskDeviceModel("11001","货位"), new TaskDeviceModel("11002","货位"),new TaskDeviceModel("11003","货位"),
                 new TaskDeviceModel( "11004","货位"),new TaskDeviceModel("11005","货位"), new TaskDeviceModel("11006","货位"), new TaskDeviceModel("11007","货位") });
             taskMonitorThread = new FlowCtlBaseModel.ThreadBaseModel("WMS任务监控线程");
-            taskMonitorThread.LoopInterval = 5000;
+            taskMonitorThread.LoopInterval = 2000;
             taskMonitorThread.SetThreadRoutine(WMSTaskMonitorProc);
             taskMonitorThread.TaskInit();
             foreach(FlowCtlBaseModel.CtlNodeBaseModel node in  NodeManager.MonitorNodeList)
@@ -40,6 +41,8 @@ namespace PrcsCtlModelsAoyou
                 {
                     (node as TransDevModel.NodeRGV).dlgtTaskAllocate = RgvTasksndAllocate;
                 }
+                node.dlgtPathLockcheck = TaskLockCheck;
+               
             }
             return true;
         }
@@ -85,6 +88,17 @@ namespace PrcsCtlModelsAoyou
                         {
                             wcsNode.DevCata = node.DevCata;
                         }
+                        if(wcsNode.NodeFlag=="起点")
+                        {
+                            if(wcsNode.DevCata=="站台")
+                            {
+                                wcsPath.PathCata = "上架";
+                            }
+                            else
+                            {
+                                wcsPath.PathCata = "下架";
+                            }
+                        }
                     }
                     wcsPathMap[wcsPath.PathKey] = wcsPath;
                 }
@@ -98,53 +112,118 @@ namespace PrcsCtlModelsAoyou
             }
            
         }
-        public bool CreateNodeNextTask(FlowCtlBaseModel.CtlNodeBaseModel curNode, CtlDBAccess.Model.ControlTaskModel curTask,ref string reStr)
+        #region 委托实现
+        /// <summary>
+        /// 设备执行任务之前，检查是否路径被锁定，防止上下架冲突
+        /// </summary>
+        /// <param name="curNode"></param>
+        /// <param name="curTask"></param>
+        /// <param name="reStr">若可用，返回0,1：路径被锁定，不可用,2:其它错误,-1:系统异常</param>
+        /// <returns></returns>
+        public int TaskLockCheck(FlowCtlBaseModel.CtlNodeBaseModel curNode,CtlDBAccess.Model.ControlTaskModel curTask, ref string reStr)
+        {
+            try
+            {
+                lock(pathCheckLock)
+                {
+                    if(curTask==null)
+                    {
+                        reStr = "任务为空";
+                        return 2;
+                    }
+                    CtlDBAccess.Model.MainControlTaskModel mainTask= mainCtlTaskBll.GetModel(curTask.MainTaskID);
+                    if(!wcsPathMap.Keys.Contains(mainTask.FlowPathKey))
+                    {
+                        reStr = "不存在的路径：" + mainTask.FlowPathKey;
+                        return 2;
+                    }
+                    FlowCtlBaseModel.WCSFlowPathModel wcsPath = wcsPathMap[mainTask.FlowPathKey];
+                    if(wcsPath.PathCata =="上架")
+                    {
+                       // List<CtlDBAccess.Model.MainControlTaskModel> lockedMaintaskList = GetLockedTaskList(curNode, "下架");
+                        if (!NodeLockedBytask(curNode,"下架"))
+                        {
+                            return 0;
+                        }
+                        else
+                        {
+                            return 1;
+                        }
+                    }
+                    else if(wcsPath.PathCata=="下架")
+                    {
+                        //List<CtlDBAccess.Model.MainControlTaskModel> lockedMaintaskList = GetLockedTaskList(curNode, "上架");
+                        if (!NodeLockedBytask(curNode, "上架"))
+                        {
+                            return 0;
+                        }
+                        else
+                        {
+                            return 1;
+                        }
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                reStr = ex.ToString();
+                return -1;
+               
+            }
+            
+        }
+        public bool CreateNodeNextTask(FlowCtlBaseModel.CtlNodeBaseModel curNode, CtlDBAccess.Model.ControlTaskModel curTask, ref string reStr)
         {
             try
             {
                 CtlDBAccess.Model.MainControlTaskModel mainTask = mainCtlTaskBll.GetModel(curTask.MainTaskID);
-                if(mainTask==null)
+                if (mainTask == null)
                 {
                     reStr = "主任务为空,不存在的主任务ID:" + curTask.MainTaskID;
                     return false;
                 }
                 FlowCtlBaseModel.WCSFlowPathModel wcsPath = null;
-                if(wcsPathMap.Keys.Contains(mainTask.FlowPathKey))
+                if (wcsPathMap.Keys.Contains(mainTask.FlowPathKey))
                 {
                     wcsPath = wcsPathMap[mainTask.FlowPathKey];
                 }
                 else
                 {
-                    reStr = "路径不存在:"+mainTask.FlowPathKey;
+                    reStr = "路径不存在:" + mainTask.FlowPathKey;
                     return false;
                 }
-              
+
                 FlowCtlBaseModel.WCSPathNodeModel wcsNode = wcsPath.GetNodeByID(curNode.NodeID);
-                if(wcsNode.NodeFlag== "终点")
+                if (wcsNode.NodeFlag == "终点")
                 {
                     //管理任务完成
-                    WMS_Interface.ResposeData res= WmsSvc.UpdateManageTaskStatus(mainTask.WMSTaskID, "已完成");
-                    if(!res.Status)
+                    WMS_Interface.ResposeData res = WmsSvc.UpdateManageTaskStatus(mainTask.WMSTaskID, "已完成");
+                    if (!res.Status)
                     {
-                        reStr = string.Format("更新WMS任务:{0}状态失败,{1}",mainTask.WMSTaskID,res.Describe);
+                        reStr = string.Format("更新WMS任务:{0}状态失败,{1}", mainTask.WMSTaskID, res.Describe);
                         return false;
                     }
                     mainTask.TaskStatus = "已完成";
                     mainTask.FinishTime = System.DateTime.Now;
-                    if(!mainCtlTaskBll.Update(mainTask))
+                    if (!mainCtlTaskBll.Update(mainTask))
                     {
-                        reStr = string.Format("更新主控制任务:{0}状态失败",mainTask.MainTaskID);
+                        reStr = string.Format("更新主控制任务:{0}状态失败", mainTask.MainTaskID);
                         return false;
                     }
                     return true;
                 }
-                FlowCtlBaseModel.CtlNodeBaseModel nextNode= NodeManager.GetNodeByID(wcsNode.NextNodeID);
-                if(curNode.DevCata=="站台")
+                FlowCtlBaseModel.CtlNodeBaseModel nextNode = NodeManager.GetNodeByID(wcsNode.NextNodeID);
+                if (curNode.DevCata == "站台")
                 {
                     if (nextNode.DevCata == "站台")
                     {
                         CtlDBAccess.Model.ControlTaskModel nextCtlTask = CreateConveyorTask(curTask.TaskIndex + 1, mainTask.MainTaskID, curNode as TransDevModel.NodeTransStation, nextNode as TransDevModel.NodeTransStation, curTask.PalletCode, ref reStr);
-                        if(nextCtlTask == null)
+                        if (nextCtlTask == null)
                         {
                             return false;
                         }
@@ -166,7 +245,7 @@ namespace PrcsCtlModelsAoyou
                             return false;
                         }
                         CtlDBAccess.Model.ControlTaskModel nextCtlTask = CreateRGVTask(curTask.TaskIndex + 1, mainTask.MainTaskID, nextNode as TransDevModel.NodeRGV, curNode as TransDevModel.NodeTransStation, nextNode2 as TransDevModel.NodeTransStation, curTask.PalletCode, ref reStr);
-                        if(nextCtlTask==null)
+                        if (nextCtlTask == null)
                         {
                             return false;
                         }
@@ -175,17 +254,17 @@ namespace PrcsCtlModelsAoyou
                     else if (nextNode.DevCata == "堆垛机")
                     {
 
-                        CtlDBAccess.Model.ControlTaskModel nextCtlTask = CreateStackerTask(curTask.TaskIndex + 1, mainTask,nextNode.NodeID, curNode as TransDevModel.NodeTransStation, curTask.PalletCode, ref reStr);
-                        if(nextCtlTask == null)
+                        CtlDBAccess.Model.ControlTaskModel nextCtlTask = CreateStackerTask(curTask.TaskIndex + 1, mainTask, nextNode.NodeID, curNode as TransDevModel.NodeTransStation, curTask.PalletCode, ref reStr);
+                        if (nextCtlTask == null)
                         {
                             return false;
                         }
                         return ctlTaskBll.Add(nextCtlTask);
                     }
                 }
-                else if(curNode.DevCata=="RGV")
+                else if (curNode.DevCata == "RGV")
                 {
-                    if(nextNode.DevCata != "站台")
+                    if (nextNode.DevCata != "站台")
                     {
                         reStr = "RGV目标设备应该为站台";
                         return false;
@@ -220,9 +299,9 @@ namespace PrcsCtlModelsAoyou
                         }
                         return ctlTaskBll.Add(nextCtlTask);
                     }
-                    else if(nextNode2.DevCata=="堆垛机")
+                    else if (nextNode2.DevCata == "堆垛机")
                     {
-                        CtlDBAccess.Model.ControlTaskModel nextCtlTask = CreateStackerTask(curTask.TaskIndex + 1,mainTask, nextNode2.NodeID, rgvTargetNode as TransDevModel.NodeTransStation, curTask.PalletCode, ref reStr);
+                        CtlDBAccess.Model.ControlTaskModel nextCtlTask = CreateStackerTask(curTask.TaskIndex + 1, mainTask, nextNode2.NodeID, rgvTargetNode as TransDevModel.NodeTransStation, curTask.PalletCode, ref reStr);
                         if (nextCtlTask == null)
                         {
                             return false;
@@ -235,7 +314,7 @@ namespace PrcsCtlModelsAoyou
                         return false;
                     }
                 }
-                else if(curNode.DevCata=="堆垛机")
+                else if (curNode.DevCata == "堆垛机")
                 {
                     if (nextNode.DevCata != "站台")
                     {
@@ -271,11 +350,11 @@ namespace PrcsCtlModelsAoyou
                         }
                         return ctlTaskBll.Add(nextCtlTask);
                     }
-                    else if(nextNode2.DevCata=="RGV")
+                    else if (nextNode2.DevCata == "RGV")
                     {
                         FlowCtlBaseModel.WCSPathNodeModel targetWcsNode2 = wcsPath.GetNodeByID(nextNode2.NodeID);
                         FlowCtlBaseModel.CtlNodeBaseModel nextNode3 = NodeManager.GetNodeByID(targetWcsNode2.NextNodeID);
-                        if(nextNode3==null)
+                        if (nextNode3 == null)
                         {
                             return false;
                         }
@@ -296,6 +375,41 @@ namespace PrcsCtlModelsAoyou
                 return false;
             }
         }
+        #endregion
+        private bool NodeLockedBytask(FlowCtlBaseModel.CtlNodeBaseModel curNode,string mainTaskCata)
+        {
+            foreach (string pathKey in wcsPathMap.Keys)
+            {
+                FlowCtlBaseModel.WCSFlowPathModel wcsPath = wcsPathMap[pathKey];
+                if (wcsPath.PathCata != mainTaskCata)
+                {
+                    continue;
+                }
+                if(!wcsPath.ContainNode(curNode.NodeID))
+                {
+                    continue;
+                }
+                List<CtlDBAccess.Model.MainControlTaskModel> taskList =mainCtlTaskBll.GetModelList(string.Format("FlowPathKey ='{0}' and TaskStatus='执行中'", pathKey));
+                if(taskList != null && taskList.Count()>0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        //private List<CtlDBAccess.Model.MainControlTaskModel>  GetLockedTaskList(FlowCtlBaseModel.CtlNodeBaseModel curNode,string mainTaskCata)
+        //{
+        //    List<CtlDBAccess.Model.MainControlTaskModel> lockedTaskList = new List<CtlDBAccess.Model.MainControlTaskModel>();
+        //    foreach(string pathKey in wcsPathMap.Keys)
+        //    {
+        //        FlowCtlBaseModel.WCSFlowPathModel wcsPath = wcsPathMap[pathKey];
+        //        if(wcsPath.PathCata != mainTaskCata)
+        //        {
+        //            continue;
+        //        }
+                
+        //    }
+        //}
         private CtlDBAccess.Model.ControlTaskModel CreateConveyorTask(int taskIndex, string mainTaskID, TransDevModel.NodeTransStation stNode, TransDevModel.NodeTransStation targetNode, string palletID, ref string reStr)
         {
            
@@ -420,6 +534,10 @@ namespace PrcsCtlModelsAoyou
             List<CtlDBAccess.Model.ControlTaskModel> taskList = ctlTaskBll.GetTaskToRunList((int)SysCfg.EnumAsrsTaskType.RGV上下料, SysCfg.EnumTaskStatus.待执行.ToString(), rgv.NodeID, true);
             foreach(CtlDBAccess.Model.ControlTaskModel taskModel in taskList)
             {
+                if(0 != TaskLockCheck(rgv,taskModel,ref reStr))
+                {
+                    continue;
+                }
                 string devSt = taskModel.StDevice;
                 string devTarget = taskModel.EndDevice;
                 FlowCtlBaseModel.CtlNodeBaseModel stNode= NodeManager.GetNodeByID(devSt);
@@ -576,7 +694,5 @@ namespace PrcsCtlModelsAoyou
                 }
             }*/
         }
-
-
     }
 }

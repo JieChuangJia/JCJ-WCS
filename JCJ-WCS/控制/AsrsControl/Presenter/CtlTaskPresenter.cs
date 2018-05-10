@@ -126,34 +126,39 @@ namespace AsrsControl
                 }
                 if(taskModel.TaskType >5)
                 {
-                    continue;
+                    taskBll.Delete(taskID);
+                    
                 }
-                AsrsTaskParamModel paramModel = new AsrsTaskParamModel();
-                string reStr="";
-              //  if (!paramModel.ParseParam((SysCfg.EnumAsrsTaskType)taskModel.TaskType, taskModel.TaskParam, ref reStr))
-                if (!paramModel.ParseParam(taskModel, ref reStr))
+                else
                 {
-                    Console.WriteLine(string.Format("任务ID：{0}，参数解析失败，无法删除"), taskModel.TaskID);
-                    continue;
-                }
-                if (taskModel.TaskStatus == SysCfg.EnumTaskStatus.待执行.ToString())
-                {
-                    if(!asrsResourceManage.UpdateGsTaskStatus(taskModel.tag1, paramModel.CellPos1, EnumGSTaskStatus.完成, ref reStr))
+                    AsrsTaskParamModel paramModel = new AsrsTaskParamModel();
+                    string reStr = "";
+                    //  if (!paramModel.ParseParam((SysCfg.EnumAsrsTaskType)taskModel.TaskType, taskModel.TaskParam, ref reStr))
+                    if (!paramModel.ParseParam(taskModel, ref reStr))
                     {
-                        Console.WriteLine(string.Format("任务ID:{0},删除失败，因为更新{1}:{2}-{3}-{4}状态失败", taskModel.TaskID, taskModel.tag1, paramModel.CellPos1.Row, paramModel.CellPos1.Col, paramModel.CellPos1.Layer));
+                        Console.WriteLine(string.Format("任务ID：{0}，参数解析失败，无法删除"), taskModel.TaskID);
                         continue;
                     }
-                    if (taskModel.TaskType == (int)SysCfg.EnumAsrsTaskType.移库)
+                    if (taskModel.TaskStatus == SysCfg.EnumTaskStatus.待执行.ToString())
                     {
-                        if(!asrsResourceManage.UpdateGsTaskStatus(taskModel.tag1, paramModel.CellPos2, EnumGSTaskStatus.完成, ref reStr))
+                        if (!asrsResourceManage.UpdateGsTaskStatus(taskModel.tag1, paramModel.CellPos1, EnumGSTaskStatus.完成, ref reStr))
                         {
-                            Console.WriteLine(string.Format("任务ID:{0},删除失败，因为更新{1}:{2}-{3}-{4}状态失败", taskModel.TaskID, taskModel.tag1, paramModel.CellPos2.Row, paramModel.CellPos2.Col, paramModel.CellPos2.Layer));
+                            Console.WriteLine(string.Format("任务ID:{0},删除失败，因为更新{1}:{2}-{3}-{4}状态失败", taskModel.TaskID, taskModel.tag1, paramModel.CellPos1.Row, paramModel.CellPos1.Col, paramModel.CellPos1.Layer));
                             continue;
                         }
+                        if (taskModel.TaskType == (int)SysCfg.EnumAsrsTaskType.移库)
+                        {
+                            if (!asrsResourceManage.UpdateGsTaskStatus(taskModel.tag1, paramModel.CellPos2, EnumGSTaskStatus.完成, ref reStr))
+                            {
+                                Console.WriteLine(string.Format("任务ID:{0},删除失败，因为更新{1}:{2}-{3}-{4}状态失败", taskModel.TaskID, taskModel.tag1, paramModel.CellPos2.Row, paramModel.CellPos2.Col, paramModel.CellPos2.Layer));
+                                continue;
+                            }
+                        }
                     }
+
+                    taskBll.Delete(taskID);
                 }
-               
-                taskBll.Delete(taskID);
+                
             }
             QueryTask();
         }

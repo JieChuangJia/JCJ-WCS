@@ -102,7 +102,8 @@ namespace TransDevModel
                             if(!dlgtCreateNextTask(this,this.currentTask,ref reStr))
                             {
                                 currentTaskDescribe = string.Format("发送下一步任务失败,主任务ID{0},{1}", this.currentTask.MainTaskID,reStr);
-                               // break;
+                                Console.WriteLine(reStr);
+                                break;
                             }
                         }
                         string logInfo = string.Format("任务完成:{0},上料站台：{1}，下料站台:{2}", ((SysCfg.EnumAsrsTaskType)currentTask.TaskType).ToString(),this.currentTask.StDevice,this.currentTask.EndDevice);

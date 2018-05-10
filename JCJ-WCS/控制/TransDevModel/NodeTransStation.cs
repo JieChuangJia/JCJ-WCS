@@ -203,12 +203,6 @@ namespace TransDevModel
                             {
                                 break;
                             }
-
-                            this.currentTaskPhase++;
-                            break;
-                        }
-                    case 2:
-                        {
                             if (SysCfg.SysCfgModel.SimMode)
                             {
                                 this.rfidUID = this.SimRfidUID;
@@ -227,6 +221,12 @@ namespace TransDevModel
                                 }
 
                             }
+                            this.currentTaskPhase++;
+                            break;
+                        }
+                    case 2:
+                        {
+                           
                             this.currentTask = null;
                             currentTaskDescribe = "等待检索待执行任务";
                             List<CtlDBAccess.Model.ControlTaskModel> taskList = ctlTaskBll.GetTaskToRunList((int)SysCfg.EnumAsrsTaskType.输送机送出, "待执行", this.nodeID);
@@ -234,6 +234,10 @@ namespace TransDevModel
                             
                             foreach (CtlDBAccess.Model.ControlTaskModel task in taskList)
                             {
+                                if(0 != dlgtPathLockcheck(this,task,ref reStr))
+                                {
+                                    continue;
+                                }
                                 if(barcodeCheck)
                                 {
                                     if (task.PalletCode == this.rfidUID)
@@ -342,6 +346,8 @@ namespace TransDevModel
                                 if(!dlgtCreateNextTask(this,this.currentTask,ref reStr))
                                 {
                                     this.db1ValsToSnd[0] = 2;
+                                    currentTaskDescribe = string.Format("发送下一步任务失败,主任务ID{0},{1}", this.currentTask.MainTaskID, reStr);
+                                    Console.WriteLine(reStr);
                                     break;
                                 }
                                 this.currentTask.FinishTime = System.DateTime.Now;
@@ -444,17 +450,17 @@ namespace TransDevModel
                 return false;
             }
             bool re=ctlTaskBll.Add(ctlTask);
-            return re;
-            //if(re)
-            //{
-            //    mainTask.TaskStatus = "执行中";
-            //    CtlDBAccess.BLL.MainControlTaskBll mainTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
-            //    return mainTaskBll.Update(mainTask);
-            //}
-            //else
-            //{
-            //    return false;
-            //}
+           // return re;
+            if (re)
+            {
+                mainTask.TaskStatus = "执行中";
+                CtlDBAccess.BLL.MainControlTaskBll mainTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
+                return mainTaskBll.Update(mainTask);
+            }
+            else
+            {
+                return false;
+            }
 
         }
        

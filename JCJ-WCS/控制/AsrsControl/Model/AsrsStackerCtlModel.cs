@@ -380,17 +380,17 @@ namespace AsrsControl
                 ctlTask.CreateTime = System.DateTime.Now;
                 ctlTask.CreateMode = "自动";
                 bool re = ctlTaskBll.Add(ctlTask);
-                return re;
-                //if (re)
-                //{
-                //    mainTask.TaskStatus = "执行中";
-                //    CtlDBAccess.BLL.MainControlTaskBll mainTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
-                //    return mainTaskBll.Update(mainTask);
-                //}
-                //else
-                //{
-                //    return false;
-                //}
+                //return re;
+                if (re)
+                {
+                    mainTask.TaskStatus = "执行中";
+                    CtlDBAccess.BLL.MainControlTaskBll mainTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
+                    return mainTaskBll.Update(mainTask);
+                }
+                else
+                {
+                    return false;
+                }
                
             }
             catch (Exception ex)

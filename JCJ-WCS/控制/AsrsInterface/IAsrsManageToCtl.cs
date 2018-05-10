@@ -16,15 +16,15 @@ namespace AsrsInterface
         /// </summary>
         /// <param name="storPanelView">货位看板扩展窗体</param>
         /// <param name="sotrListView">库存列表扩展窗体</param>
-        //void RegistExtViewStorePanel(Form storPanelView,Form sotrListView); 
+       void RegistExtViewStorePanel(Form storPanelView,Form sotrListView); 
         /// <summary>
         /// 库存看板单元格点击事件，控制模块注册
         /// </summary>
-        //event  EventHandler<CellPositionEventArgs> EventCellClicked; 
+       event  EventHandler<CellPositionEventArgs> EventCellClicked; 
         /// <summary>
         /// 库存列表详细扩展事件，控制模块注册
         /// </summary>
-        //event  EventHandler<StockListProEventArgs> EventStorDetail; 
+       event  EventHandler<StockListProEventArgs> EventStorDetail; 
         /// <summary>
         /// 货位申请
         /// </summary>

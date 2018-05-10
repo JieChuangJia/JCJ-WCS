@@ -23,9 +23,24 @@ namespace FlowCtlBaseModel
     /// </summary>
     public abstract class CtlNodeBaseModel : ILogRequired
     {
+        /// <summary>
+        /// 委托：创建下一个控制任务
+        /// </summary>
+        /// <param name="curNode"></param>
+        /// <param name="curTask"></param>
+        /// <param name="reStr"></param>
+        /// <returns></returns>
         public delegate bool DlgtCreateNextCtltask(CtlNodeBaseModel curNode,ControlTaskModel curTask,ref string reStr);
+        /// <summary>
+        /// 委托：物流路径锁定计算，是否可用
+        /// </summary>
+        /// <param name="curTask"></param>
+        /// <param name="reStr"></param>
+        /// <returns>若可用，返回0,1：路径被锁定，不可用,2:其它错误,-1:系统异常</returns>
+        public delegate int DlgtPathlockCheck(CtlNodeBaseModel curNode,ControlTaskModel curTask, ref string reStr);
         #region 委托
         public DlgtCreateNextCtltask dlgtCreateNextTask = null;
+        public DlgtPathlockCheck dlgtPathLockcheck = null;
         #endregion
         #region 私有数据
         protected XElement cfgXE = null;

@@ -9,6 +9,7 @@ namespace SysCfg
 {
     public static class SysCfgModel
     {
+        public static EnumConPathMode pathMode = EnumConPathMode.任务模式; //物流输送路径模式
         public static XElement rootXE = null;
        // private static string CfgFile = "";
         public const string SysCfgFileName = "SysCfgFile";
@@ -16,7 +17,7 @@ namespace SysCfg
         public static string xmlCfgStr = "";
         public static AsrsStepCfg asrsStepCfg = null;
         public static bool PlcCommSynMode = true;//同步通信模式
-        //public static bool UnbindMode = true;//ASRS动作调试模式，没有数据绑定
+        public static bool UnbindMode = false;//ASRS动作调试模式，没有数据绑定
         public static bool RfidSimMode = false;
         public static bool WmsConnMode = true;
         public static int ZhuyeMode = 0; //注液模式，1：一次注液分一步模式，2:一次注液分两步模式
@@ -84,7 +85,17 @@ namespace SysCfg
 
                 rootXE = root;
                 XElement sysSetXE=root.Element("sysSet");
-                
+                XElement asrsStepCfgXE = sysSetXE.Element("AsrsStepCfg");
+                if (asrsStepCfgXE != null)
+                {
+                    asrsStepCfg = new AsrsStepCfg();
+                    if (!asrsStepCfg.LoadCfg(asrsStepCfgXE, ref reStr))
+                    {
+                        return false;
+                    }
+                  
+                }
+               
                 XElement stackerWarnXE = sysSetXE.Element("StackerWarnDef");
                 StackerErrcodeMap = new Dictionary<int, string>();
                 if(stackerWarnXE == null)
@@ -251,10 +262,17 @@ namespace SysCfg
         产品出库 = 3,
         空筐出库 = 4,
         移库 = 5,
+        托盘装载=6,
+        OCV测试分拣=7,
 
         RGV上料=11,
         RGV下料=12,
         RGV上下料=13,
         输送机送出=21
+    }
+    public enum EnumConPathMode 
+    {
+        实时模式=1,
+        任务模式=2
     }
 }
