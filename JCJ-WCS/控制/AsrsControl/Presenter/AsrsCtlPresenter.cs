@@ -345,8 +345,8 @@ namespace AsrsControl
                 }
             }
           //  asrsModel.GenerateOutputTask(cell, null,taskType, false,asrsExtParams,1000);
-            asrsModel.GenerateCheckoutTask(cell, taskType, false, ref reStr,1000);
-            return true;
+            return asrsModel.GenerateCheckoutTask(cell, taskType, false, ref reStr,1000);
+            
         }
         public bool CreateManualMoveGSTask(string startHouseName, CellCoordModel startCell, string endHouseName, CellCoordModel endCell, ref string reStr)
         {

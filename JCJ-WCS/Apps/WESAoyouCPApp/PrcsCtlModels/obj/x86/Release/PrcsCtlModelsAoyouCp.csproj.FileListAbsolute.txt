@@ -30,10 +30,6 @@ E:\workspace\项目\之信遨优项目\代码\Git_WESAoyou\WES_Aoyou\WES\Apps\WE
 E:\workspace\项目\之信遨优项目\代码\Git_WESAoyou\WES_Aoyou\WES\Apps\WESAoyouCPApp\PrcsCtlModels\obj\x86\Release\PrcsCtlModelsAoyouCp.csproj.GenerateResource.Cache
 E:\workspace\项目\之信遨优项目\代码\Git_WESAoyou\WES_Aoyou\WES\Apps\WESAoyouCPApp\PrcsCtlModels\obj\x86\Release\PrcsCtlModelsAoyouCp.dll
 E:\workspace\项目\之信遨优项目\代码\Git_WESAoyou\WES_Aoyou\WES\Apps\WESAoyouCPApp\PrcsCtlModels\obj\x86\Release\PrcsCtlModelsAoyouCp.pdb
-E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WESAoyouCPApp\PrcsCtlModels\obj\x86\Release\PrcsCtlModelsAoyouCp.csprojResolveAssemblyReference.cache
-E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WESAoyouCPApp\PrcsCtlModels\obj\x86\Release\PrcsCtlModelsAoyou.Properties.Resources.resources
-E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WESAoyouCPApp\PrcsCtlModels\obj\x86\Release\PrcsCtlModelsAoyouCp.csproj.GenerateResource.Cache
-E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WESAoyouCPApp\PrcsCtlModels\obj\x86\Release\PrcsCtlModelsAoyouCp.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WESAoyouCPApp\PrcsCtlModels\bin\Release\PrcsCtlModelsAoyouCp.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WESAoyouCPApp\PrcsCtlModels\bin\Release\PrcsCtlModelsAoyouCp.pdb
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WESAoyouCPApp\PrcsCtlModels\bin\Release\AsrsControl.dll
@@ -63,4 +59,8 @@ E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\A
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WESAoyouCPApp\PrcsCtlModels\bin\Release\TransDevModel.pdb
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WESAoyouCPApp\PrcsCtlModels\bin\Release\CtlMonitorInterface.pdb
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WESAoyouCPApp\PrcsCtlModels\bin\Release\MonitorViews.pdb
+E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WESAoyouCPApp\PrcsCtlModels\obj\x86\Release\PrcsCtlModelsAoyouCp.csprojResolveAssemblyReference.cache
+E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WESAoyouCPApp\PrcsCtlModels\obj\x86\Release\PrcsCtlModelsAoyou.Properties.Resources.resources
+E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WESAoyouCPApp\PrcsCtlModels\obj\x86\Release\PrcsCtlModelsAoyouCp.csproj.GenerateResource.Cache
+E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WESAoyouCPApp\PrcsCtlModels\obj\x86\Release\PrcsCtlModelsAoyouCp.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\Apps\WESAoyouCPApp\PrcsCtlModels\obj\x86\Release\PrcsCtlModelsAoyouCp.pdb

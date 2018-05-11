@@ -101,8 +101,9 @@ namespace WESAoyou
                 foreach (AsrsControl.AsrsCtlModel asrsCtl in asrsPresenter.AsrsCtls)
                 {
                     asrsCtl.dlgtAsrsOutportBusiness = AsrsOutportBusiness;
-                   
+                    asrsCtl.dlgtAsrsOutTaskPost = AsrsOutTaskBusiness;
                     asrsCtl.dlgtGetLogicArea = AsrsAreaToCheckin;
+                    asrsCtl.dlgtAsrsCheckoutLoop = AsrsCheckoutLoop;
                    
                 }
 
@@ -331,6 +332,149 @@ namespace WESAoyou
         #endregion
        
         #region 立库逻辑扩展
+         /// <summary>
+         /// 控制出库任务的生成，包括产品出库，空筐出库
+         /// </summary>
+         /// <param name="asrsCtl"></param>
+         /// <param name="reStr"></param>
+         /// <returns></returns>
+         private bool AsrsCheckoutLoop(AsrsControl.AsrsCtlModel asrsCtl,SysCfg.EnumAsrsTaskType taskType,ref string reStr)
+         {
+             try
+             {
+                 CtlDBAccess.BLL.ControlTaskBll ctlTaskBll = new CtlDBAccess.BLL.ControlTaskBll();
+               //  SysCfg.EnumAsrsTaskType taskType = SysCfg.EnumAsrsTaskType.产品出库;
+                 // 1产品出库
+                 List<AsrsPortalModel> ports = asrsCtl.GetOutPortsOfBindedtask(taskType);
+                 string houseName = asrsCtl.HouseName;
+                 AsrsModel.EnumCellStatus targetStoreStatus = EnumCellStatus.满位;
+                 if(taskType== SysCfg.EnumAsrsTaskType.空筐出库)
+                 {
+                     targetStoreStatus = EnumCellStatus.空料框;
+                 }
+                 foreach (AsrsPortalModel port in ports)
+                 {
+                     if (taskType == SysCfg.EnumAsrsTaskType.空筐出库)
+                     {
+                         if (port.Db2Vals[0] != 2 || port.Db2Vals[2] != 1) //禁止出库
+                         {
+                             continue;
+                         }
+                     }
+                     else //禁止出库
+                     {
+                         if (port.Db2Vals[0] != 2 || port.Db2Vals[1] != 1)
+                         {
+                             continue;
+                         }
+                         
+                     }
+                     //查询是否有待执行或者执行中的任务
+                     string str = string.Format("DeviceID='{0}' and EndDevice='{1}' and TaskType={2} and (TaskStatus='待执行' or TaskStatus='执行中')", asrsCtl.StackDevice.NodeID, port.NodeID, (int)taskType);
+                     List<CtlDBAccess.Model.ControlTaskModel> taskList = ctlTaskBll.GetModelList(str);
+                     if (taskList != null && taskList.Count() > 0)
+                     {
+                         continue;
+                     }
+                     //遍历所有库位，判断材料类别，按照先入先出规则，匹配出库的货位。
+                     Dictionary<string, AsrsModel.GSMemTempModel> asrsStatDic = new Dictionary<string, AsrsModel.GSMemTempModel>();
+                     if (!asrsResManage.GetAllGsModel(ref asrsStatDic, ref reStr))
+                     {
+                         Console.WriteLine(string.Format("{0} 获取货位状态失败", houseName));
+                         return false;
+                     }
+                     List<AsrsModel.GSMemTempModel> validCells = new List<AsrsModel.GSMemTempModel>();
+
+                     int r = 1, c = 1, L = 1;
+                     //先查询所有可出库货位
+                     for (r = 1; r < asrsCtl.AsrsRow + 1; r++)
+                     {
+                         for (c = 1; c < asrsCtl.AsrsCol + 1; c++)
+                         {
+                             for (L = 1; L < asrsCtl.AsrsLayer + 1; L++)
+                             {
+                                 string strKey = string.Format("{0}:{1}-{2}-{3}", houseName, r, c, L);
+                                 AsrsModel.GSMemTempModel cellStat = null;
+                                 if (!asrsStatDic.Keys.Contains(strKey))
+                                 {
+                                     continue;
+                                 }
+                                 cellStat = asrsStatDic[strKey];
+                                 if ((!cellStat.GSEnabled) || (cellStat.GSTaskStatus == AsrsModel.EnumGSTaskStatus.锁定.ToString()) || (cellStat.GSStatus != targetStoreStatus.ToString()))
+                                 {
+                                     // reStr = string.Format("货位{0}-{1}-{2}禁用,无法生成出库任务", cell.Row, cell.Col, cell.Layer);
+                                     continue;
+                                 }
+                                 AsrsModel.CellCoordModel cell = new AsrsModel.CellCoordModel(r, c, L);
+                                 validCells.Add(cellStat);
+                             }
+                         }
+                     }
+                     //再按照先入先出原则生成出库任务
+                     if (validCells.Count() > 0)
+                     {
+                         //排序，按照先入先出
+                         AsrsModel.GSMemTempModel firstGS = validCells[0];
+                         if (validCells.Count() > 1)
+                         {
+                             for (int i = 1; i < validCells.Count(); i++)
+                             {
+                                 AsrsModel.GSMemTempModel tempGS = validCells[i];
+                                 if (tempGS.InHouseDate < firstGS.InHouseDate)
+                                 {
+                                     firstGS = tempGS;
+                                 }
+                             }
+                         }
+                         //生成出库任务
+                         string[] strCellArray = firstGS.GSPos.Split(new string[] { "-" }, StringSplitOptions.RemoveEmptyEntries);
+                         int row = int.Parse(strCellArray[0]);
+                         int col = int.Parse(strCellArray[1]);
+                         int layer = int.Parse(strCellArray[2]);
+                         AsrsModel.CellCoordModel cell = new AsrsModel.CellCoordModel(row, col, layer);
+                         List<string> storGoods = new List<string>();
+                         if(!asrsResManage.GetStockDetail(houseName, cell, ref storGoods))
+                         {
+                             return false;
+                         }
+                         string palletIDStr = "";
+                         for (int i = 0; i < storGoods.Count(); i++)
+                         {
+                             if (storGoods.Count() > 1 && (i == storGoods.Count() - 1))
+                             {
+                                 palletIDStr = palletIDStr + storGoods[i];
+                             }
+                             else
+                             {
+                                 palletIDStr = palletIDStr + storGoods[i] + ",";
+                             }
+                         }
+
+                        return asrsCtl.CreateStackerTask(port, taskType, cell, palletIDStr, ref reStr);
+                       
+                         
+                         //if (asrsCtl.GenerateOutputTask(cell, port.BindedTaskOutput, true, port.PortSeq, ref reStr, new List<short> { palletCata }))
+                         //{
+                         //    port.Db1ValsToSnd[0] = 2;
+                         //}
+                         //else
+                         //{
+                         //    Console.WriteLine("生成任务{0}失败,{1}", port.BindedTaskOutput.ToString(), reStr);
+                         //}
+
+                     }
+                 }
+                 
+                 return true;
+             }
+             catch (Exception ex)
+             {
+                 reStr = ex.ToString();
+                 return false;
+
+             }
+         }
+
         private bool AsrsOutportBusiness(AsrsControl.AsrsPortalModel port, ref string reStr)
         {
             try
@@ -354,7 +498,40 @@ namespace WESAoyou
                 return false;
             }
         }
-     
+        //出库后任务处理，通知物流线是空筐还是满筐
+        private bool AsrsOutTaskBusiness(AsrsControl.AsrsPortalModel outPort, CtlDBAccess.Model.ControlTaskModel task, ref string reStr)
+        {
+            try
+            {
+                if (task == null)
+                {
+                    reStr = "任务为空";
+                    return false;
+                }
+                if (task.TaskType == (int)SysCfg.EnumAsrsTaskType.产品出库)
+                {
+                    outPort.Db1ValsToSnd[1] = 2;
+                }
+                else if (task.TaskType == (int)SysCfg.EnumAsrsTaskType.空筐出库)
+                {
+                    outPort.Db1ValsToSnd[1] = 1;
+                }
+                if (!outPort.NodeCmdCommit(true, ref reStr))
+                {
+                    reStr = string.Format("出库站台{0}状态'出库完成'提交失败", outPort.PortSeq);
+                    return false;
+                }
+                System.Threading.Thread.Sleep(500);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                reStr = ex.ToString();
+                return false;
+            }
+
+        }
        
         private string AsrsAreaToCheckin(string palletID,AsrsControl.AsrsCtlModel asrsCtl,int step)
         {
@@ -466,7 +643,7 @@ namespace WESAoyou
             }
             return true;
         }
-        public bool ReadPalletCfgFromPlc(string shopSection,ref DataTable dt,ref string reStr)
+       public bool ReadPalletCfgFromPlc(string shopSection,ref DataTable dt,ref string reStr)
        {
           // Console.WriteLine("读{0}", shopSection);
            DevInterface.IPlcRW plcRW1 = devCommManager.GetPlcByID(7);

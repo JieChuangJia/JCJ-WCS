@@ -104,7 +104,7 @@
           <DB1Addr addrStart="D2100" blockNum="5">DB1数据区地址信息</DB1Addr>
           <DB2Addr addrStart="D3100" blockNum="5">DB2数据区地址信息</DB2Addr>
         </BaseDatainfo>
-        <SelfDatainfo portSeq="1" bindedTask="产品入库" capacity="2" emptyPalletCheckIn="true">
+        <SelfDatainfo portSeq="1" bindedTask="产品入库,空筐入库" capacity="2" emptyPalletCheckIn="true">
           <Db1Desc>收到产品入库请求,1:复位，2：收到入库请求,3:库区不存在或者没有货位可用</Db1Desc>
           <Db2Desc>位置1有板状态,1:无板，2:有板;位置2有板状态,1:无板，2:有板;手动入库请求,1:复位,2:手动入库请求</Db2Desc>
           <PortType>1</PortType>
@@ -119,8 +119,8 @@
         </BaseDatainfo>
         <SelfDatainfo portSeq="2" bindedTask="产品出库,空筐出库">
           <PortType>2</PortType>
-          <Db1Desc>出库任务状态，1：复位，2：出库完成</Db1Desc>
-          <Db2Desc>出口状态,1:禁止，2:允许出库;化成线堆积状态,1:正常，2:堆积;二封线堆积状态,1:正常,2:堆积</Db2Desc>
+          <Db1Desc>出库任务状态，1：复位，2：出库完成;出库货物类型,0:复位,1:空筐,2:满筐</Db1Desc>
+          <Db2Desc>出口状态,1:禁止，2:允许出库;满筐出库物流线堆积状态,1:正常，2:堆积;空筐出库物流线堆积状态,1:正常,2:堆积</Db2Desc>
         </SelfDatainfo>
       </Node>
      
@@ -139,7 +139,7 @@
           <DB1Addr addrStart="D2110" blockNum="5">DB1数据区地址信息</DB1Addr>
           <DB2Addr addrStart="D3110" blockNum="5">DB2数据区地址信息</DB2Addr>
         </BaseDatainfo>
-        <SelfDatainfo portSeq="1" bindedTask="产品入库" capacity="2" emptyPalletCheckIn="true">
+        <SelfDatainfo portSeq="1" bindedTask="产品入库,空筐入库" capacity="2" emptyPalletCheckIn="true">
           <Db1Desc>收到产品入库请求,1:复位，2：收到入库请求,3:库区不存在或者没有货位可用</Db1Desc>
           <Db2Desc>位置1有板状态,1:无板，2:有板;位置2有板状态,1:无板，2:有板;手动入库请求,1:复位,2:手动入库请求</Db2Desc>
           <PortType>1</PortType>
@@ -154,8 +154,8 @@
         </BaseDatainfo>
         <SelfDatainfo portSeq="2" bindedTask="产品出库,空筐出库">
           <PortType>2</PortType>
-          <Db1Desc>出库任务状态，1：复位，2：出库完成;化成线堆积状态,1:正常，2:堆积;二封线堆积状态,1:正常,2:堆积</Db1Desc>
-          <Db2Desc>出口状态,1:禁止，2:允许出库;化成线堆积状态,1:正常，2:堆积;二封线堆积状态,1:正常,2:堆积</Db2Desc>
+          <Db1Desc>出库任务状态，1：复位，2：出库完成;出库货物类型,0:复位,1:空筐,2:满筐</Db1Desc>
+          <Db2Desc>出口状态,1:禁止，2:允许出库;满筐出库物流线堆积状态,1:正常，2:堆积;空筐出库物流线堆积状态,1:正常,2:堆积</Db2Desc>
         </SelfDatainfo>
       </Node>
     </Asrs>
@@ -173,7 +173,7 @@
           <DB1Addr addrStart="D2120" blockNum="5">DB1数据区地址信息</DB1Addr>
           <DB2Addr addrStart="D3120" blockNum="5">DB2数据区地址信息</DB2Addr>
         </BaseDatainfo>
-        <SelfDatainfo portSeq="1" bindedTask="产品入库" capacity="2" emptyPalletCheckIn="true">
+        <SelfDatainfo portSeq="1" bindedTask="产品入库,空筐入库" capacity="2" emptyPalletCheckIn="true">
           <Db1Desc>收到产品入库请求,1:复位，2：收到入库请求,3:库区不存在或者没有货位可用</Db1Desc>
           <Db2Desc>位置1有板状态,1:无板，2:有板;位置2有板状态,1:无板，2:有板;手动入库请求,1:复位,2:手动入库请求</Db2Desc>
           <PortType>1</PortType>
@@ -188,8 +188,8 @@
         </BaseDatainfo>
         <SelfDatainfo portSeq="2" bindedTask="产品出库,空筐出库">
           <PortType>2</PortType>
-          <Db1Desc>出库任务状态，1：复位，2：出库完成;化成线堆积状态,1:正常，2:堆积;二封线堆积状态,1:正常,2:堆积</Db1Desc>
-          <Db2Desc>出口状态,1:禁止，2:允许出库;化成线堆积状态,1:正常，2:堆积;二封线堆积状态,1:正常,2:堆积</Db2Desc>
+          <Db1Desc>出库任务状态，1：复位，2：出库完成;出库货物类型,0:复位,1:空筐,2:满筐</Db1Desc>
+          <Db2Desc>出口状态,1:禁止，2:允许出库;满筐出库物流线堆积状态,1:正常，2:堆积;空筐出库物流线堆积状态,1:正常,2:堆积</Db2Desc>
         </SelfDatainfo>
       </Node>
     </Asrs>

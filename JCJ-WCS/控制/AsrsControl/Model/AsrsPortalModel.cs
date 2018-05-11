@@ -24,6 +24,7 @@ namespace AsrsControl
         private int portSeq = 1;//编号，从1开始
         private SysCfg.EnumAsrsTaskType bindedTaskInput = SysCfg.EnumAsrsTaskType.空;
         private SysCfg.EnumAsrsTaskType bindedTaskOutput = SysCfg.EnumAsrsTaskType.空;
+        private List<SysCfg.EnumAsrsTaskType> bindedTaskList = new List<SysCfg.EnumAsrsTaskType>();
      //   private bool inputPort = true;
     //    public bool InputPort { get { return inputPort; } set { inputPort = value; } }
         private AsrsCtlModel asrsCtlModel = null;
@@ -33,6 +34,7 @@ namespace AsrsControl
        // public string PalletWaiting { get { return palletWaitting; } set { palletWaitting = value; } }
         public SysCfg.EnumAsrsTaskType BindedTaskInput { get { return bindedTaskInput; } set { bindedTaskInput = value; } }
         public SysCfg.EnumAsrsTaskType BindedTaskOutput { get { return bindedTaskOutput; } set { bindedTaskOutput = value; } }
+        public List<SysCfg.EnumAsrsTaskType> BindedTaskList { get { return bindedTaskList; } set { bindedTaskList = value; } }
         public AsrsCtlModel AsrsCtl { get { return asrsCtlModel; } }
         /// <summary>
         /// 入口缓存托盘最大数量
@@ -113,6 +115,11 @@ namespace AsrsControl
                 {
                     if(strArray.Count()>0)
                     {
+                        foreach (string strTask in strArray)
+                        {
+                            bindedTaskList.Add((SysCfg.EnumAsrsTaskType)Enum.Parse(typeof(SysCfg.EnumAsrsTaskType), strTask));
+                        }
+
                         if(this.portCata == 1)
                         {
                             this.bindedTaskInput = (SysCfg.EnumAsrsTaskType)Enum.Parse(typeof(SysCfg.EnumAsrsTaskType), strArray[0]);

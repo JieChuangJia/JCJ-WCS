@@ -379,29 +379,7 @@ namespace WCSAoyou
                 return false;
             }
         }
-        private bool AsrsOutTaskBusiness(AsrsControl.AsrsPortalModel outPort, AsrsControl.AsrsTaskParamModel taskParam,ref string reStr)
-        {
-            try
-            {
-                outPort.Db1ValsToSnd[1] = (short)taskParam.CellPos1.Row;
-                if (!outPort.NodeCmdCommit(true, ref reStr))
-                {
-                    reStr = string.Format("出库站台{0}状态'出库完成'提交失败", outPort.PortSeq);
-                    return false;
-                }
-                System.Threading.Thread.Sleep(500);
-               
-                return true;
-            }
-            catch (Exception ex)
-            {
-                reStr = ex.ToString();
-                return false;
-              
-            }
-            
-        }
-      
+       
         private string AsrsAreaToCheckin(string palletID,AsrsControl.AsrsCtlModel asrsCtl,int step)
         {
             string area = "";
@@ -459,6 +437,8 @@ namespace WCSAoyou
             }
             return area;
         }
+
+        
         #endregion
         #region 产线配置扩展
        public bool SendDevlinePalletCfg(string shopSection, ref string reStr)
