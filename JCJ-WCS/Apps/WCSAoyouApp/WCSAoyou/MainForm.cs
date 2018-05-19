@@ -209,6 +209,7 @@ namespace WCSAoyou
 
                     return;
                 }
+                this.nodeMonitorView.WmsSimViewDisp = true;
                 this.configView.BatteryCfgView.dlgtSndPalletCfg = presenter.SendDevlinePalletCfg;
                 this.configView.BatteryCfgView.dlgtGetPalletCfg = presenter.ReadPalletCfgFromPlc;
                 List<string> logSrcs = new List<string>();
