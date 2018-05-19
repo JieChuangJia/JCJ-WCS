@@ -13,6 +13,5 @@ E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\基础类
 E:\workspace\项目\之信遨优项目\代码\原材料库\WCS\JCJ-WCS\基础类\LogInterface\obj\x86\Release\LogInterface.pdb
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\基础类\LogInterface\bin\Release\LogInterface.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\基础类\LogInterface\bin\Release\LogInterface.pdb
-E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\基础类\LogInterface\obj\x86\Release\LogInterface.csprojResolveAssemblyReference.cache
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\基础类\LogInterface\obj\x86\Release\LogInterface.dll
 E:\workspace\项目\之信遨优项目\代码\原材料库\GIT_WCS-JCJ\JCJ-WCS\基础类\LogInterface\obj\x86\Release\LogInterface.pdb

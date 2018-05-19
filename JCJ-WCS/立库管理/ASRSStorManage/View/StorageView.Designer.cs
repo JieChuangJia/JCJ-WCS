@@ -694,14 +694,13 @@
             this.tsmi_AddStockList,
             this.tsmi_ModifyCode});
             this.cms_DeleteStockList.Name = "contextMenuStrip1";
-            this.cms_DeleteStockList.Size = new System.Drawing.Size(153, 92);
+            this.cms_DeleteStockList.Size = new System.Drawing.Size(101, 70);
             // 
             // tsmi_DeleteStockList
             // 
             this.tsmi_DeleteStockList.Name = "tsmi_DeleteStockList";
-            this.tsmi_DeleteStockList.Size = new System.Drawing.Size(152, 22);
+            this.tsmi_DeleteStockList.Size = new System.Drawing.Size(100, 22);
             this.tsmi_DeleteStockList.Text = "删除";
-            this.tsmi_DeleteStockList.Visible = false;
             this.tsmi_DeleteStockList.Click += new System.EventHandler(this.tsmi_DeleteStockList_Click);
             // 
             // tsmi_AddStockList

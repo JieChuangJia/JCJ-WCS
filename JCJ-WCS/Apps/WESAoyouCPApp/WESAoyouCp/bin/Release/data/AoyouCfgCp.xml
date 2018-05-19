@@ -24,11 +24,11 @@
   <CommDevCfg>
     <PLCCfg>
       <PLCVendor>三菱</PLCVendor>
-      <PLC id="1" cata="FX5U" role="D1库堆垛机" db1Len="20"  db2Len="20" >192.168.1.213:7000</PLC>
-      <PLC id="2" cata="FX5U" role="D2库堆垛机" db1Len="20" db2Len="20" >192.168.1.216:7000</PLC>
-      <PLC id="3" cata="FX5U" role="D3库堆垛机" db1Len="20" db2Len="20" >192.168.1.201:7000</PLC>
+      <PLC id="1" cata="FX5U" role="D1库堆垛机" db1Len="20"  db2Len="20" >192.168.1.219:7000</PLC>
+      <PLC id="2" cata="FX5U" role="D2库堆垛机" db1Len="20" db2Len="20" >192.168.1.222:7000</PLC>
+      <PLC id="3" cata="FX5U" role="D3库堆垛机" db1Len="20" db2Len="20" >192.168.1.225:7000</PLC>
       
-      <PLC id="4" cata="Qn" role="线体控制" db1Len="200" db2Len="200">192.168.1.234:7000</PLC>
+      <PLC id="4" cata="Qn" role="线体控制" db1Len="200" db2Len="200">192.168.1.236:7000</PLC>
    
     </PLCCfg>
     <!--RFID配置-->
@@ -37,8 +37,8 @@
      -->
     </RfidCfg>
     <BarScannerCfg>
-      <BarScanner id="1" role ="满筐入库分流口" CommAddr="COM11"></BarScanner>
-      <BarScanner id="2" role  ="空筐入库分流" CommAddr="COM12"></BarScanner>
+      <BarScanner id="1" role ="满筐入库分流口" CommAddr="COM26"></BarScanner>
+      <BarScanner id="2" role  ="空筐入库分流" CommAddr="COM27"></BarScanner>
     </BarScannerCfg>
     <HKFillServerCfg>
       <!--杭可装载服务器地址配置-->

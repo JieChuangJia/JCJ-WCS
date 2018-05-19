@@ -251,14 +251,14 @@ namespace ASRSStorManage.Presenter
                     vsgsm.GoodsSiteLayer), EnumGSOperateType.手动删除货位, "手动删除货位:" + vsgsm.GoodsSiteName, ref reStr);
                 this.view.AddLog("库存管理", "手动删除货位:" + vsgsm.GoodsSiteName+"成功！", LogInterface.EnumLoglevel.提示);
 
-                bllGs.UpdateGSStatusByRCL(vsgsm.StoreHouseName, vsgsm.GoodsSiteRow, vsgsm.GoodsSiteColumn,vsgsm.GoodsSiteLayer,EnumCellStatus.空闲);
-                bllGs.UpdateGsTaskStatusByRCL(vsgsm.StoreHouseName, vsgsm.GoodsSiteRow, vsgsm.GoodsSiteColumn,vsgsm.GoodsSiteLayer, EnumGSTaskStatus.完成);
-                string operteDetail = "[" + vsgsm.GoodsSiteName + "]货位状态由《" + vsgsm.GoodsSiteStatus + "》变更为《" + EnumCellStatus.空闲.ToString()
-                    + "》；" + "货位任务状态由《" + vsgsm.GoodsSiteTaskStatus + "》变更为《" + EnumGSTaskStatus.完成.ToString() + "》";
+                //bllGs.UpdateGSStatusByRCL(vsgsm.StoreHouseName, vsgsm.GoodsSiteRow, vsgsm.GoodsSiteColumn,vsgsm.GoodsSiteLayer,EnumCellStatus.空闲);
+                //bllGs.UpdateGsTaskStatusByRCL(vsgsm.StoreHouseName, vsgsm.GoodsSiteRow, vsgsm.GoodsSiteColumn,vsgsm.GoodsSiteLayer, EnumGSTaskStatus.完成);
+                //string operteDetail = "[" + vsgsm.GoodsSiteName + "]货位状态由《" + vsgsm.GoodsSiteStatus + "》变更为《" + EnumCellStatus.空闲.ToString()
+                //    + "》；" + "货位任务状态由《" + vsgsm.GoodsSiteTaskStatus + "》变更为《" + EnumGSTaskStatus.完成.ToString() + "》";
 
-                this.iStorageManager.AddGSOperRecord(vsgsm.StoreHouseName, new CellCoordModel(vsgsm.GoodsSiteRow, vsgsm.GoodsSiteColumn, vsgsm.GoodsSiteLayer)
-                    , EnumGSOperateType.手动修改状态, operteDetail, ref reStr);
-                this.view.AddLog("库存管理", "手动删除货位，同时更新货位状态" + operteDetail + "成功！", LogInterface.EnumLoglevel.提示);
+                //this.iStorageManager.AddGSOperRecord(vsgsm.StoreHouseName, new CellCoordModel(vsgsm.GoodsSiteRow, vsgsm.GoodsSiteColumn, vsgsm.GoodsSiteLayer)
+                //    , EnumGSOperateType.手动修改状态, operteDetail, ref reStr);
+                //this.view.AddLog("库存管理", "手动删除货位，同时更新货位状态" + operteDetail + "成功！", LogInterface.EnumLoglevel.提示);
 
             }
             QueryStock(this.currHouseName,this.currHouseArea, this.currRowth, this.currColth, this.currLayerth, this.gsStatus, this.gsTaskSta,this.currProBatch,this.isChecked,this.materialBoxCode);

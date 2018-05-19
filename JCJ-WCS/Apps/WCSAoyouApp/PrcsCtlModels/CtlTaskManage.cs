@@ -617,7 +617,7 @@ namespace PrcsCtlModelsAoyou
             }
             string reStr = "";
             //分解主控制任务
-            List<CtlDBAccess.Model.MainControlTaskModel> mainTasks = mainCtlTaskBll.GetModelList("TaskStatus = '待执行'");
+            List<CtlDBAccess.Model.MainControlTaskModel> mainTasks = mainCtlTaskBll.GetModelList("TaskStatus = '待启动'");
             foreach (CtlDBAccess.Model.MainControlTaskModel mainTask in mainTasks)
             {
                 string pathKey = mainTask.FlowPathKey;

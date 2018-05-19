@@ -26,7 +26,7 @@ namespace MonitorViews
        // private List<CtlNodeStatus> nodeStatusList = null;
         private DevConnMonitorView devMonitorView = new DevConnMonitorView();
         public DevConnMonitorView DevMonitorView { get { return devMonitorView; } }
-         
+        public bool WmsSimViewDisp { get; set; }
         #endregion
         #region 公有接口
         public ICtlnodeMonitor NodeMonitor { get; set; }
@@ -141,6 +141,13 @@ namespace MonitorViews
         #region UI事件
         private void ProcessMonitorView_Load(object sender, EventArgs e)
         {
+            if(!WmsSimViewDisp)
+            {
+                
+               
+                this.tabControl1.TabPages.Remove(tabPage3);
+                this.tabPage3.Parent = null;
+            }
             //仿真模拟
             if (SysCfg.SysCfgModel.SimMode)
             {
@@ -391,7 +398,7 @@ namespace MonitorViews
                 mainCtlTask.MainTaskID = dr["管理任务ID"].ToString();
                 mainCtlTask.FlowPathKey = dr["起始设备号"].ToString() + "-" + dr["目标设备号"].ToString();
                 mainCtlTask.PalletCode = dr["托盘码"].ToString();
-                mainCtlTask.TaskStatus = "待执行";
+                mainCtlTask.TaskStatus = "待启动";
                 //if(wmsTask.Type == "下架")
                 //{
                 //    mainCtlTask.TaskType = "产品出库";
@@ -443,7 +450,7 @@ namespace MonitorViews
             DataRow dr = dt.Rows.Add();
             dr["管理任务ID"] = wmsTaskID;
             dr["任务类型"] = taskType;
-            dr["任务状态"] = "待执行";
+            dr["任务状态"] = "待启动";
             dr["托盘码"] = barcode;
             dr["起始设备号"] = stDev;
             
@@ -473,7 +480,7 @@ namespace MonitorViews
         private void OnRefreshWMSDt()
         {
             CtlDBAccess.BLL.MainControlTaskBll mainTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
-            List<CtlDBAccess.Model.MainControlTaskModel> mainTaskList= mainTaskBll.GetModelList("TaskStatus='待执行' or TaskStatus='执行中' ");
+            List<CtlDBAccess.Model.MainControlTaskModel> mainTaskList = mainTaskBll.GetModelList("TaskStatus='待启动' or TaskStatus='已启动' or TaskStatus='待执行' or TaskStatus='执行中' ");
             DataTable dt = (this.dataGridView1.DataSource as DataTable).Clone();
             foreach(CtlDBAccess.Model.MainControlTaskModel mainTask in mainTaskList)
             {
@@ -500,6 +507,16 @@ namespace MonitorViews
         }
         private void OnDelMaintask()
         {
+            if(this.parentPNP.RoleID>2)
+            {
+                MessageBox.Show("没有管理员权限");
+                return;
+            }
+            int re = PoupAskmes("是否确定要删除？");
+            if(re!=1 )
+            {
+                return;
+            }
             CtlDBAccess.BLL.MainControlTaskBll mainTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
             foreach(DataGridViewRow rw in  this.dataGridView1.SelectedRows)
             {
@@ -509,7 +526,14 @@ namespace MonitorViews
                 {
                     continue;
                 }
-                if(mainTask.TaskStatus!="执行中")
+                if(mainTask.TaskStatus=="执行中")
+                {
+                    if(parentPNP.RoleID==1)
+                    {
+                        mainTaskBll.Delete(mainTaskID);
+                    }
+                }
+                else
                 {
                     mainTaskBll.Delete(mainTaskID);
                 }
@@ -542,6 +566,31 @@ namespace MonitorViews
         private void comboBoxDevList_SelectedIndexChanged_1(object sender, EventArgs e)
         {
 
+        }
+        private void OnMaintaskSel()
+        {
+            if (this.dataGridView1.SelectedRows == null || this.dataGridView1.SelectedRows.Count < 1)
+            {
+                return;
+            }
+            DataGridViewRow dr = this.dataGridView1.SelectedRows[0];
+            string mainTaskID = dr.Cells["管理任务ID"].Value.ToString();
+            CtlDBAccess.BLL.ControlTaskBll ctlTaskBll = new CtlDBAccess.BLL.ControlTaskBll();
+            DataSet ds = ctlTaskBll.GetList(-1, string.Format("MainTaskID='{0}'", mainTaskID), "TaskIndex");
+            this.dataGridView2.DataSource = ds.Tables[0];
+            this.dataGridView2.Columns["MainTaskID"].Visible = false;
+            this.dataGridView2.Columns["TaskParam"].Visible = false;
+            this.dataGridView2.Columns["tag1"].Visible = false;
+            this.dataGridView2.Columns["tag2"].Visible = false;
+            this.dataGridView2.Columns["tag3"].Visible = false;
+            this.dataGridView2.Columns["tag4"].Visible = false;
+            this.dataGridView2.Columns["tag5"].Visible = false;
+            dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            OnMaintaskSel();   
         }
        
 

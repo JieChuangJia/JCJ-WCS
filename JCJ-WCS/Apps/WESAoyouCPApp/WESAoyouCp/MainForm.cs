@@ -167,7 +167,8 @@ namespace WESAoyou
                 //CtlDBAccess.DBUtility.PubConstant.ConnectionString = string.Format(@"{0}Initial Catalog=ACEcams;User ID=sa;Password=123456;", dbSrc);
                 string dbConn1 = string.Format(@"{0}Initial Catalog=AoyouCpEcams;User ID=sa;Password=123456;", dbSrc);
                 CtlDBAccess.DBUtility.DbHelperSQL.SetConnstr(dbConn1);
-                string dbConn2 = string.Format(@"{0}Initial Catalog=AoyouLocalMes;User ID=sa;Password=123456;", dbSrc);
+                string localDBSrc = ConfigurationManager.AppSettings["localMesDBSource"];
+                string dbConn2 = string.Format(@"{0}Initial Catalog=AoyouLocalMes;User ID=sa;Password=123456;", localDBSrc);
                 MesDBAccess.DBUtility.DbHelperSQL.SetConnstr(dbConn2);
                 AsrsStorDBAcc.DbHelperSQL.SetConnstr(string.Format(@"{0}Initial Catalog=AoyouCpWMSDB;User ID=sa;Password=123456;", dbSrc));
                 #endregion
@@ -196,6 +197,7 @@ namespace WESAoyou
 
                     return;
                 }
+                this.nodeMonitorView.WmsSimViewDisp = false;
                 this.configView.BatteryCfgView.dlgtSndPalletCfg = presenter.SendDevlinePalletCfg;
                 this.configView.BatteryCfgView.dlgtGetPalletCfg = presenter.ReadPalletCfgFromPlc;
                 List<string> logSrcs = new List<string>();

@@ -255,7 +255,27 @@ namespace TransDevModel
                             if (this.currentTask == null)
                             {
                                 this.currentTaskDescribe = string.Format("没有匹配托盘{0}的任务", this.rfidUID);
+                                if (this.barcodeRW != null && barcodeCheck)
+                                {
+                                    if (SysCfg.SysCfgModel.SimMode)
+                                    {
+                                        this.rfidUID = this.SimRfidUID;
+                                    }
+                                    else
+                                    {
+                                        this.rfidUID = this.barcodeRW.ReadBarcode().Trim();//this.barcodeRW.Trim();
+                                    }
+                                   
+                                    if (string.IsNullOrWhiteSpace(this.rfidUID))
+                                    {
+                                        break;
+                                    }
+                                }
                                 break;
+                            }
+                            if (!string.IsNullOrWhiteSpace(this.rfidUID))
+                            {
+                                logRecorder.AddDebugLog(this.nodeName, "读到托盘号:" + this.rfidUID);
                             }
                             //发送任务参数
                             this.db1ValsToSnd[6] = 1;
@@ -453,7 +473,7 @@ namespace TransDevModel
            // return re;
             if (re)
             {
-                mainTask.TaskStatus = "执行中";
+                mainTask.TaskStatus = "已启动";
                 CtlDBAccess.BLL.MainControlTaskBll mainTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
                 return mainTaskBll.Update(mainTask);
             }

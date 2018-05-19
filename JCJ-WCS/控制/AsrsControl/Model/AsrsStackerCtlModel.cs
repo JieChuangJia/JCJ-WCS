@@ -383,7 +383,7 @@ namespace AsrsControl
                 //return re;
                 if (re)
                 {
-                    mainTask.TaskStatus = "执行中";
+                    mainTask.TaskStatus = "已启动";
                     CtlDBAccess.BLL.MainControlTaskBll mainTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
                     return mainTaskBll.Update(mainTask);
                 }
