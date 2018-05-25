@@ -97,6 +97,7 @@ namespace FlowCtlBaseModel
                         {
                             continue;
                         }
+                       
                         //if (node.NodeID == "12134")
                         //{
                         //    Console.WriteLine("{0} S2", node.NodeName);
@@ -113,6 +114,7 @@ namespace FlowCtlBaseModel
                         {
                             continue;
                         }
+                        
                         //if (node.NodeID == "12134")
                         //{
                         //    Console.WriteLine("{0} S4", node.NodeName);
