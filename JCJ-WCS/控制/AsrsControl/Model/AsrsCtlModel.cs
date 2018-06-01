@@ -1991,40 +1991,45 @@ namespace AsrsControl
                                 return false;
                             }
                             //2 更新库存状态
-                            string batchName = "空";
-
-                            int stepUpdate = 2;
-                            int curStep = 0;
-                            #region MES处理
-                            if (taskParamModel.InputCellGoods != null && taskParamModel.InputCellGoods.Count() > 0)
+                            if(SysCfg.SysCfgModel.pathMode == SysCfg.EnumConPathMode.实时模式)
                             {
-                                string pallet = taskParamModel.InputCellGoods[0];
-                                batchName = productOnlineBll.GetBatchNameofPallet(pallet);
+                                string batchName = "空";
 
-                                if (!MesAcc.GetStep(pallet, out curStep, ref reStr))
+                                int stepUpdate = 2;
+                                int curStep = 0;
+                                #region MES处理
+                                if (taskParamModel.InputCellGoods != null && taskParamModel.InputCellGoods.Count() > 0)
                                 {
-                                    return false;
-                                }
-                                foreach (string palletID in taskParamModel.InputCellGoods)
-                                {
+                                    string pallet = taskParamModel.InputCellGoods[0];
+                                    batchName = productOnlineBll.GetBatchNameofPallet(pallet);
 
-                                    if (dlgtUpdateStep != null)
+                                    if (!MesAcc.GetStep(pallet, out curStep, ref reStr))
                                     {
-                                        dlgtUpdateStep(palletID, this, curStep);
+                                        return false;
                                     }
-                                    else
+                                    foreach (string palletID in taskParamModel.InputCellGoods)
                                     {
-                                        stepUpdate = SysCfg.SysCfgModel.asrsStepCfg.GetNextStep(curStep);
-                                        if (!MesAcc.UpdateStep(stepUpdate, palletID, ref reStr))
+
+                                        if (dlgtUpdateStep != null)
                                         {
-                                            return false;
+                                            dlgtUpdateStep(palletID, this, curStep);
+                                        }
+                                        else
+                                        {
+                                            stepUpdate = SysCfg.SysCfgModel.asrsStepCfg.GetNextStep(curStep);
+                                            if (!MesAcc.UpdateStep(stepUpdate, palletID, ref reStr))
+                                            {
+                                                return false;
+                                            }
                                         }
                                     }
+                                    // string palletID = taskParamModel.InputCellGoods[0];
                                 }
-                                // string palletID = taskParamModel.InputCellGoods[0];
+                                #endregion
+                                this.asrsResManage.AddStack(this.houseName, taskParamModel.CellPos1, batchName, taskParamModel.InputCellGoods, ref reStr);
                             }
-                            #endregion
-                            this.asrsResManage.AddStack(this.houseName, taskParamModel.CellPos1, batchName, taskParamModel.InputCellGoods, ref reStr);
+                           
+                           
                             //3 更新出入库操作状态
                             this.asrsResManage.UpdateGSOper(this.houseName, taskParamModel.CellPos1, EnumGSOperate.无, ref reStr);
 

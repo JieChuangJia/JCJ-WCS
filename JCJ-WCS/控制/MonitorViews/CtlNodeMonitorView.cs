@@ -77,6 +77,10 @@ namespace MonitorViews
             OnRefreshWMSDt();
             return true;
         }
+        public override void ChangeRoleID(int roleID)
+        {
+          
+        }
         
         private delegate void DlgtAbortApp();
         public void AbortApp()
@@ -143,8 +147,6 @@ namespace MonitorViews
         {
             if(!WmsSimViewDisp)
             {
-                
-               
                 this.tabControl1.TabPages.Remove(tabPage3);
                 this.tabPage3.Parent = null;
             }

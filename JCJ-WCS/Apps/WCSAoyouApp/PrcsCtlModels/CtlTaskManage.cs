@@ -582,7 +582,7 @@ namespace PrcsCtlModelsAoyou
                     mainCtlTask.MainTaskID = wmsTask.TaskID;
                     mainCtlTask.FlowPathKey = wmsTask.StartDevice.DeviceCode + "-" + wmsTask.TargetDevice.DeviceCode;
                     mainCtlTask.PalletCode = wmsTask.PalletCode;
-                    mainCtlTask.TaskStatus = "待执行";
+                    mainCtlTask.TaskStatus = "待启动";
                     //if(wmsTask.Type == "下架")
                     //{
                     //    mainCtlTask.TaskType = "产品出库";

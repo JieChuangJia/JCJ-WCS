@@ -590,6 +590,8 @@ namespace WESAoyou
             }
             return area;
         }
+
+        
         #endregion
         #region 产线配置扩展
        public bool SendDevlinePalletCfg(string shopSection, ref string reStr)
@@ -683,6 +685,7 @@ namespace WESAoyou
            }
            return true;
        }
+
         #endregion
 
     }

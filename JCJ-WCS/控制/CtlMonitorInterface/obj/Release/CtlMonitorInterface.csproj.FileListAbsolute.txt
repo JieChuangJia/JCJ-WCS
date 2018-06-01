@@ -1,4 +1,0 @@
-E:\workspace\项目\之信遨优项目\代码\WES\控制\CtlMonitorInterface\bin\Release\CtlMonitorInterface.dll
-E:\workspace\项目\之信遨优项目\代码\WES\控制\CtlMonitorInterface\bin\Release\CtlMonitorInterface.pdb
-E:\workspace\项目\之信遨优项目\代码\WES\控制\CtlMonitorInterface\obj\Release\CtlMonitorInterface.dll
-E:\workspace\项目\之信遨优项目\代码\WES\控制\CtlMonitorInterface\obj\Release\CtlMonitorInterface.pdb

@@ -107,6 +107,7 @@ namespace WCSAoyou
                     asrsCtl.dlgtGetLogicArea = AsrsAreaToCheckin;
                    
                 }
+               
 
                 //4 初始化流水线控制系统
                 XElement prcsNodeRoot = root.Element("CtlNodes");
@@ -144,7 +145,18 @@ namespace WCSAoyou
                     Console.WriteLine("WCS路径配置错误,{0}", reStr);
                     return false;
                 }
-
+                //注册限高检测委托
+                List<string> heightCheckStations = new List<string>();
+                heightCheckStations.AddRange(new string[] { "12112" });
+                foreach (string devID in heightCheckStations)
+                {
+                    TransDevModel.NodeTransStation transDev = ctlNodeManager.GetNodeByID(devID) as TransDevModel.NodeTransStation;
+                    if (transDev == null)
+                    {
+                        continue;
+                    }
+                    transDev.dlgtHeightChecked = AsrsHeightChecked;
+                }
                 //6 通信设备分配
                 ctlNodeManager.AllocateCommdev();
 
@@ -438,7 +450,47 @@ namespace WCSAoyou
             return area;
         }
 
-        
+         private bool AsrsHeightChecked(CtlDBAccess.Model.MainControlTaskModel mainTask,int height,ref string reStr)
+        {
+            try
+            {
+                if(mainTask==null)
+                {
+                    reStr = "主控制任务为空";
+                    return false;
+                }
+                if(mainTask.TaskType != "上架")
+                {
+                    return true;
+                }
+                List<string> checkAsrsList = new List<string>();
+                checkAsrsList.AddRange(new string[] {"11003","11004","11005" });
+                if (checkAsrsList.Contains(mainTask.EndDevice))
+                {
+                    string[] cellArray = mainTask.EndDeviceParam.Split(new string[] { "-" }, StringSplitOptions.RemoveEmptyEntries);
+                    if(cellArray != null && cellArray.Count()<3)
+                    {
+                        reStr = "主任务目标货位参数错误";
+                        return false;
+                    }
+                    int layer = int.Parse(cellArray[2]);
+                    if(layer>3)
+                    {
+                        if(height>1)
+                        {
+                            reStr = "目标货位限高！";
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                reStr = ex.ToString();
+                return false;
+            }
+        }
         #endregion
         #region 产线配置扩展
        public bool SendDevlinePalletCfg(string shopSection, ref string reStr)

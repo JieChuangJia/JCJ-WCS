@@ -209,7 +209,7 @@ namespace WCSAoyou
 
                     return;
                 }
-                this.nodeMonitorView.WmsSimViewDisp = true;
+              
                 this.configView.BatteryCfgView.dlgtSndPalletCfg = presenter.SendDevlinePalletCfg;
                 this.configView.BatteryCfgView.dlgtGetPalletCfg = presenter.ReadPalletCfgFromPlc;
                 List<string> logSrcs = new List<string>();
@@ -502,7 +502,7 @@ namespace WCSAoyou
             nodeMonitorView.RegisterMenus(this.menuStrip1, "流程监控");
             nodeMonitorView.SetLoginterface(logView.GetLogrecorder());
             nodeMonitorView.SetAsrsMonitors(asrsCtlView.AsrsMonitors);
-
+            this.nodeMonitorView.WmsSimViewDisp = true;
 
 
             AsrsInterface.IAsrsManageToCtl asrsResManage = presenter.WmsSvc;

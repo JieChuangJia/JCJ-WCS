@@ -12,10 +12,19 @@ namespace TransDevModel
     /// </summary>
     public class NodeTransStation : CtlNodeBaseModel
     {
+        /// <summary>
+        /// 委托
+        /// </summary>
+        /// <param name="mainTask">主控制任务</param>
+        /// <param name="height">高度,1:低货，2:高货</param>
+        /// <param name="reStr"></param>
+        /// <returns></returns>
+        public delegate bool DlgtHeightChecked(CtlDBAccess.Model.MainControlTaskModel mainTask,int height,ref string reStr);
         private int taskMode = 0;
         private int recvTaskPhase = 0;
         protected int transMode = 0; //输送站台任务模式,0:不发任务，也不收任务，1：只发任务，2：只收任务
         protected bool barcodeCheck = false;
+        public DlgtHeightChecked dlgtHeightChecked;
         public NodeTransStation()
         {
             devCata = "站台";
@@ -251,6 +260,7 @@ namespace TransDevModel
                                     this.currentTask = task;
                                     break;
                                 }
+
                             }
                             if (this.currentTask == null)
                             {
@@ -273,24 +283,38 @@ namespace TransDevModel
                                 }
                                 break;
                             }
-                            if (!string.IsNullOrWhiteSpace(this.rfidUID))
+                            if (this.currentTask.TaskIndex == 1)
                             {
-                                logRecorder.AddDebugLog(this.nodeName, "读到托盘号:" + this.rfidUID);
+                                CtlDBAccess.BLL.MainControlTaskBll mainTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
+                                CtlDBAccess.Model.MainControlTaskModel mainTask = mainTaskBll.GetModel(this.currentTask.MainTaskID);
+                                if (dlgtHeightChecked != null)
+                                {
+                                    if(!dlgtHeightChecked(mainTask,db2Vals[2],ref reStr))
+                                    {
+                                        string strHeightExceed = string.Format("货物{0}超高，与{1}目标货位{2}冲突", this.rfidUID, mainTask.EndDevice, mainTask.EndDeviceParam);
+                                        if(this.db1ValsToSnd[0] != 3)
+                                        {
+                                            logRecorder.AddDebugLog(nodeName, strHeightExceed);
+                                        }
+                                        this.currentTaskDescribe = strHeightExceed;
+                                        this.db1ValsToSnd[0] = 3;
+                                        break;
+                                    }
+                                }
+                                if (mainTask != null)
+                                {
+                                    mainTask.TaskStatus = "执行中";
+                                    mainTaskBll.Update(mainTask);
+                                }
                             }
                             //发送任务参数
                             this.db1ValsToSnd[6] = 1;
                             this.db1ValsToSnd[7] = 21;
                             this.db1ValsToSnd[8] = (short)this.currentTask.ControlID;
                             this.db1ValsToSnd[9] = short.Parse(this.currentTask.EndDevice);
-                            if (this.currentTask.TaskIndex == 1)
+                            if (!string.IsNullOrWhiteSpace(this.rfidUID))
                             {
-                                CtlDBAccess.BLL.MainControlTaskBll mainTaskBll = new CtlDBAccess.BLL.MainControlTaskBll();
-                                CtlDBAccess.Model.MainControlTaskModel mainTask = mainTaskBll.GetModel(this.currentTask.MainTaskID);
-                                if (mainTask != null)
-                                {
-                                    mainTask.TaskStatus = "执行中";
-                                    mainTaskBll.Update(mainTask);
-                                }
+                                logRecorder.AddDebugLog(this.nodeName, "读到托盘号:" + this.rfidUID);
                             }
                             logRecorder.AddDebugLog(nodeName, string.Format("控制ID{0}执行到第2步,发送参数，等待PLC读数据完成",this.currentTask.ControlID));
                             this.currentTaskPhase++;
