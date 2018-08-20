@@ -58,7 +58,7 @@ namespace MonitorViews
             DataTable dt = new DataTable("模拟WMS任务列表");
             dt.Columns.AddRange(new DataColumn[]{new DataColumn("管理任务ID"),new DataColumn("任务类型"),new DataColumn("任务状态"),new DataColumn("托盘码"),
             new DataColumn("起始设备号"),new DataColumn("起始设备类型"),new DataColumn("起始设备参数"),new DataColumn("目标设备号"),
-            new DataColumn("目标设备类型"),new DataColumn("目标设备参数"),new DataColumn("备注")});
+            new DataColumn("目标设备类型"),new DataColumn("任务创建时间"),new DataColumn("目标设备参数"),new DataColumn("备注")});
             /*
             DataRow dr = dt.Rows.Add();
             dr["管理任务ID"] = System.Guid.NewGuid().ToString();
@@ -425,7 +425,7 @@ namespace MonitorViews
                 }
                 if (mainCtlTask.EndDeviceCata == "货位")
                 {
-                    mainCtlTask.EndDeviceParam = dr["目标设备参数"].ToString(); ;
+                    mainCtlTask.EndDeviceParam = dr["目标设备参数"].ToString();
                 }
                 mainCtlTask.CreateTime = System.DateTime.Now;
                 mainCtlTask.CreateMode = "自动";
@@ -496,8 +496,9 @@ namespace MonitorViews
                 dr["目标设备类型"] = mainTask.EndDeviceCata;
                 dr["起始设备参数"] = mainTask.StDeviceParam;
                 dr["目标设备号"] = mainTask.EndDevice;
-
+                dr["任务创建时间"] = mainTask.CreateTime.ToString("yyyy-MM-dd HH:mm:ss");
                 dr["目标设备参数"] = mainTask.EndDeviceParam;
+               
                 dr["备注"] = "";
             }
             this.dataGridView1.DataSource = dt;

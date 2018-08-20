@@ -93,7 +93,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.panel3);
             this.splitContainer1.Size = new System.Drawing.Size(1655, 537);
-            this.splitContainer1.SplitterDistance = 454;
+            this.splitContainer1.SplitterDistance = 456;
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -112,7 +112,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1651, 450);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1651, 452);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
@@ -157,7 +157,7 @@
             this.panelCenterview.Location = new System.Drawing.Point(1, 83);
             this.panelCenterview.Margin = new System.Windows.Forms.Padding(1);
             this.panelCenterview.Name = "panelCenterview";
-            this.panelCenterview.Size = new System.Drawing.Size(1649, 366);
+            this.panelCenterview.Size = new System.Drawing.Size(1649, 368);
             this.panelCenterview.TabIndex = 2;
             // 
             // MainTabControl
@@ -169,7 +169,7 @@
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.Padding = new System.Drawing.Point(0, 0);
             this.MainTabControl.SelectedIndex = 0;
-            this.MainTabControl.Size = new System.Drawing.Size(1649, 366);
+            this.MainTabControl.Size = new System.Drawing.Size(1649, 368);
             this.MainTabControl.TabIndex = 0;
             // 
             // panel2
@@ -357,7 +357,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1651, 77);
+            this.panel3.Size = new System.Drawing.Size(1651, 75);
             this.panel3.TabIndex = 2;
             // 
             // toolStrip1
@@ -410,7 +410,7 @@
             this.richTextBoxLog.Location = new System.Drawing.Point(0, 29);
             this.richTextBoxLog.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBoxLog.Name = "richTextBoxLog";
-            this.richTextBoxLog.Size = new System.Drawing.Size(1649, 50);
+            this.richTextBoxLog.Size = new System.Drawing.Size(1649, 48);
             this.richTextBoxLog.TabIndex = 0;
             this.richTextBoxLog.Text = "";
             this.richTextBoxLog.TextChanged += new System.EventHandler(this.richTextBoxLog_TextChanged);

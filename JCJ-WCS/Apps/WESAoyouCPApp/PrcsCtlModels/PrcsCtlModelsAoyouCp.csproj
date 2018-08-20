@@ -48,13 +48,11 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevAccess, Version=1.0.0.3, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\LibReference\DevAccess.dll</HintPath>
+    <Reference Include="DevAccess">
+      <HintPath>..\..\..\LibReference\DevAccess.dll</HintPath>
     </Reference>
-    <Reference Include="DevInterface, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\LibReference\DevInterface.dll</HintPath>
+    <Reference Include="DevInterface">
+      <HintPath>..\..\..\LibReference\DevInterface.dll</HintPath>
     </Reference>
     <Reference Include="JieChuangServices">
       <HintPath>..\..\libReference\JieChuangServices.dll</HintPath>

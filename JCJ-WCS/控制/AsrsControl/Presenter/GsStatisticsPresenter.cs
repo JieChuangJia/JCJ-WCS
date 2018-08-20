@@ -59,10 +59,7 @@ namespace AsrsControl
                          }
                      }
                 }
-                else
-                {
-
-                }
+              
 
                 DataTable gsData = new DataTable();
                 gsData.Columns.Add("库房名称");
@@ -73,12 +70,10 @@ namespace AsrsControl
                 gsData.Columns.Add("操作时间");
                 for (int i = 0; i < gsOperList.Count;i++ )
                 {
-                    string[] palletIDArr = gsOperList[i].TaskParam.Split(';');
-                    if(palletIDArr.Length <4)
-                    {
-                        continue;
-                    }
-                    string palletID = palletIDArr[3];
+                   
+                    //string[] palletIDArr = gsOperList[i].PalletCode.Split(';'); ;// gsOperList[i].TaskParam.Split(';');
+
+                    string palletID = gsOperList[i].PalletCode;
                     DataRow dr= gsData.NewRow();
                     dr["库房名称"] = gsOperList[i].tag1;
                     dr["库区"] = houseArea;

@@ -14,7 +14,8 @@ namespace AsrsControl
     /// </summary>
     public class AsrsPortalModel : NodeTransStation
     {
-       
+        
+        public delegate bool DlgtGroupEnabled(AsrsPortalModel port, string palletID, ref string reStr); //是否同组入库判断
       //  private IrfidRW rfidRW = null;
       //  public IrfidRW RfidRW { get { return rfidRW; } set { rfidRW = value; } }
        
@@ -28,6 +29,7 @@ namespace AsrsControl
      //   private bool inputPort = true;
     //    public bool InputPort { get { return inputPort; } set { inputPort = value; } }
         private AsrsCtlModel asrsCtlModel = null;
+        public DlgtGroupEnabled dlgtGroupEnabled;
         public int PortCata { get { return portCata; } set { portCata = value; } }
         public int PortSeq { get { return portSeq; } }
         
@@ -150,84 +152,113 @@ namespace AsrsControl
         }
         public override bool IsPathOpened(string palletID,ref string reStr)
         {
-           if(!base.IsPathOpened(palletID,ref reStr))
-           {
-               return false;
-           }
-           lock(portBufLock)
-           {
-               //先判断入口实际信号
-               bool portCrowd = true;
-               for (int i = 0; i < PortinBufCapacity; i++)
-               {
-                   if(db2Vals[i] ==1)
-                   {
-                       portCrowd = false;
-                       break;
-                   }
-               }
-               if(portCrowd) //入口拥堵
-               {
-                   return false;
-               }
-               //再判断数据
-               if (this.palletBuffer.Count() >= PortinBufCapacity)
-               {
-                   reStr = "缓存已满";
-                   return false;
-               }
-              if(PortinBufCapacity>1) //只有入口最大允许缓存数量大于1时才考虑库区，批次
-              {
-                  if (this.palletBuffer.Count() > 0)
-                  {
-                      //1 判断是否同一个库区
-                      string lastPalletID = this.palletBuffer[0];
-                      int lastStep = 0;
-                      if (!MesAcc.GetStep(lastPalletID, out lastStep, ref reStr))
-                      {
-                          return false;
-                      }
-                      int step = 0;
-                      if (!MesAcc.GetStep(palletID, out step, ref reStr))
-                      {
-                          return false;
-                      }
-                      string areaLast = asrsCtlModel.GetAreaToCheckin(lastPalletID,lastStep).ToString();// AsrsModel.EnumLogicArea.注液高温区.ToString();
-                      // areaLast=SysCfg.SysCfgModel.asrsStepCfg.AsrsAreaSwitch(lastStep);
-                      string areaCur = asrsCtlModel.GetAreaToCheckin(palletID,step).ToString();//AsrsModel.EnumLogicArea.注液高温区.ToString(); ;
-                      //     areaCur=SysCfg.SysCfgModel.asrsStepCfg.AsrsAreaSwitch(step);
+            try
+            {
+                if (!base.IsPathOpened(palletID, ref reStr))
+                {
+                    return false;
+                }
+                lock (portBufLock)
+                {
+                    int palletStep = 0;
+                    if (!MesAcc.GetStep(palletID, out palletStep, ref reStr))
+                    {
+                        return false;
+                    }
 
-                      if (areaLast != areaCur)
-                      {
-                          reStr = string.Format("托盘{0}待进入的立库分区{1},跟当前缓存托盘待进入的分区{2}不同", palletID, areaCur, areaLast);
-                          return false;
-                      }
-                      //2 是否同批
-                      string batchLast = "";
-                      string batch = "";
-                      if (!MesAcc.GetTrayCellLotNO(palletID, out batch, ref reStr))
-                      {
-                          return false;
-                      }
-                      if (!MesAcc.GetTrayCellLotNO(lastPalletID, out batchLast, ref reStr))
-                      {
-                          return false;
-                      }
-                      if (batchLast == batch)
-                      {
-                          return true;
-                      }
-                      else
-                      {
-                          reStr = string.Format("托盘{0} 批次{1},与入口缓存的托盘{2} 批次{3}不同", palletID, batch, lastPalletID, batchLast);
-                          return false;
-                      }
-                  }
-              }
-            
-               return true;
-           }
-           
+                    if (palletStep == 0)
+                    {
+                        //判断第一个料框是否空筐
+
+                        if (!EmptyPalletInputEnabled)
+                        {
+                            reStr = "系统已配置禁止空筐入库";
+                            return false;
+                        }
+                    }
+                    //先判断入口实际信号
+                    bool portCrowd = true;
+                    for (int i = 0; i < PortinBufCapacity; i++)
+                    {
+                        if (db2Vals[i] == 1)
+                        {
+                            portCrowd = false;
+                            break;
+                        }
+                    }
+                    if (portCrowd) //入口拥堵
+                    {
+                        return false;
+                    }
+                    //再判断数据
+                    if (this.palletBuffer.Count() >= PortinBufCapacity)
+                    {
+                        reStr = "缓存已满";
+                        return false;
+                    }
+                    if (dlgtGroupEnabled != null)
+                    {
+                        return dlgtGroupEnabled(this, palletID, ref reStr);
+                    }
+                    else
+                    {
+                        if (PortinBufCapacity > 1) //只有入口最大允许缓存数量大于1时才考虑库区，批次
+                        {
+                            if (this.palletBuffer.Count() > 0)
+                            {
+                                //1 判断是否同一个库区
+                                string lastPalletID = this.palletBuffer[0];
+                                int lastStep = 0;
+                                if (!MesAcc.GetStep(lastPalletID, out lastStep, ref reStr))
+                                {
+                                    return false;
+                                }
+                                int step = 0;
+                                if (!MesAcc.GetStep(palletID, out step, ref reStr))
+                                {
+                                    return false;
+                                }
+                                string areaLast = asrsCtlModel.GetAreaToCheckin(lastPalletID, lastStep).ToString();// AsrsModel.EnumLogicArea.注液高温区.ToString();
+                                // areaLast=SysCfg.SysCfgModel.asrsStepCfg.AsrsAreaSwitch(lastStep);
+                                string areaCur = asrsCtlModel.GetAreaToCheckin(palletID, step).ToString();//AsrsModel.EnumLogicArea.注液高温区.ToString(); ;
+                                //     areaCur=SysCfg.SysCfgModel.asrsStepCfg.AsrsAreaSwitch(step);
+
+                                if (areaLast != areaCur)
+                                {
+                                    reStr = string.Format("托盘{0}待进入的立库分区{1},跟当前缓存托盘待进入的分区{2}不同", palletID, areaCur, areaLast);
+                                    return false;
+                                }
+                                //2 是否同批
+                                string batchLast = "";
+                                string batch = "";
+                                if (!MesAcc.GetTrayCellLotNO(palletID, out batch, ref reStr))
+                                {
+                                    return false;
+                                }
+                                if (!MesAcc.GetTrayCellLotNO(lastPalletID, out batchLast, ref reStr))
+                                {
+                                    return false;
+                                }
+                                if (batchLast == batch)
+                                {
+                                    return true;
+                                }
+                                else
+                                {
+                                    reStr = string.Format("托盘{0} 批次{1},与入口缓存的托盘{2} 批次{3}不同", palletID, batch, lastPalletID, batchLast);
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                    return true;
+                } 
+            }
+            catch (Exception ex)
+            {
+                reStr = ex.ToString();
+                return false;
+            }
           
         }
         public override int PathValidWeight(string palletID, ref string reStr)

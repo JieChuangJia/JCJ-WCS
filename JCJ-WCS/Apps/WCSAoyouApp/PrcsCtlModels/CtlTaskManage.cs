@@ -272,13 +272,6 @@ namespace PrcsCtlModelsAoyou
                     FlowCtlBaseModel.WCSPathNodeModel rgvTargetWcsNode = wcsPath.GetNodeByID(wcsNode.NextNodeID);
                     if (rgvTargetWcsNode.NodeFlag == "终点")
                     {
-                        mainTask.TaskStatus = "已完成";
-                        mainTask.FinishTime = System.DateTime.Now;
-                        if (!mainCtlTaskBll.Update(mainTask))
-                        {
-                            reStr = string.Format("更新主控制任务:{0}状态失败", mainTask.MainTaskID);
-                            return false;
-                        }
                         //管理任务完成
                         WMS_Interface.ResposeData res = WmsSvc.UpdateManageTaskStatus(mainTask.WMSTaskID, "已完成");
                         if (!res.Status)
@@ -286,6 +279,15 @@ namespace PrcsCtlModelsAoyou
                             reStr = string.Format("更新WMS任务:{0}状态失败,{1}", mainTask.WMSTaskID, res.Describe);
                             return false;
                         }
+
+                        mainTask.TaskStatus = "已完成";
+                        mainTask.FinishTime = System.DateTime.Now;
+                        if (!mainCtlTaskBll.Update(mainTask))
+                        {
+                            reStr = string.Format("更新主控制任务:{0}状态失败", mainTask.MainTaskID);
+                            return false;
+                        }
+                        
                         return true;
                     }
                     FlowCtlBaseModel.CtlNodeBaseModel rgvTargetNode = NodeManager.GetNodeByID(rgvTargetWcsNode.NodeID);
@@ -324,13 +326,6 @@ namespace PrcsCtlModelsAoyou
                     FlowCtlBaseModel.WCSPathNodeModel targetWcsNode = wcsPath.GetNodeByID(wcsNode.NextNodeID);
                     if (targetWcsNode.NodeFlag == "终点")
                     {
-                        mainTask.TaskStatus = "已完成";
-                        mainTask.FinishTime = System.DateTime.Now;
-                        if (!mainCtlTaskBll.Update(mainTask))
-                        {
-                            reStr = string.Format("更新主控制任务:{0}状态失败", mainTask.MainTaskID);
-                            return false;
-                        }
                         //管理任务完成
                         WMS_Interface.ResposeData res = WmsSvc.UpdateManageTaskStatus(mainTask.WMSTaskID, "已完成");
                         if (!res.Status)
@@ -338,6 +333,14 @@ namespace PrcsCtlModelsAoyou
                             reStr = string.Format("更新WMS任务:{0}状态失败,{1}", mainTask.WMSTaskID, res.Describe);
                             return false;
                         }
+                        mainTask.TaskStatus = "已完成";
+                        mainTask.FinishTime = System.DateTime.Now;
+                        if (!mainCtlTaskBll.Update(mainTask))
+                        {
+                            reStr = string.Format("更新主控制任务:{0}状态失败", mainTask.MainTaskID);
+                            return false;
+                        }
+                        
                         return true;
                     }
                     FlowCtlBaseModel.CtlNodeBaseModel nextNode2 = NodeManager.GetNodeByID(targetWcsNode.NextNodeID);
